@@ -1,0 +1,131 @@
+version: '3.7'
+services:
+    mirakc:
+        build:
+            context: mirakc
+        container_name: mirakc
+        image: collelog/mirakc:alpine3.11
+        #networks:
+        #    - container-link
+        #ports:
+        #    - '40772:40772'
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - mirakurun_run:/var/run/mirakurun
+            - ./mirakc/epg:/var/lib/mirakc/epg
+            - ./mirakc/config.yml:/etc/mirakc/config.yml:ro
+        network_mode: 'none'
+        environment:
+            RUST_LOG: info
+            MIRAKC_DEBUG_CHILD_PROCESS: ''
+            MIRAKC_ARIG_LOG: info
+        logging:
+            driver: json-file
+            options:
+                max-size: '10m'
+                max-file: '5'
+        devices:
+            - /dev/px4video0:/dev/px4video0
+            - /dev/px4video1:/dev/px4video1
+            - /dev/px4video2:/dev/px4video2
+            - /dev/px4video3:/dev/px4video3
+            - /dev/px4video4:/dev/px4video4
+            - /dev/px4video5:/dev/px4video5
+            - /dev/px4video6:/dev/px4video6
+            - /dev/px4video7:/dev/px4video7
+            - /dev/bus/usb/001/009
+        init: true
+        restart: unless-stopped
+
+#    mirakurun:
+#        build:
+#            context: mirakurun
+#        container_name: mirakurun
+#        image: collelog/mirakurun:alpine3.11-node12.14.0
+#        networks:
+#            - container-link
+#        ports:
+#            - "40772:40772"
+#        volumes:
+#            - /etc/localtime:/etc/localtime:ro
+#            - mirakurun_run:/var/run/mirakurun
+#            - ./mirakurun/conf:/usr/local/etc/mirakurun
+#            - ./mirakurun/db:/usr/local/var/db/mirakurun
+#        #environment:
+#        cap_add:
+#            - SYS_NICE
+#            - SYS_ADMIN
+#        devices:
+#            - /dev/px4video0:/dev/px4video0
+#            - /dev/px4video1:/dev/px4video1
+#            - /dev/px4video2:/dev/px4video2
+#            - /dev/px4video3:/dev/px4video3
+#            - /dev/px4video4:/dev/px4video4
+#            - /dev/px4video5:/dev/px4video5
+#            - /dev/px4video6:/dev/px4video6
+#            - /dev/px4video7:/dev/px4video7
+#            - /dev/bus/usb/001/009
+#        init: true
+#        restart: unless-stopped
+
+    mysql:
+        build:
+            context: mariadb
+        container_name: epgstation-mysql
+        image: collelog/mariadb:alpine3.11-mariadb10.4.10
+        #networks:
+        #    - container-link
+        #ports:
+        #    - '3306:3306'
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - ./mariadb/sock:/var/run/mysqld
+            - ./mariadb/db:/var/lib/mysql
+            - ./mariadb/init:/docker-entrypoint-initdb.d/
+        network_mode: 'none'
+        #environment:
+        #    MYSQL_ROOT_PASSWORD: epgstation
+        command: --character-set-server=utf8mb4 --collation-server=utf8mb4_bin --performance-schema=false --expire_logs_days=1
+        init: true
+        restart: unless-stopped
+
+    epgstation:
+        build:
+            context: epgstation
+        container_name: epgstation
+        image: collelog/epgstation:alpine3.11-node12.14.0
+        networks:
+            - container-link
+        ports:
+            - '8888:8888'
+            - '8889:8889'
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - mirakurun_run:/var/run/mirakurun
+            - ./mariadb/sock:/var/run/mysqld
+            - ./epgstation/config:/usr/local/EPGStation/config
+            - ./epgstation/data:/usr/local/EPGStation/data
+            - ./epgstation/thumbnail:/usr/local/EPGStation/thumbnail
+            - ./epgstation/logs:/usr/local/EPGStation/logs
+            - ./recorded:/usr/local/EPGStation/recorded
+        #environment:
+        depends_on:
+           - mirakc
+#           - mirakurun
+           - mysql
+        #user: '1000:1000'
+        init: true
+        restart: unless-stopped
+
+networks:
+    default:
+        external:
+            name: bridge
+
+    container-link:
+        name: tvrecording
+        driver: bridge
+
+volumes:
+    mirakurun_run:
+        driver: 'local'

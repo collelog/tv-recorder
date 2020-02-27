@@ -1,0 +1,31 @@
+#logLevel: 2 # integer -1: FATAL to 3: DEBUG
+logLevel: 2
+
+#maxLogHistory: 1000 # integer (lines)
+
+#path: /var/run/mirakurun.sock # string or ~ (null)
+path: /var/run/mirakurun/mirakurun.sock
+
+#port: 40772 # integer or ~ (null)
+port: 40772
+
+#disableIPv6: false # boolean
+
+#highWaterMark: 25165824 # integer (bytes)
+#highWaterMark: 67108864 # 64MB
+#highWaterMark: 134217728 # 128MB
+#highWaterMark: 268435456 # 256MB
+#highWaterMark: 536870912 # 512MB
+
+#overflowTimeLimit: 30000 # integer (ms)
+
+#maxBufferBytesBeforeReady: 3145728 # integer (bytes)
+maxBufferBytesBeforeReady: 8388608
+
+#eventEndTimeout: 1000 # integer (ms)
+
+#programGCInterval: 900000 # integer (ms)
+
+#epgGatheringInterval: 900000 # integer (ms)
+
+#epgRetrievalTime: 600000 # integer (ms)

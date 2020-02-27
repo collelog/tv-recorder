@@ -1,0 +1,119 @@
+- name: PX4-S1
+  types:
+    - BS
+    - CS
+  command: recpt1 --device /dev/px4video0 <channel> - -
+  decoder: arib-b25-stream-test
+  isDisabled: false
+
+- name: PX4-S2
+  types:
+    - BS
+    - CS
+  command: recpt1 --device /dev/px4video1 <channel> - -
+  decoder: arib-b25-stream-test
+  isDisabled: false
+
+- name: PX4-T1
+  types:
+    - GR
+  command: recpt1 --device /dev/px4video2 <channel> - -
+  decoder: arib-b25-stream-test
+  isDisabled: false
+
+- name: PX4-T2
+  types:
+    - GR
+  command: recpt1 --device /dev/px4video3 <channel> - -
+  decoder: arib-b25-stream-test
+  isDisabled: false
+
+- name: PX4-S3
+  types:
+    - BS
+    - CS
+  command: recpt1 --device /dev/px4video4 <channel> - -
+  decoder: arib-b25-stream-test
+  isDisabled: false
+
+- name: PX4-S4
+  types:
+    - BS
+    - CS
+  command: recpt1 --device /dev/px4video5 <channel> - -
+  decoder: arib-b25-stream-test
+  isDisabled: false
+
+- name: PX4-T3
+  types:
+    - GR
+  command: recpt1 --device /dev/px4video6 <channel> - -
+  decoder: arib-b25-stream-test
+  isDisabled: false
+
+- name: PX4-T4
+  types:
+    - GR
+  command: recpt1 --device /dev/px4video7 <channel> - -
+  decoder: arib-b25-stream-test
+  isDisabled: false
+
+- name: PX4-S5
+  types:
+    - BS
+    - CS
+  command: recpt1 --device /dev/px4video8 <channel> - -
+  decoder: arib-b25-stream-test
+  isDisabled: true
+
+- name: PX4-S6
+  types:
+    - BS
+    - CS
+  command: recpt1 --device /dev/px4video9 <channel> - -
+  decoder: arib-b25-stream-test
+  isDisabled: true
+
+- name: PX4-T5
+  types:
+    - GR
+  command: recpt1 --device /dev/px4video10 <channel> - -
+  decoder: arib-b25-stream-test
+  isDisabled: true
+
+- name: PX4-T6
+  types:
+    - GR
+  command: recpt1 --device /dev/px4video11 <channel> - -
+  decoder: arib-b25-stream-test
+  isDisabled: true
+
+- name: PX4-S7
+  types:
+    - BS
+    - CS
+  command: recpt1 --device /dev/px4video12 <channel> - -
+  decoder: arib-b25-stream-test
+  isDisabled: true
+
+- name: PX4-S8
+  types:
+    - BS
+    - CS
+  command: recpt1 --device /dev/px4video13 <channel> - -
+  decoder: arib-b25-stream-test
+  isDisabled: true
+
+- name: PX4-T7
+  types:
+    - GR
+  command: recpt1 --device /dev/px4video14 <channel> - -
+  decoder: arib-b25-stream-test
+  isDisabled: true
+
+- name: PX4-T8
+  types:
+    - GR
+  command: recpt1 --device /dev/px4video15 <channel> - -
+  decoder: arib-b25-stream-test
+  isDisabled: true
