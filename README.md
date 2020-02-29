@@ -76,13 +76,14 @@ docker-mirakurun-chinach
 - **mirakc Docker image**
   - [libarib25](https://github.com/stz2012/libarib25)
   - [stz2012版recpt1](https://github.com/stz2012/recpt1/) --enable-b25
-  - スマートカードリーダーの利用環境、想定利用で不要なパッケージの整理
+  - スマートカードリーダーの利用
+  - 想定利用で不要なパッケージ、アプリケーションの整理
 
 - **Mirakurun Docker image**
   - [Node.js v12](https://nodejs.org/ja/)
   - [libarib25](https://github.com/stz2012/libarib25)
   - [stz2012版recpt1](https://github.com/stz2012/recpt1/) --enable-b25
-  - スマートカードリーダーの利用環境、想定利用で不要なパッケージの整理
+  - 想定利用で不要なパッケージの整理
 
 
 ## 開発環境

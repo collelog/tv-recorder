@@ -27,7 +27,6 @@ RUN make -j $(nproc)
 RUN make install
 
 
-
 # final image
 FROM node:12-alpine
 LABEL maintainer "collelog <collelog.cavamin@gmail.com>"
@@ -68,9 +67,6 @@ RUN set -eux && \
 	\
 	# pm2
 	npm install pm2 -g && \
-	\
-	# arib-b25-stream-test
-	npm install arib-b25-stream-test -g --unsafe && \
 	\
 	# mirakurun
 	npm install mirakurun@latest -g --unsafe --production && \

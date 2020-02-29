@@ -33,7 +33,7 @@ services:
             - /dev/px4video5:/dev/px4video5
             - /dev/px4video6:/dev/px4video6
             - /dev/px4video7:/dev/px4video7
-            - /dev/bus/usb/001/009
+            - /dev/bus/usb/001/008
         init: true
         restart: unless-stopped
 
@@ -64,7 +64,7 @@ services:
 #            - /dev/px4video5:/dev/px4video5
 #            - /dev/px4video6:/dev/px4video6
 #            - /dev/px4video7:/dev/px4video7
-#            - /dev/bus/usb/001/009
+#            - /dev/bus/usb/001/008
 #        init: true
 #        restart: unless-stopped
 
