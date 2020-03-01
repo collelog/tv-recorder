@@ -44,12 +44,11 @@ COPY --from=recpt1-build /usr/local/lib64/pkgconfig/libarib25.pc /usr/local/lib6
 
 # recpt1
 COPY --from=recpt1-build /usr/local/bin/recpt1 /usr/local/bin/recpt1
-COPY --from=recpt1-build /usr/local/bin/recpt1ctl /usr/local/bin/recpt1ctl
-COPY --from=recpt1-build /usr/local/bin/checksignal /usr/local/bin/checksignal
 
 RUN set -eux && \
 	apk upgrade --update && \
 	apk add --no-cache ccid libstdc++ pcsc-lite pcsc-lite-libs tzdata && \
+	apk add --virtual build-packages --no-cache gcc g++ make libc-dev pcsc-lite-dev pkgconfig && \
 	\
 	# timezone
 	cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
@@ -69,10 +68,12 @@ RUN set -eux && \
 	npm install pm2 -g && \
 	\
 	# mirakurun
+	npm install arib-b25-stream-test -g --unsafe && \
 	npm install mirakurun@latest -g --unsafe --production && \
 	sed -i -e 's/--max_old_space_size=512/--max_old_space_size=1024/g' /usr/local/lib/node_modules/mirakurun/package.json && \
 	\
 	# cleaning
+	apk del --purge build-packages && \
 	npm cache verify && \
 	rm -rf /tmp/* ~/.npm /var/cache/apk/*
 
