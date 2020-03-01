@@ -64,19 +64,20 @@ docker-mirakurun-chinach
 - **EPGStation Docker image**
   - Alpine Linux ベース
   - [FFMpeg 4.2.2](https://www.ffmpeg.org/)
-  - MariaDB UNIXドメインソケット接続
-  - MariaDB 文字コード：UTF8MB4
+  - MariaDB 接続：UNIXドメインソケット
+  - MariaDB 文字コード：UTF8MB4、Collation：UTF8MB4_BIN
   - 想定利用で不要なパッケージの整理
 
 - **MariaDB Docker image**
-  - サーバー、DB 文字コード：UTF8MB4
-  - EPGStation 向けDB、ユーザーアカウント作成
-  - [Grafana](https://grafana.com/) 向け読み取り専用ユーザーアカウント作成
+  - サーバー 文字コード：UTF8MB4、Collation：UTF8MB4_BIN
+  - EPGStation 向けDB作成（文字コード：UTF8MB4、Collation：UTF8MB4_BIN）
+  - EPGStation 向けユーザー作成
+  - [Grafana](https://grafana.com/) 向け読み取り専用ユーザー作成
 
 - **mirakc Docker image**
   - [libarib25](https://github.com/stz2012/libarib25)
   - [stz2012版recpt1](https://github.com/stz2012/recpt1/) --enable-b25
-  - スマートカードリーダーの利用
+  - スマートカードリーダーの設定
   - 想定利用で不要なパッケージ、アプリケーションの整理
 
 - **Mirakurun Docker image**
