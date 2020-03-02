@@ -64,9 +64,10 @@ docker-mirakurun-chinach
 - **EPGStation Docker image**
   - Alpine Linux ベース
   - [FFMpeg 4.2.2](https://www.ffmpeg.org/)
-  - MariaDB 接続：UNIXドメインソケット
+  - MariaDB 連携：UNIXドメインソケット
   - MariaDB 文字コード：UTF8MB4、Collation：UTF8MB4_BIN
-  - 想定利用で不要なパッケージの整理
+  - mirakc 連携：UNIXドメインソケット
+  - 利用想定で不要なパッケージの整理
 
 - **MariaDB Docker image**
   - サーバー 文字コード：UTF8MB4、Collation：UTF8MB4_BIN
@@ -78,13 +79,13 @@ docker-mirakurun-chinach
   - [libarib25](https://github.com/stz2012/libarib25)
   - [stz2012版recpt1](https://github.com/stz2012/recpt1/) --enable-b25
   - スマートカードリーダーの設定
-  - 想定利用で不要なパッケージ、アプリケーションの整理
+  - 利用想定で不要なパッケージ、アプリケーションの整理
 
 - **Mirakurun Docker image**
   - [Node.js v12](https://nodejs.org/ja/)
   - [libarib25](https://github.com/stz2012/libarib25)
   - [stz2012版recpt1](https://github.com/stz2012/recpt1/) --enable-b25
-  - 想定利用で不要なパッケージの整理
+  - 利用想定で不要なパッケージの整理
 
 
 ## 開発環境
