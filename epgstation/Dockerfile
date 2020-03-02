@@ -30,8 +30,7 @@ RUN apk add --no-cache \
 	yasm
 
 RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories && \
-	apk add --no-cache \
-	fdk-aac-dev
+	apk add --no-cache fdk-aac-dev
 
 RUN mkdir -p /build
 WORKDIR /build
@@ -83,28 +82,8 @@ WORKDIR /usr/local/
 
 RUN set -eux && \
 	apk upgrade --update && \
-	apk add --no-cache \
-		ca-certificates \
-		pcre \
-		lame \
-		libogg \
-		libass \
-		libvpx \
-		libvorbis \
-		libwebp \
-		libtheora \
-		openssl \
-		opus \
-		rtmpdump \
-		x264-dev \
-		x265-dev && \
-	apk add --no-cache --virtual .build-deps \
-		g++ \
-		git \
-		make \
-		python3 \
-		tzdata \
-	&& \
+	apk add --no-cache ca-certificates pcre lame libogg libass libvpx libvorbis libwebp libtheora openssl opus rtmpdump x264-dev x265-dev && \
+	apk add --no-cache --virtual build-packages g++ git make python3 tzdata && \
 	\
 	# timezone
 	cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
@@ -118,7 +97,7 @@ RUN set -eux && \
 	\
 	# cleaning
 	npm cache verify && \
-	apk del --purge .build-deps && \
+	apk del --purge build-packages && \
 	rm -rf /tmp/* ~/.npm /var/cache/apk/*
 
 COPY --from=ffmpeg-build /usr/local/ffmpeg /usr/local/ffmpeg

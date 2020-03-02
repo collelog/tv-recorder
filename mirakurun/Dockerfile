@@ -48,7 +48,7 @@ COPY --from=recpt1-build /usr/local/bin/recpt1 /usr/local/bin/recpt1
 RUN set -eux && \
 	apk upgrade --update && \
 	apk add --no-cache ccid libstdc++ pcsc-lite pcsc-lite-libs tzdata && \
-	apk add --virtual build-packages --no-cache gcc g++ make libc-dev pcsc-lite-dev pkgconfig && \
+	apk add --no-cache --virtual build-packages gcc g++ make libc-dev pcsc-lite-dev pkgconfig && \
 	\
 	# timezone
 	cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
