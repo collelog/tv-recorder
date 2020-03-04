@@ -37,27 +37,27 @@ Intel CPUを採用したSynology NASでの使用を想定し作成しました�
   - docker-compose version 1.22.0 and higher
 
 ## 利用ソースコード
-当ソフトウェアは以下のソースコード（docker-compose.yml,Dockerfile,その他動作に必要なファイル一式）を改変または参考に作成しています。
+当ソースコードは以下のソースコード（docker-compose.yml,Dockerfile,その他動作に必要なファイル一式）を改変または参考に作成しています。
 
 - **EPGStation** ([l3tnun/docker-mirakurun-epgstation](https://github.com/l3tnun/docker-mirakurun-epgstation))  
 docker-mirakurun-epgstation
-  - [MIT License](http://opensource.org/licenses/MIT)
+  - MIT License ([License File](https://github.com/l3tnun/docker-mirakurun-epgstation/blob/master/LICENSE), [Open Source Initiative Site](http://opensource.org/licenses/MIT))
 
 - **FFMpeg** ([alfg/docker-ffmpeg](https://github.com/alfg/docker-ffmpeg))  
 docker-ffmpesg
-  - [MIT License](http://opensource.org/licenses/MIT)
+  - MIT License ([License File](https://github.com/alfg/docker-ffmpeg/blob/master/LICENSE), [Open Source Initiative Site](http://opensource.org/licenses/MIT))
 
 - **MariaDB** ([yobasystems/alpine-mariadb](https://github.com/yobasystems/alpine-mariadb))  
 MariaDB Docker image running on Alpine Linux
 
 - **mirakc** ([masnagam/mirakc](https://github.com/masnagam/mirakc))  
 A Mirakurun clone written in Rust
-  - [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0)
-  - [MIT License](http://opensource.org/licenses/MIT)
+ - Apache License, Version 2.0 ([License File](https://github.com/masnagam/mirakc/blob/master/LICENSE-APACHE), [The Apache Software Foundation Site](http://www.apache.org/licenses/LICENSE-2.0))
+  - MIT License ([License File](https://github.com/masnagam/mirakc/blob/master/LICENSE-MIT), [Open Source Initiative Site](http://opensource.org/licenses/MIT))
 
 - **Mirakurun** ([Chinachu/docker-mirakurun-chinachu](https://github.com/Chinachu/docker-mirakurun-chinachu))  
 docker-mirakurun-chinach  
-  - [MIT License](http://opensource.org/licenses/MIT)
+  - MIT License ([License File](https://github.com/Chinachu/docker-mirakurun-chinachu/blob/master/LICENSE), [Open Source Initiative Site](http://opensource.org/licenses/MIT))
 
 
 ### 主な変更点
@@ -101,4 +101,4 @@ docker-mirakurun-chinach
 
 
 ## License
-このソフトウェアは [MIT License](http://opensource.org/licenses/MIT) のもとでリリースします。
+このソースコードは MIT License ([License File](https://github.com/collelog/tv-recorder/blob/master/LICENSE), [Open Source Initiative Site](http://opensource.org/licenses/MIT)) のもとでリリースします。
