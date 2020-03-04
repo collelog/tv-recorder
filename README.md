@@ -52,7 +52,7 @@ MariaDB Docker image running on Alpine Linux
 
 - **mirakc** ([masnagam/mirakc](https://github.com/masnagam/mirakc))  
 A Mirakurun clone written in Rust
- - Apache License, Version 2.0 ([License File](https://github.com/masnagam/mirakc/blob/master/LICENSE-APACHE), [The Apache Software Foundation Site](http://www.apache.org/licenses/LICENSE-2.0))
+  - Apache License, Version 2.0 ([License File](https://github.com/masnagam/mirakc/blob/master/LICENSE-APACHE), [The Apache Software Foundation Site](http://www.apache.org/licenses/LICENSE-2.0))
   - MIT License ([License File](https://github.com/masnagam/mirakc/blob/master/LICENSE-MIT), [Open Source Initiative Site](http://opensource.org/licenses/MIT))
 
 - **Mirakurun** ([Chinachu/docker-mirakurun-chinachu](https://github.com/Chinachu/docker-mirakurun-chinachu))  
