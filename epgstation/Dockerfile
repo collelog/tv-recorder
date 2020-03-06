@@ -7,6 +7,8 @@ ENV LD_LIBRARY_PATH=/usr/lib
 
 RUN set -eux
 RUN apk add --no-cache \
+	autoconf \
+	automake \
 	build-base \
 	ca-certificates \
 	coreutils \
@@ -14,6 +16,7 @@ RUN apk add --no-cache \
 	freetype-dev \
 	gcc \
 	lame-dev \
+	libtool \
 	libogg-dev \
 	libass \
 	libass-dev \
@@ -32,12 +35,21 @@ RUN apk add --no-cache \
 RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories && \
 	apk add --no-cache fdk-aac-dev
 
-RUN mkdir -p /build
-WORKDIR /build
+RUN mkdir -p /build/aribb24
+WORKDIR /build/aribb24
+RUN curl -fsSL https://github.com/nkoriyama/aribb24/tarball/master \
+	| tar -xz --strip-components=1
+RUN autoreconf -fiv
+RUN ./configure --prefix=/usr/local/ffmpeg --enable-static --disable-shared
+RUN make
+RUN make install
+
+RUN mkdir -p /build/ffmpeg
+WORKDIR /build/ffmpeg
 RUN curl -fsSL http://ffmpeg.org/releases/ffmpeg-${FFMPEG_VERSION}.tar.gz \
 	| tar -xz --strip-components=1
 
-RUN ./configure \
+RUN PKG_CONFIG_PATH=/usr/local/ffmpeg/lib/pkgconfig ./configure \
 	--enable-version3 \
 	--enable-gpl \
 	--enable-nonfree \
@@ -53,6 +65,7 @@ RUN ./configure \
 	--enable-libass \
 	--enable-libwebp \
 	--enable-librtmp \
+	--enable-libaribb24 \
 	--enable-postproc \
 	--enable-avresample \
 	--enable-libfreetype \
@@ -83,14 +96,17 @@ WORKDIR /usr/local/
 RUN set -eux && \
 	apk upgrade --update && \
 	apk add --no-cache ca-certificates pcre lame libogg libass libvpx libvorbis libwebp libtheora openssl opus rtmpdump x264-dev x265-dev && \
-	apk add --no-cache --virtual build-packages g++ git make python3 tzdata && \
+	apk add --no-cache --virtual build-packages ca-certificates curl g++ make python3 tzdata && \
 	\
 	# timezone
 	cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
 	echo "Asia/Tokyo" > /etc/timezone && \
 	\
 	# install EPGStation
-	git clone https://github.com/l3tnun/EPGStation.git && \
+	mkdir -p /usr/local/EPGStation && \
+	cd /usr/local/EPGStation && \
+	curl -fsSL https://github.com/l3tnun/EPGStation/tarball/master \
+		| tar -xz --strip-components=1 && \
 	cd /usr/local/EPGStation && \
 	npm install && \
 	npm run build && \
