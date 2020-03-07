@@ -41,23 +41,24 @@ Intel CPUを採用したSynology NASでの使用を想定し作成しました�
 
 - **EPGStation** ([l3tnun/docker-mirakurun-epgstation](https://github.com/l3tnun/docker-mirakurun-epgstation))  
 docker-mirakurun-epgstation
-  - MIT License ([License File](https://github.com/l3tnun/docker-mirakurun-epgstation/blob/master/LICENSE), [Open Source Initiative Site](http://opensource.org/licenses/MIT))
+  - [MIT License](https://github.com/l3tnun/docker-mirakurun-epgstation/blob/master/LICENSE)
 
 - **FFMpeg** ([alfg/docker-ffmpeg](https://github.com/alfg/docker-ffmpeg))  
 docker-ffmpesg
-  - MIT License ([License File](https://github.com/alfg/docker-ffmpeg/blob/master/LICENSE), [Open Source Initiative Site](http://opensource.org/licenses/MIT))
+  - [MIT License](https://github.com/alfg/docker-ffmpeg/blob/master/LICENSE)
 
 - **MariaDB** ([yobasystems/alpine-mariadb](https://github.com/yobasystems/alpine-mariadb))  
 MariaDB Docker image running on Alpine Linux
 
 - **mirakc** ([masnagam/mirakc](https://github.com/masnagam/mirakc))  
 A Mirakurun clone written in Rust
-  - Apache License, Version 2.0 ([License File](https://github.com/masnagam/mirakc/blob/master/LICENSE-APACHE), [The Apache Software Foundation Site](http://www.apache.org/licenses/LICENSE-2.0))
-  - MIT License ([License File](https://github.com/masnagam/mirakc/blob/master/LICENSE-MIT), [Open Source Initiative Site](http://opensource.org/licenses/MIT))
+  - [Apache License, Version 2.0](https://github.com/masnagam/mirakc/blob/master/LICENSE-APACHE)  
+    or
+  - [MIT License](https://github.com/masnagam/mirakc/blob/master/LICENSE-MIT)
 
 - **Mirakurun** ([Chinachu/docker-mirakurun-chinachu](https://github.com/Chinachu/docker-mirakurun-chinachu))  
 docker-mirakurun-chinach  
-  - MIT License ([License File](https://github.com/Chinachu/docker-mirakurun-chinachu/blob/master/LICENSE), [Open Source Initiative Site](http://opensource.org/licenses/MIT))
+  - [MIT License](https://github.com/Chinachu/docker-mirakurun-chinachu/blob/master/LICENSE)
 
 
 ### 主な変更点
@@ -76,15 +77,11 @@ docker-mirakurun-chinach
   - [Grafana](https://grafana.com/) 向け読み取り専用ユーザー作成
 
 - **mirakc Docker image**
-  - [libarib25](https://github.com/stz2012/libarib25)
-  - [stz2012版recpt1](https://github.com/stz2012/recpt1/) --enable-b25
-  - スマートカードリーダーの設定
-  - 利用想定で不要なパッケージ、アプリケーションの整理
+  - [arib-b25-stream-test](https://www.npmjs.com/package/arib-b25-stream-test)
+  - スマートカードリーダーの使用
 
 - **Mirakurun Docker image**
   - [Node.js v12](https://nodejs.org/ja/)
-  - [libarib25](https://github.com/stz2012/libarib25)
-  - [stz2012版recpt1](https://github.com/stz2012/recpt1/) --enable-b25
   - 利用想定で不要なパッケージの整理
 
 
@@ -101,4 +98,4 @@ docker-mirakurun-chinach
 
 
 ## License
-このソースコードは MIT License ([License File](https://github.com/collelog/tv-recorder/blob/master/LICENSE), [Open Source Initiative Site](http://opensource.org/licenses/MIT)) のもとでリリースします。
+このソースコードは [MIT License](https://github.com/collelog/tv-recorder/blob/master/LICENSE) のもとでリリースします。
