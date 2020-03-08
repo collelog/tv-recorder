@@ -61,10 +61,10 @@ docker-mirakurun-chinach
   - [MIT License](https://github.com/Chinachu/docker-mirakurun-chinachu/blob/master/LICENSE)
 
 
-### 主な変更点
+### 主な機能
 - **EPGStation Docker image**
   - Alpine Linux ベース
-  - [FFMpeg 4.2.2](https://www.ffmpeg.org/)
+  - [FFmpeg 4.2.2](https://www.ffmpeg.org/)
   - MariaDB 連携：UNIXドメインソケット
   - MariaDB 文字コード：UTF8MB4、Collation：UTF8MB4_BIN
   - mirakc 連携：UNIXドメインソケット
@@ -83,6 +83,8 @@ docker-mirakurun-chinach
 - **Mirakurun Docker image**
   - [Node.js v12](https://nodejs.org/ja/)
   - 利用想定で不要なパッケージの整理
+
+- **[tv-recorder-monitoring](https://github.com/collelog/tv-recorder-monitoring) との連携**
 
 
 ## 開発環境
