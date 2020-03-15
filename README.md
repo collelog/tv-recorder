@@ -1,6 +1,6 @@
 # TV Recorder on Docker
 
-> EPGStation version 1.x.x, MariaDB, mirakc (or Mirakurun) のDockerコンテナ  
+> EPGStation version 1.6.x, MariaDB, mirakc (or Mirakurun) のDockerコンテナ  
   
 Intel CPUを採用したSynology NASでの使用を想定し作成しましたが、Dockerホスト実行条件を満たすx86-64プラットフォームのLinuxであれば動作します。  
 
@@ -43,7 +43,7 @@ Intel CPUを採用したSynology NASでの使用を想定し作成しました�
 docker-mirakurun-epgstation
   - [MIT License](https://github.com/l3tnun/docker-mirakurun-epgstation/blob/master/LICENSE)
 
-- **FFMpeg** ([alfg/docker-ffmpeg](https://github.com/alfg/docker-ffmpeg))  
+- **FFmpeg** ([alfg/docker-ffmpeg](https://github.com/alfg/docker-ffmpeg))  
 docker-ffmpesg
   - [MIT License](https://github.com/alfg/docker-ffmpeg/blob/master/LICENSE)
 
@@ -86,6 +86,48 @@ docker-mirakurun-chinach
 
 - **[tv-recorder-monitoring](https://github.com/collelog/tv-recorder-monitoring) との連携**
 
+## FFmpeg Build
+```
+ffmpeg version 4.2.2 Copyright (c) 2000-2019 the FFmpeg developers
+built with gcc 9.2.0 (Alpine 9.2.0)
+configuration: 
+	--enable-version3
+	--enable-gpl
+	--enable-nonfree
+	--enable-small
+	--enable-libmp3lame
+	--enable-libx264
+	--enable-libx265
+	--enable-libvpx
+	--enable-libtheora
+	--enable-libvorbis
+	--enable-libopus
+	--enable-libfdk-aac
+	--enable-libass
+	--enable-libwebp
+	--enable-librtmp
+	--enable-libaribb24
+	--enable-postproc
+	--enable-avresample
+	--enable-libfreetype
+	--enable-openssl
+	--disable-debug
+	--disable-doc
+	--disable-ffplay
+	--extra-cflags=-I/usr/local/ffmpeg/include
+	--extra-ldflags=-L/usr/local/ffmpeg/lib
+	--extra-libs='-lpthread -lm'
+	--prefix=/usr/local/ffmpeg
+libavutil      56. 31.100 / 56. 31.100
+libavcodec     58. 54.100 / 58. 54.100
+libavformat    58. 29.100 / 58. 29.100
+libavdevice    58.  8.100 / 58.  8.100
+libavfilter     7. 57.100 /  7. 57.100
+libavresample   4.  0.  0 /  4.  0.  0
+libswscale      5.  5.100 /  5.  5.100
+libswresample   3.  5.100 /  3.  5.100
+libpostproc    55.  5.100 / 55.  5.100
+```
 
 ## 開発環境
 > OS
@@ -97,7 +139,6 @@ docker-mirakurun-chinach
 
 >docker-compose
 >> version 1.24.0, build 0aa59064
-
 
 ## License
 このソースコードは [MIT License](https://github.com/collelog/tv-recorder/blob/master/LICENSE) のもとでリリースします。
