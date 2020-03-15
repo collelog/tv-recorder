@@ -32,7 +32,7 @@ RUN apk add --no-cache \
 	x265-dev \
 	yasm
 
-RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories && \
+RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories && \
 	apk add --no-cache fdk-aac-dev
 
 RUN mkdir -p /build/aribb24
@@ -98,6 +98,10 @@ RUN set -eux && \
 	apk add --no-cache ca-certificates pcre lame libogg libass libvpx libvorbis libwebp libtheora openssl opus rtmpdump x264-dev x265-dev && \
 	apk add --no-cache --virtual build-packages ca-certificates curl g++ make python3 tzdata && \
 	\
+	# fdk-aac
+	echo http://dl-cdn.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories && \
+	apk add --no-cache fdk-aac && \
+	\
 	# timezone
 	cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
 	echo "Asia/Tokyo" > /etc/timezone && \
@@ -117,7 +121,6 @@ RUN set -eux && \
 	rm -rf /tmp/* ~/.npm /var/cache/apk/*
 
 COPY --from=ffmpeg-build /usr/local/ffmpeg /usr/local/ffmpeg
-COPY --from=ffmpeg-build /usr/lib/libfdk-aac.so.2 /usr/lib/libfdk-aac.so.2
 
 WORKDIR /usr/local/EPGStation
 
