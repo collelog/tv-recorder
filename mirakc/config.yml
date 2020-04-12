@@ -134,9 +134,6 @@ channels:
   - name: BS23_1
     type: BS
     channel: BS23_1
-  - name: BS23_2
-    type: BS
-    channel: BS23_2
   - name: CS2
     type: CS
     channel: CS2
