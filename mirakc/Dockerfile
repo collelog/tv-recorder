@@ -17,6 +17,9 @@ ENV MIRAKC_CONFIG=/etc/mirakc/config.yml
 # arib-b25-stream-test
 COPY --from=arib-b25-stream-test-build /usr/local/lib/node_modules/arib-b25-stream-test /usr/local/arib-b25-stream-test
 
+COPY ./services.sh /usr/local/bin
+
+
 RUN set -eux && \
 	apk upgrade --update && \
 	apk add --no-cache ccid pcsc-lite pcsc-lite-libs && \
@@ -30,9 +33,9 @@ RUN set -eux && \
 	ln -sf /usr/local/arib-b25-stream-test/bin/b25 /usr/local/bin/arib-b25-stream-test && \
 	\
 	# cleaning
-	rm -rf /tmp/* /var/cache/apk/*
-
-COPY ./services.sh /usr/local/bin
+	rm -rf /tmp/* /var/cache/apk/* && \
+	\
+	chmod 755 /usr/local/bin/services.sh
 
 VOLUME /var/lib/mirakc/epg
 
