@@ -4,7 +4,6 @@ epg:
 server:
   addrs:
     - unix: /var/run/mirakurun/mirakurun.sock
-
   stream-max-chunks: 6000
   stream-chunks-size: 32768
 
@@ -81,12 +80,9 @@ channels:
   - name: BS11_0
     type: BS
     channel: BS11_0
-  - name: BS11_1
-    type: BS
-    channel: BS11_1
   - name: OUJ
     type: BS
-    channel: BS11_2
+    channel: BS11_1
   - name: BS-NTV
     type: BS
     channel: BS13_0
@@ -182,95 +178,99 @@ tuners:
   - name: PX4-S1
     types: [BS,CS]
     command: >-
-      recpt1 --b25 --device /dev/px4video0 {{channel}} {{duration}} -
+      recpt1 --device /dev/px4video0 {{channel}} {{duration}} -
     disabled: false
 
   - name: PX4-S2
     types: [BS,CS]
     command: >-
-      recpt1 --b25 --device /dev/px4video1 {{channel}} {{duration}} -
+      recpt1 --device /dev/px4video1 {{channel}} {{duration}} -
     disabled: false
 
   - name: PX4-T1
     types: [GR]
     command: >-
-      recpt1 --b25 --device /dev/px4video2 {{channel}} {{duration}} -
+      recpt1 --device /dev/px4video2 {{channel}} {{duration}} -
     disabled: false
 
   - name: PX4-T2
     types: [GR]
     command: >-
-      recpt1 --b25 --device /dev/px4video3 {{channel}} {{duration}} -
+      recpt1 --device /dev/px4video3 {{channel}} {{duration}} -
     disabled: false
 
   - name: PX4-S3
     types: [BS,CS]
     command: >-
-      recpt1 --b25 --device /dev/px4video4 {{channel}} {{duration}} -
+      recpt1 --device /dev/px4video4 {{channel}} {{duration}} -
     disabled: false
 
   - name: PX4-S4
     types: [BS,CS]
     command: >-
-      recpt1 --b25 --device /dev/px4video5 {{channel}} {{duration}} -
+      recpt1 --device /dev/px4video5 {{channel}} {{duration}} -
     disabled: false
 
   - name: PX4-T3
     types: [GR]
     command: >-
-      recpt1 --b25 --device /dev/px4video6 {{channel}} {{duration}} -
+      recpt1 --device /dev/px4video6 {{channel}} {{duration}} -
     disabled: false
 
   - name: PX4-T4
     types: [GR]
     command: >-
-      recpt1 --b25 --device /dev/px4video7 {{channel}} {{duration}} -
+      recpt1 --device /dev/px4video7 {{channel}} {{duration}} -
     disabled: false
 
   - name: PX4-S5
     types: [BS,CS]
     command: >-
-      recpt1 --b25 --device /dev/px4video8 {{channel}} {{duration}} -
+      recpt1 --device /dev/px4video8 {{channel}} {{duration}} -
     disabled: true
 
   - name: PX4-S6
     types: [BS,CS]
     command: >-
-      recpt1 --b25 --device /dev/px4video9 {{channel}} {{duration}} -
+      recpt1 --device /dev/px4video9 {{channel}} {{duration}} -
     disabled: true
 
   - name: PX4-T5
     types: [GR]
     command: >-
-      recpt1 --b25 --device /dev/px4video10 {{channel}} {{duration}} -
+      recpt1 --device /dev/px4video10 {{channel}} {{duration}} -
     disabled: true
 
   - name: PX4-T6
     types: [GR]
     command: >-
-      recpt1 --b25 --device /dev/px4video11 {{channel}} {{duration}} -
+      recpt1 --device /dev/px4video11 {{channel}} {{duration}} -
     disabled: true
 
   - name: PX4-S7
     types: [BS,CS]
     command: >-
-      recpt1 --b25 --device /dev/px4video12 {{channel}} {{duration}} -
+      recpt1 --device /dev/px4video12 {{channel}} {{duration}} -
     disabled: true
 
   - name: PX4-S8
     types: [BS,CS]
     command: >-
-      recpt1 --b25 --device /dev/px4video13 {{channel}} {{duration}} -
+      recpt1 --device /dev/px4video13 {{channel}} {{duration}} -
     disabled: true
 
   - name: PX4-T7
     types: [GR]
     command: >-
-      recpt1 --b25 --device /dev/px4video14 {{channel}} {{duration}} -
+      recpt1 --device /dev/px4video14 {{channel}} {{duration}} -
     disabled: true
 
   - name: PX4-T8
     types: [GR]
     command: >-
-      recpt1 --b25 --device /dev/px4video15 {{channel}} {{duration}} -
+      recpt1 --device /dev/px4video15 {{channel}} {{duration}} -
     disabled: true
+
+filters:
+  post-filter: >-
+    arib-b25-stream-test
