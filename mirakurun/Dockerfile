@@ -39,6 +39,8 @@ COPY --from=recpt1-build /usr/local/bin/recpt1 /usr/local/bin/recpt1
 # arib-b25-stream-test
 COPY --from=arib-b25-stream-test-build /usr/local/lib/node_modules/arib-b25-stream-test /usr/local/lib/node_modules/arib-b25-stream-test
 
+COPY services.sh /usr/local/bin
+
 RUN set -eux && \
 	apk upgrade --update && \
 	apk add --no-cache ccid libstdc++ pcsc-lite pcsc-lite-libs tzdata && \
@@ -60,9 +62,9 @@ RUN set -eux && \
 	\
 	# cleaning
 	npm cache verify && \
-	rm -rf /tmp/* ~/.npm /var/cache/apk/*
-
-COPY services.sh /usr/local/bin
+	rm -rf /tmp/* ~/.npm /var/cache/apk/* && \
+	\
+	chmod 755 /usr/local/bin/services.sh
 
 WORKDIR /usr/local/lib/node_modules/mirakurun
 
