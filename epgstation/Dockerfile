@@ -109,7 +109,7 @@ RUN set -eux && \
 	# install EPGStation
 	mkdir -p /usr/local/EPGStation && \
 	cd /usr/local/EPGStation && \
-	curl -fsSL https://github.com/l3tnun/EPGStation/tarball/master \
+	curl -fsSL https://github.com/l3tnun/EPGStation/tarball/e9a57bcdbdaee6edd7c276469bdfdd7e5c142f9a \
 		| tar -xz --strip-components=1 && \
 	cd /usr/local/EPGStation && \
 	npm install && \
