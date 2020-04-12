@@ -4,8 +4,6 @@ epg:
 server:
   addrs:
     - unix: /var/run/mirakurun/mirakurun.sock
-  stream-max-chunks: 6000
-  stream-chunks-size: 32768
 
 channels:
   - name: MX
