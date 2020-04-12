@@ -1,7 +1,7 @@
 # TV Recorder on Docker
 
-> EPGStation version 1.6.x, MariaDB, mirakc (or Mirakurun) のDockerコンテナ  
-  
+> EPGStation 1.6.7, MariaDB 10.4.12-r0, mirakc (or Mirakurun 2.14.0) のDockerコンテナ
+
 Synology NAS(Intel CPUを採用したDockerパッケージ[適用機種](https://www.synology.com/ja-jp/dsm/packages/Docker))を想定し作成しましたが、x86-64プラットフォームのLinuxであれば動作します。
 
 
@@ -41,26 +41,24 @@ Synology NAS(Intel CPUを採用したDockerパッケージ[適用機種](https:/
 ## 利用ソースコード
 当ソースコードは以下のソースコード（docker-compose.yml,Dockerfile,その他動作に必要なファイル一式）を改変または参考に作成しています。
 
-- **EPGStation** ([l3tnun/docker-mirakurun-epgstation](https://github.com/l3tnun/docker-mirakurun-epgstation))  
-docker-mirakurun-epgstation
-  - [MIT License](https://github.com/l3tnun/docker-mirakurun-epgstation/blob/master/LICENSE)
+- **EPGStation**
+  - [l3tnun/docker-mirakurun-epgstation](https://github.com/l3tnun/docker-mirakurun-epgstation) : docker-mirakurun-epgstation
+    - [MIT License](https://github.com/l3tnun/docker-mirakurun-epgstation/blob/master/LICENSE)
 
-- **FFmpeg** ([alfg/docker-ffmpeg](https://github.com/alfg/docker-ffmpeg))  
-docker-ffmpesg
-  - [MIT License](https://github.com/alfg/docker-ffmpeg/blob/master/LICENSE)
+- **FFmpeg**
+  - [alfg/docker-ffmpeg](https://github.com/alfg/docker-ffmpeg) : docker-ffmpesg
+    - [MIT License](https://github.com/alfg/docker-ffmpeg/blob/master/LICENSE)
 
-- **MariaDB** ([yobasystems/alpine-mariadb](https://github.com/yobasystems/alpine-mariadb))  
-MariaDB Docker image running on Alpine Linux
+- **MariaDB**
+  - [yobasystems/alpine-mariadb](https://github.com/yobasystems/alpine-mariadb) : MariaDB Docker image running on Alpine Linux  
 
-- **mirakc** ([masnagam/mirakc](https://github.com/masnagam/mirakc))  
-A Mirakurun clone written in Rust
-  - [Apache License, Version 2.0](https://github.com/masnagam/mirakc/blob/master/LICENSE-APACHE)  
-    or
-  - [MIT License](https://github.com/masnagam/mirakc/blob/master/LICENSE-MIT)
+- **mirakc**
+  - [masnagam/mirakc](https://github.com/masnagam/mirakc) : mirakc (a Mirakurun clone written in Rust) + recdvb + recpt1
+    - [Apache License, Version 2.0](https://github.com/masnagam/mirakc/blob/master/LICENSE-APACHE) or [MIT License](https://github.com/masnagam/mirakc/blob/master/LICENSE-MIT)
 
-- **Mirakurun** ([Chinachu/docker-mirakurun-chinachu](https://github.com/Chinachu/docker-mirakurun-chinachu))  
-docker-mirakurun-chinach  
-  - [MIT License](https://github.com/Chinachu/docker-mirakurun-chinachu/blob/master/LICENSE)
+- **Mirakurun**
+  - [Chinachu/docker-mirakurun-chinachu](https://github.com/Chinachu/docker-mirakurun-chinachu) : docker-mirakurun-chinach
+    - [MIT License](https://github.com/Chinachu/docker-mirakurun-chinachu/blob/master/LICENSE)
 
 
 ### 主な機能
