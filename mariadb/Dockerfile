@@ -8,9 +8,9 @@ ADD ./files/run.sh /scripts/run.sh
 RUN set -eux && \
 	apk upgrade --update && \
 	apk add --no-cache \
-		mariadb \
-		mariadb-client \
-		mariadb-server-utils \
+		mariadb=10.4.12-r0 \
+		mariadb-client=10.4.12-r0 \
+		mariadb-server-utils=10.4.12-r0 \
 		pwgen \
 		tzdata \
 	&& \
