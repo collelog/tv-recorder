@@ -55,7 +55,7 @@ RUN set -eux && \
 	npm install pm2 -g && \
 	\
 	# mirakurun
-	npm install mirakurun@latest -g --unsafe --production && \
+	npm install mirakurun@2.14.0 -g --unsafe --production && \
 	sed -i -e 's/--max_old_space_size=512/--max_old_space_size=1024/g' /usr/local/lib/node_modules/mirakurun/package.json && \
 	\
 	# cleaning
