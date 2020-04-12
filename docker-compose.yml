@@ -1,10 +1,10 @@
 version: '3.7'
 services:
     mirakc:
-        build:
-            context: mirakc
+        #build:
+        #    context: mirakc
         container_name: mirakc
-        image: collelog/mirakc-alpine3.11:master
+        image: collelog/uo-mirakc:master-alpine-amd64
         #networks:
         #    - container-link
         #ports:
@@ -38,10 +38,10 @@ services:
         restart: unless-stopped
 
 #    mirakurun:
-#        build:
-#            context: mirakurun
+#        #build:
+#        #    context: mirakurun
 #        container_name: mirakurun
-#        image: collelog/mirakurun-node12.14.0-alpine3.11:master
+#        image: collelog/uo-mirakurun:2.14.0-alpine-amd64
 #        networks:
 #            - container-link
 #        ports:
@@ -70,10 +70,10 @@ services:
 #        restart: unless-stopped
 
     mysql:
-        build:
-            context: mariadb
+        #build:
+        #    context: mariadb
         container_name: epgstation-mysql
-        image: collelog/mariadb-alpine3.11:10.4.10
+        image: collelog/uo-epgstation-mariadb:10.4.12-alpine-amd64
         networks:
             - container-link
         ports:
@@ -91,10 +91,10 @@ services:
         restart: unless-stopped
 
     epgstation:
-        build:
-            context: epgstation
+        #build:
+        #    context: epgstation
         container_name: epgstation
-        image: collelog/epgstation-node12.14.0-alpine3.11:master
+        image: collelog/uo-epgstation:1.6.7-alpine-amd64
         networks:
             - container-link
         ports:
