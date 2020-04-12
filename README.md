@@ -2,39 +2,41 @@
 
 > EPGStation version 1.6.x, MariaDB, mirakc (or Mirakurun) のDockerコンテナ  
   
-Intel CPUを採用したSynology NASでの使用を想定し作成しましたが、Dockerホスト実行条件を満たすx86-64プラットフォームのLinuxであれば動作します。  
+Synology NAS(Intel CPUを採用したDockerパッケージ[適用機種](https://www.synology.com/ja-jp/dsm/packages/Docker))を想定し作成しましたが、x86-64プラットフォームのLinuxであれば動作します。
 
 
 ## Dockerコンテナ構成
 
-### EPGStation
+### EPGStation ([collelog/uo-epgstation:1.6.7-alpine-amd64](https://hub.docker.com/r/collelog/uo-epgstation))
 - [Alpine Linux 3.11](https://alpinelinux.org/)([alpine:3.11](https://hub.docker.com/_/alpine))
 - [EPGStation](https://github.com/l3tnun/EPGStation)
-  - branch: master
+  - version: 1.6.7 (commit e9a57bcdbdaee6edd7c276469bdfdd7e5c142f9a)
+- [FFmpeg 4.2.2](https://www.ffmpeg.org/)
 
-### MariaDB
+### MariaDB ([collelog/uo-epgstation-mariadb:10.4.12-alpine-amd64](https://hub.docker.com/r/collelog/uo-epgstation-mariadb))
 - [Alpine Linux 3.11](https://alpinelinux.org/)([alpine:3.11](https://hub.docker.com/_/alpine))
-- [MariaDB 10.4.12](https://mariadb.org/)
+- [MariaDB 10.4.12-r0](https://mariadb.org/)
 
-### mirakc
+### mirakc ([collelog/uo-mirakc:master-alpine-amd64](https://hub.docker.com/r/collelog/uo-mirakc))
 - [Alpine Linux 3.11](https://alpinelinux.org/)([alpine:3.11](https://hub.docker.com/_/alpine))
 - [mirakc](https://github.com/masnagam/mirakc)
   - branch: master
 
-### Mirakurun (Optional)
+### Mirakurun (Optional) ([collelog/uo-mirakurun:2.14.0-alpine-amd64](https://hub.docker.com/r/collelog/uo-mirakurun))
 - [Alpine Linux 3.11](https://alpinelinux.org/)([node:12-alpine](https://hub.docker.com/_/node/))
 - [Mirakurun](https://github.com/Chinachu/Mirakurun)
-  - branch: master
+  - version: 2.14.0
 
-## Dockerホスト実行条件
+## 実行条件
 - Linux x86-64プラットフォーム
-- PLEX社製TVチューナー PX-W3U4/Q3U4/W3PE4/Q3PE4 のUSB接続
-- B-CASカード/スマートカードリーダーのUSB接続
-- [nns779/px4_drv](https://github.com/nns779/px4_drv) のインストール
-- pcscd の無効化
 - docker-compose.yml version 3.7 対応 Docker バージョンのインストール
   - Docker Engine version 18.06.0 and higher
   - docker-compose version 1.22.0 and higher
+- pcscd の無効化
+- [nns779/px4_drv](https://github.com/nns779/px4_drv) のインストール
+- PLEX社製TVチューナー PX-W3U4/Q3U4/W3PE4/Q3PE4 のUSB接続
+- B-CASカード/スマートカードリーダーのUSB接続
+
 
 ## 利用ソースコード
 当ソースコードは以下のソースコード（docker-compose.yml,Dockerfile,その他動作に必要なファイル一式）を改変または参考に作成しています。
