@@ -8,7 +8,7 @@ RUN npm install arib-b25-stream-test -g --unsafe
 
 
 # final image
-FROM masnagam/mirakc:master-alpine-amd64
+FROM masnagam/mirakc:0.6.0-alpine-amd64
 LABEL maintainer "collelog <collelog.cavamin@gmail.com>"
 
 EXPOSE 40772
