@@ -20,7 +20,7 @@ Synology NAS(Intel CPUを採用したDockerパッケージ[適用機種](https:/
 ### mirakc ([collelog/uo-mirakc:master-alpine-amd64](https://hub.docker.com/r/collelog/uo-mirakc))
 - [Alpine Linux 3.11](https://alpinelinux.org/)([alpine:3.11](https://hub.docker.com/_/alpine))
 - [mirakc](https://github.com/masnagam/mirakc)
-  - branch: master
+  - version: 0.6.0
 
 ### Mirakurun (Optional) ([collelog/uo-mirakurun:2.14.0-alpine-amd64](https://hub.docker.com/r/collelog/uo-mirakurun))
 - [Alpine Linux 3.11](https://alpinelinux.org/)([node:12-alpine](https://hub.docker.com/_/node/))
