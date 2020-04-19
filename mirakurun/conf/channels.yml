@@ -167,12 +167,12 @@
 
 - name: ＢＳキャンパスｅｘ
   type: BS
-  channel: 'BS11_2'
+  channel: 'BS11_1'
   serviceId: 231
 
 - name: ＢＳキャンパスｏｎ
   type: BS
-  channel: 'BS11_2'
+  channel: 'BS11_1'
   serviceId: 232
 
 - name: グリーンチャンネル
@@ -185,14 +185,9 @@
   channel: 'BS13_2'
   serviceId: 236
 
-- name: ＦＯＸスポーツエンタ
-  type: BS
-  channel: 'BS11_0'
-  serviceId: 238
-
 - name: ＢＳスカパー！
   type: BS
-  channel: 'BS11_1'
+  channel: 'BS11_0'
   serviceId: 241
 
 - name: Ｊ　ＳＰＯＲＴＳ　１
@@ -235,14 +230,9 @@
   channel: 'BS3_2'
   serviceId: 256
 
-- name: ディーライフ
-  type: BS
-  channel: 'BS23_2'
-  serviceId: 258
-
 - name: 放送大学ラジオ
   type: BS
-  channel: 'BS11_2'
+  channel: 'BS11_1'
   serviceId: 531
 
 - name: ショップチャンネル
