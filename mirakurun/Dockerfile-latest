@@ -26,6 +26,15 @@ RUN apk add --no-cache gcc g++ make libc-dev pcsc-lite-dev pkgconfig
 RUN npm install arib-b25-stream-test -g --unsafe
 
 
+# mirakurunmirakurun-build
+FROM node:12-alpine3.11 AS mirakurun-build
+
+ENV DOCKER="YES"
+
+RUN npm install mirakurun@latest -g --unsafe-perm --production
+RUN sed -i -e 's/--max_old_space_size=512/--max_old_space_size=1024/g' /usr/local/lib/node_modules/mirakurun/package.json
+
+
 # final image
 FROM node:12-alpine3.11
 LABEL maintainer "collelog <collelog.cavamin@gmail.com>"
@@ -38,6 +47,10 @@ COPY --from=recpt1-build /usr/local/bin/recpt1 /usr/local/bin/recpt1
 
 # arib-b25-stream-test
 COPY --from=arib-b25-stream-test-build /usr/local/lib/node_modules/arib-b25-stream-test /usr/local/lib/node_modules/arib-b25-stream-test
+
+# mirakurun
+COPY --from=mirakurun-build /usr/local/lib/node_modules/mirakurun /usr/local/lib/node_modules/mirakurun
+
 
 COPY services.sh /usr/local/bin
 
@@ -52,13 +65,6 @@ RUN set -eux && \
 	\
 	# arib-b25-stream-test
 	ln -sf /usr/local/lib/node_modules/arib-b25-stream-test/bin/b25 /usr/local/bin/arib-b25-stream-test && \
-	\
-	# pm2
-	npm install pm2 -g && \
-	\
-	# mirakurun
-	npm install mirakurun@latest -g --unsafe --production && \
-	sed -i -e 's/--max_old_space_size=512/--max_old_space_size=1024/g' /usr/local/lib/node_modules/mirakurun/package.json && \
 	\
 	# cleaning
 	npm cache verify && \
