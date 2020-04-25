@@ -3,6 +3,7 @@ services:
     mirakc:
         #build:
         #    context: mirakc
+        #    dockerfile: Dockerfile
         container_name: mirakc
         image: collelog/uo-mirakc:0.6.0-alpine-amd64
         #networks:
@@ -37,41 +38,10 @@ services:
         init: true
         restart: unless-stopped
 
-#    mirakurun:
-#        #build:
-#        #    context: mirakurun
-#        container_name: mirakurun
-#        image: collelog/uo-mirakurun:2.14.0-alpine-amd64
-#        networks:
-#            - container-link
-#        ports:
-#            - "40773:40772"
-#        volumes:
-#            - /etc/localtime:/etc/localtime:ro
-#            - ./mirakurun/sock:/var/run/mirakurun
-#            - ./mirakurun/conf:/usr/local/etc/mirakurun
-#            - ./mirakurun/db:/usr/local/var/db/mirakurun
-#        environment:
-#            NODE_ENV: production
-#        cap_add:
-#            - SYS_NICE
-#            - SYS_ADMIN
-#        devices:
-#            - /dev/px4video0:/dev/px4video0
-#            - /dev/px4video1:/dev/px4video1
-#            - /dev/px4video2:/dev/px4video2
-#            - /dev/px4video3:/dev/px4video3
-#            - /dev/px4video4:/dev/px4video4
-#            - /dev/px4video5:/dev/px4video5
-#            - /dev/px4video6:/dev/px4video6
-#            - /dev/px4video7:/dev/px4video7
-#            - /dev/bus/usb/00x/0xx             # USB IC card reader
-#        init: true
-#        restart: unless-stopped
-
     mysql:
         #build:
         #    context: mariadb
+        #    dockerfile: Dockerfile
         container_name: epgstation-mysql
         image: collelog/uo-epgstation-mariadb:10.4.12-alpine-amd64
         networks:
@@ -93,6 +63,7 @@ services:
     epgstation:
         #build:
         #    context: epgstation
+        #    dockerfile: Dockerfile
         container_name: epgstation
         image: collelog/uo-epgstation:1.6.7-alpine-amd64
         networks:
@@ -103,7 +74,6 @@ services:
         volumes:
             - /etc/localtime:/etc/localtime:ro
             - ./mirakc/sock:/var/run/mirakurun
-#            - ./mirakurun/sock:/var/run/mirakurun
             - ./mariadb/sock:/var/run/mysqld
             - ./epgstation/config:/usr/local/EPGStation/config
             - ./epgstation/data:/usr/local/EPGStation/data
@@ -114,7 +84,6 @@ services:
             NODE_ENV: production
         depends_on:
            - mirakc
-#           - mirakurun
            - mysql
         #user: '1000:1000'
         init: true
