@@ -2,7 +2,7 @@
 
 > EPGStation 1.6.7, MariaDB 10.4.12-r0, mirakc 0.6.0 (or Mirakurun 2.15.2) のDockerコンテナ
 
-Synology NAS(Intel CPUを採用したDockerパッケージ[適用機種](https://www.synology.com/ja-jp/dsm/packages/Docker))を想定し作成しましたが、x86-64プラットフォームのLinuxであれば動作します。
+Synology NAS(Intel CPUを採用した[Dockerパッケージ適用機種](https://www.synology.com/ja-jp/dsm/packages/Docker))を想定し作成しましたが、x86-64プラットフォームのLinuxであれば動作します。
 
 
 ## Docker Compose ファイル
@@ -96,7 +96,7 @@ Synology NAS(Intel CPUを採用したDockerパッケージ[適用機種](https:/
 
 - **Mirakurun Docker image**
   - [Node.js v12](https://nodejs.org/)
-  - 開発環境(Synology NAS)での安定動作実績値として、max_old_space_sizeを512から1024に変更（環境依存値のため、実際に動作させる環境に合わせて見直してください）
+  - 開発環境(Synology NAS)での実績値として、max_old_space_sizeを512から1024に変更（環境依存値のため、実際の動作環境に合わせて見直してください）
   - 利用想定で不要なパッケージの整理
 
 - **[tv-recorder-monitoring](https://github.com/collelog/tv-recorder-monitoring) との連携**
