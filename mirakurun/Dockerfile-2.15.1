@@ -31,7 +31,7 @@ FROM node:12-alpine3.11 AS mirakurun-build
 
 ENV DOCKER="YES"
 
-RUN npm install mirakurun@2.15.2 -g --unsafe-perm --production
+RUN npm install mirakurun@2.15.1 -g --unsafe-perm --production
 RUN sed -i -e 's/--max_old_space_size=512/--max_old_space_size=1024/g' /usr/local/lib/node_modules/mirakurun/package.json
 
 
