@@ -1,527 +1,337 @@
-- name: ＮＨＫ総合１・東京
+- name: NHK総合・東京
   type: GR
   channel: '27'
-
-- name: ＮＨＫＥテレ１東京
+- name: NHKEテレ東京
   type: GR
   channel: '26'
-
-- name: 日テレ１
+- name: 日テレ
   type: GR
   channel: '25'
-
-- name: ＴＢＳ１
+- name: TBS
   type: GR
   channel: '22'
-
 - name: フジテレビ
   type: GR
   channel: '21'
-
 - name: テレビ朝日
   type: GR
   channel: '24'
-
-- name: テレビ東京１
+- name: テレビ東京
   type: GR
   channel: '23'
-
-- name: ＴＯＫＹＯ　ＭＸ１
+- name: TOKYO MX
   type: GR
   channel: '16'
-
-- name: ＮＨＫＢＳ１
+- name: NHK BS1
   type: BS
-  channel: 'BS15_0'
+  channel: BS15_0
   serviceId: 101
-
-- name: ＮＨＫＢＳ１
+- name: NHK BSプレミアム
   type: BS
-  channel: 'BS15_0'
-  serviceId: 102
-
-- name: ＮＨＫＢＳプレミアム
-  type: BS
-  channel: 'BS3_1'
+  channel: BS03_1
   serviceId: 103
-
-- name: ＮＨＫＢＳプレミアム
+- name: BS日テレ
   type: BS
-  channel: 'BS3_1'
-  serviceId: 104
-
-- name: ＢＳ日テレ
-  type: BS
-  channel: 'BS13_0'
+  channel: BS13_0
   serviceId: 141
-
-- name: ＢＳ日テレ
+- name: BS朝日
   type: BS
-  channel: 'BS13_0'
-  serviceId: 142
-
-- name: ＢＳ日テレ
-  type: BS
-  channel: 'BS13_0'
-  serviceId: 143
-
-- name: ＢＳ朝日１
-  type: BS
-  channel: 'BS1_0'
+  channel: BS01_0
   serviceId: 151
-
-- name: ＢＳ朝日２
+- name: BS-TBS
   type: BS
-  channel: 'BS1_0'
-  serviceId: 152
-
-- name: ＢＳ朝日３
-  type: BS
-  channel: 'BS1_0'
-  serviceId: 153
-
-- name: ＢＳ－ＴＢＳ
-  type: BS
-  channel: 'BS1_1'
+  channel: BS01_1
   serviceId: 161
-
-- name: ＢＳ－ＴＢＳ
+- name: BSテレ東
   type: BS
-  channel: 'BS1_1'
-  serviceId: 162
-
-- name: ＢＳ－ＴＢＳ
-  type: BS
-  channel: 'BS1_1'
-  serviceId: 163
-
-- name: ＢＳテレ東
-  type: BS
-  channel: 'BS1_2'
+  channel: BS01_2
   serviceId: 171
-
-- name: ＢＳテレ東２
+- name: BSフジ
   type: BS
-  channel: 'BS1_2'
-  serviceId: 172
-
-- name: ＢＳテレ東３
-  type: BS
-  channel: 'BS1_2'
-  serviceId: 173
-
-- name: ＢＳフジ・１８１
-  type: BS
-  channel: 'BS13_1'
+  channel: BS13_1
   serviceId: 181
-
-- name: ＢＳフジ・１８２
+- name: WOWOWプライム
   type: BS
-  channel: 'BS13_1'
-  serviceId: 182
-
-- name: ＢＳフジ・１８３
-  type: BS
-  channel: 'BS13_1'
-  serviceId: 183
-
-- name: ＷＯＷＯＷプライム
-  type: BS
-  channel: 'BS3_0'
+  channel: BS03_0
   serviceId: 191
-
-- name: ＷＯＷＯＷライブ
+- name: WOWOWライブ
   type: BS
-  channel: 'BS5_0'
+  channel: BS05_0
   serviceId: 192
-
-- name: ＷＯＷＯＷシネマ
+- name: WOWOWシネマ
   type: BS
-  channel: 'BS5_1'
+  channel: BS05_1
   serviceId: 193
-
-- name: スターチャンネル１
+- name: スター・チャンネル1
   type: BS
-  channel: 'BS9_1'
+  channel: BS09_1
   serviceId: 200
-
-- name: スターチャンネル２
+- name: スター・チャンネル2
   type: BS
-  channel: 'BS15_1'
+  channel: BS15_1
   serviceId: 201
-
-- name: スターチャンネル３
+- name: スター・チャンネル3
   type: BS
-  channel: 'BS15_1'
+  channel: BS15_1
   serviceId: 202
-
-- name: ＢＳ１１イレブン
+- name: BS11
   type: BS
-  channel: 'BS9_0'
+  channel: BS09_0
   serviceId: 211
-
-- name: ＢＳ１２トゥエルビ
+- name: TwellV
   type: BS
-  channel: 'BS9_2'
+  channel: BS09_2
   serviceId: 222
-
-- name: ＢＳキャンパスｅｘ
+- name: 放送大学 BS1
   type: BS
-  channel: 'BS11_1'
+  channel: BS11_1
   serviceId: 231
-
-- name: ＢＳキャンパスｏｎ
+- name: 放送大学 BS2
   type: BS
-  channel: 'BS11_1'
+  channel: BS11_1
   serviceId: 232
-
 - name: グリーンチャンネル
   type: BS
-  channel: 'BS19_0'
+  channel: BS19_0
   serviceId: 234
-
-- name: ＢＳアニマックス
+- name: BSアニマックス
   type: BS
-  channel: 'BS13_2'
+  channel: BS13_2
   serviceId: 236
-
-- name: ＢＳスカパー！
+- name: BSスカパー!
   type: BS
-  channel: 'BS11_0'
+  channel: BS11_0
   serviceId: 241
-
-- name: Ｊ　ＳＰＯＲＴＳ　１
+- name: J SPORTS 1
   type: BS
-  channel: 'BS19_1'
+  channel: BS19_1
   serviceId: 242
-
-- name: Ｊ　ＳＰＯＲＴＳ　２
+- name: J SPORTS 2
   type: BS
-  channel: 'BS19_2'
+  channel: BS19_2
   serviceId: 243
-
-- name: Ｊ　ＳＰＯＲＴＳ　３
+- name: J SPORTS 3
   type: BS
-  channel: 'BS21_1'
+  channel: BS21_1
   serviceId: 244
-
-- name: Ｊ　ＳＰＯＲＴＳ　４
+- name: J SPORTS 4
   type: BS
-  channel: 'BS21_2'
+  channel: BS21_2
   serviceId: 245
-
-- name: ＢＳ釣りビジョン
+- name: BS釣りビジョン
   type: BS
-  channel: 'BS23_0'
+  channel: BS23_0
   serviceId: 251
-
-- name: シネフィルＷＯＷＯＷ
+- name: シネフィルWOWOW
   type: BS
-  channel: 'BS21_0'
+  channel: BS21_0
   serviceId: 252
-
-- name: 日本映画専門ｃｈ
+- name: 日本映画専門チャンネル
   type: BS
-  channel: 'BS23_1'
+  channel: BS23_1
   serviceId: 255
-
-- name: ディズニーｃｈ
+- name: ディズニー・チャンネル
   type: BS
-  channel: 'BS3_2'
+  channel: BS03_2
   serviceId: 256
-
-- name: 放送大学ラジオ
-  type: BS
-  channel: 'BS11_1'
-  serviceId: 531
-
-- name: ショップチャンネル
-  type: CS
-  channel: 'CS8'
-  serviceId: 55
-
-- name: ＱＶＣ
-  type: CS
-  channel: 'CS22'
-  serviceId: 161
 
 - name: 東映チャンネル
   type: CS
-  channel: 'CS8'
+  channel: CS8
   serviceId: 218
-
 - name: 衛星劇場
   type: CS
-  channel: 'CS10'
+  channel: CS10
   serviceId: 219
-
-- name: 映画・ｃｈＮＥＣＯ
+- name: 映画ch・NECO
   type: CS
-  channel: 'CS24'
+  channel: CS24
   serviceId: 223
-
 - name: ザ・シネマ
   type: CS
-  channel: 'CS14'
+  channel: CS14
   serviceId: 227
-
 - name: ムービープラス
   type: CS
-  channel: 'CS18'
+  channel: CS18
   serviceId: 240
-
-- name: スカイＡ
+- name: スカイA
   type: CS
-  channel: 'CS4'
+  channel: CS4
   serviceId: 250
-
-- name: ＧＡＯＲＡ
+- name: GAORA
   type: CS
-  channel: 'CS12'
+  channel: CS12
   serviceId: 254
-
-- name: 日テレジータス
+- name: 日テレG+
   type: CS
-  channel: 'CS24'
+  channel: CS24
   serviceId: 257
-
 - name: ゴルフネットワーク
   type: CS
-  channel: 'CS18'
+  channel: CS18
   serviceId: 262
-
-- name: ＳＫＹ　ＳＴＡＧＥ
+- name: SKY STAGE
   type: CS
-  channel: 'CS16'
+  channel: CS16
   serviceId: 290
-
-- name: 時代劇専門ｃｈ
+- name: 時代劇専門ch
   type: CS
-  channel: 'CS4'
+  channel: CS4
   serviceId: 292
-
 - name: ファミリー劇場
   type: CS
-  channel: 'CS14'
+  channel: CS14
   serviceId: 293
-
-- name: ホームドラマＣＨ
+- name: ホームドラマch
   type: CS
-  channel: 'CS6'
+  channel: CS6
   serviceId: 294
-
-- name: ＭＯＮＤＯ　ＴＶ
+- name: MONDO TV
   type: CS
-  channel: 'CS24'
+  channel: CS24
   serviceId: 295
-
-- name: ＴＢＳチャンネル１
+- name: TBSチャンネル1
   type: CS
-  channel: 'CS2'
+  channel: CS2
   serviceId: 296
-
-- name: ＴＢＳチャンネル２
+- name: TBSチャンネル2
   type: CS
-  channel: 'CS22'
+  channel: CS22
   serviceId: 297
-
-- name: テレ朝チャンネル１
+- name: テレ朝チャンネル1
   type: CS
-  channel: 'CS2'
+  channel: CS2
   serviceId: 298
-
-- name: テレ朝チャンネル２
+- name: テレ朝チャンネル2
   type: CS
-  channel: 'CS2'
+  channel: CS2
   serviceId: 299
-
 - name: 日テレプラス
   type: CS
-  channel: 'CS24'
+  channel: CS24
   serviceId: 300
-
-- name: エンタメ〜テレ
+- name: エンタメ～テレ
   type: CS
-  channel: 'CS4'
+  channel: CS4
   serviceId: 301
-
-- name: 銀河◆歴ドラ・サスペ
+- name: チャンネル銀河
   type: CS
-  channel: 'CS18'
+  channel: CS18
   serviceId: 305
-
-- name: フジテレビＯＮＥ
+- name: フジテレビONE
   type: CS
-  channel: 'CS20'
+  channel: CS20
   serviceId: 307
-
-- name: フジテレビＴＷＯ
+- name: フジテレビTWO
   type: CS
-  channel: 'CS20'
+  channel: CS20
   serviceId: 308
-
-- name: フジテレビＮＥＸＴ
+- name: フジテレビNEXT
   type: CS
-  channel: 'CS20'
+  channel: CS20
   serviceId: 309
-
-- name: スーパー！ドラマＴＶ
+- name: スーパー！ドラマTV
   type: CS
-  channel: 'CS14'
+  channel: CS14
   serviceId: 310
-
-- name: ＡＸＮ　海外ドラマ
+- name: AXN海外ドラマ
   type: CS
-  channel: 'CS16'
+  channel: CS16
   serviceId: 311
-
-- name: ＦＯＸ
+- name: FOX
   type: CS
-  channel: 'CS22'
+  channel: CS22
   serviceId: 312
-
-- name: 女性ｃｈ／ＬａＬａ
+- name: 女性ch／LaLa
   type: CS
-  channel: 'CS18'
+  channel: CS18
   serviceId: 314
-
-- name: ＡＸＮミステリー
+- name: AXNミステリー
   type: CS
-  channel: 'CS16'
+  channel: CS16
   serviceId: 316
-
-- name: ＫＢＳ　Ｗｏｒｌｄ
-  type: CS
-  channel: 'CS10'
-  serviceId: 317
-
-- name: Ｍｎｅｔ
-  type: CS
-  channel: 'CS8'
-  serviceId: 318
-
 - name: スペシャプラス
   type: CS
-  channel: 'CS16'
+  channel: CS16
   serviceId: 321
-
-- name: スペースシャワーＴＶ
+- name: スペースシャワーTV
   type: CS
-  channel: 'CS20'
+  channel: CS20
   serviceId: 322
-
-- name: ＭＴＶ
+- name: MTV
   type: CS
-  channel: 'CS4'
+  channel: CS4
   serviceId: 323
-
 - name: ミュージック・エア
   type: CS
-  channel: 'CS6'
+  channel: CS6
   serviceId: 324
-
 - name: エムオン！
   type: CS
-  channel: 'CS12'
+  channel: CS12
   serviceId: 325
-
-- name: 歌謡ポップス
+- name: 歌謡ポップスch
   type: CS
-  channel: 'CS6'
+  channel: CS6
   serviceId: 329
-
 - name: キッズステーション
   type: CS
-  channel: 'CS12'
+  channel: CS12
   serviceId: 330
-
 - name: カートゥーン
   type: CS
-  channel: 'CS6'
+  channel: CS6
   serviceId: 331
-
-- name: ＡＴ−Ｘ
+- name: AT-X
   type: CS
-  channel: 'CS16'
+  channel: CS16
   serviceId: 333
-
 - name: ディズニージュニア
   type: CS
-  channel: 'CS2'
+  channel: CS2
   serviceId: 339
-
-- name: ディスカバリー
+- name: ディスカバリーチャンネル
   type: CS
-  channel: 'CS6'
+  channel: CS6
   serviceId: 340
-
 - name: アニマルプラネット
   type: CS
-  channel: 'CS6'
+  channel: CS6
   serviceId: 341
-
 - name: ヒストリーチャンネル
   type: CS
-  channel: 'CS14'
+  channel: CS14
   serviceId: 342
-
-- name: ナショジオ
+- name: ナショナルジオグラフィック
   type: CS
-  channel: 'CS12'
+  channel: CS12
   serviceId: 343
-
-- name: 日テレＮＥＷＳ２４
+- name: 日テレNEWS24
   type: CS
-  channel: 'CS8'
+  channel: CS8
   serviceId: 349
-
-- name: ＴＢＳ　ＮＥＷＳ
+- name: TBS NEWS
   type: CS
-  channel: 'CS22'
+  channel: CS22
   serviceId: 351
-
-- name: ＢＢＣワールド
+- name: BBCワールドニュース
   type: CS
-  channel: 'CS16'
+  channel: CS16
   serviceId: 353
-
-- name: ＣＮＮｊ
+- name: CNNj
   type: CS
-  channel: 'CS6'
+  channel: CS6
   serviceId: 354
-
 - name: 囲碁・将棋チャンネル
   type: CS
-  channel: 'CS6'
+  channel: CS6
   serviceId: 363
-
-- name: スカサカ！ 
+- name: スポーツライブ+
   type: CS
-  channel: 'CS10'
+  channel: CS10
   serviceId: 800
-
-- name: スカチャン１
+- name: スカチャン1
   type: CS
-  channel: 'CS10'
+  channel: CS10
   serviceId: 801
-
-- name: BS SPTV
-  type: SKY
-  channel: 'CH585'
-  serviceId: 33353
-  satelite: JCSAT3A
-  isDisabled: true
-
-- name: AXN HD
-  type: SKY
-  channel: 'AXNHD'
-  serviceId: 33418
-  satelite: JCSAT4A
-  isDisabled: true
-
-- name: AT-X HD
-  type: SKY
-  channel: 'ATXHD'
-  serviceId: 33435
-  satelite: JCSAT3A
-  isDisabled: true

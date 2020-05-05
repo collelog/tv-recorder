@@ -6,168 +6,144 @@ server:
     - unix: /var/run/mirakurun/mirakurun.sock
 
 channels:
-  - name: MX
+  - name: NHK総合・東京
     type: GR
-    channel: '16'
-  - name: CX
+    channel: 27
+  - name: NHKEテレ東京
     type: GR
-    channel: '21'
+    channel: 26
+  - name: 日テレ
+    type: GR
+    channel: 25
   - name: TBS
     type: GR
-    channel: '22'
-  - name: TX
+    channel: 22
+  - name: フジテレビ
     type: GR
-    channel: '23'
-  - name: EX
+    channel: 21
+  - name: テレビ朝日
     type: GR
-    channel: '24'
-  - name: NTV
+    channel: 24
+  - name: テレビ東京
     type: GR
-    channel: '25'
-  - name: ETV
+    channel: 23
+  - name: TOKYO MX
     type: GR
-    channel: '26'
-  - name: NHK
-    type: GR
-    channel: '27'
-  - name: BS-EX
+    channel: 16
+  - name: NHK BS1
+    type: BS
+    channel: BS15_0
+  - name: NHK BSプレミアム
+    type: BS
+    channel: BS03_1
+  - name: BS日テレ
+    type: BS
+    channel: BS13_0
+  - name: BS朝日
     type: BS
     channel: BS01_0
   - name: BS-TBS
     type: BS
     channel: BS01_1
-  - name: BS-TX
+  - name: BSテレ東
     type: BS
     channel: BS01_2
-  - name: BS03_0
+  - name: BSフジ
+    type: BS
+    channel: BS13_1
+  - name: WOWOWプライム
     type: BS
     channel: BS03_0
-  - name: BSP
-    type: BS
-    channel: BS03_1
-  - name: BS03_2
-    type: BS
-    channel: BS03_2
-  - name: BS05_0
+  - name: WOWOWライブ
     type: BS
     channel: BS05_0
-  - name: BS05_1
+  - name: WOWOWシネマ
     type: BS
     channel: BS05_1
-  - name: BS07_0
+  - name: スター・チャンネル1
     type: BS
-    channel: BS07_0
-    disabled: true
-  - name: BS07_1
+    channel: BS09_1
+  - name: スター・チャンネル2/スター・チャンネル3
     type: BS
-    channel: BS07_1
-    disabled: true
-  - name: BS07_2
-    type: BS
-    channel: BS07_2
-    disabled: true
+    channel: BS15_1
   - name: BS11
     type: BS
     channel: BS09_0
-  - name: BS09_1
-    type: BS
-    channel: BS09_1
-  - name: BS12
+  - name: TwellV
     type: BS
     channel: BS09_2
-  - name: BS11_0
-    type: BS
-    channel: BS11_0
-  - name: OUJ
+  - name: 放送大学 BS1/放送大学 BS2
     type: BS
     channel: BS11_1
-  - name: BS-NTV
-    type: BS
-    channel: BS13_0
-  - name: BS-CX
-    type: BS
-    channel: BS13_1
-  - name: BS13_2
-    type: BS
-    channel: BS13_2
-  - name: BS1
-    type: BS
-    channel: BS15_0
-  - name: BS15_1
-    type: BS
-    channel: BS15_1
-  - name: BS17_0
-    type: BS
-    channel: BS17_0
-    disabled: true
-  - name: BS17_1
-    type: BS
-    channel: BS17_1
-    disabled: true
-  - name: BS17_2
-    type: BS
-    channel: BS17_2
-    disabled: true
-  - name: BS19_0
+  - name: グリーンチャンネル
     type: BS
     channel: BS19_0
-  - name: BS19_1
+  - name: BSアニマックス
+    type: BS
+    channel: BS13_2
+  - name: BSスカパー!
+    type: BS
+    channel: BS11_0
+  - name: J SPORTS 1
     type: BS
     channel: BS19_1
-  - name: BS19_2
+  - name: J SPORTS 2
     type: BS
     channel: BS19_2
-  - name: BS21_0
-    type: BS
-    channel: BS21_0
-  - name: BS21_1
+  - name: J SPORTS 3
     type: BS
     channel: BS21_1
-  - name: BS21_2
+  - name: J SPORTS 4
     type: BS
     channel: BS21_2
-  - name: BS23_0
+  - name: BS釣りビジョン
     type: BS
     channel: BS23_0
-  - name: BS23_1
+  - name: シネフィルWOWOW
+    type: BS
+    channel: BS21_0
+  - name: 日本映画専門チャンネル
     type: BS
     channel: BS23_1
-  - name: CS2
-    type: CS
-    channel: CS2
-  - name: CS4
-    type: CS
-    channel: CS4
-  - name: CS6
-    type: CS
-    channel: CS6
-  - name: CS8
+  - name: ディズニー・チャンネル
+    type: BS
+    channel: BS03_2
+  - name: 東映チャンネル/日テレNEWS24
     type: CS
     channel: CS8
-  - name: CS10
+  - name: 衛星劇場/スポーツライブ+/スカチャン1
     type: CS
     channel: CS10
-  - name: CS12
-    type: CS
-    channel: CS12
-  - name: CS14
-    type: CS
-    channel: CS14
-  - name: CS16
-    type: CS
-    channel: CS16
-  - name: CS18
-    type: CS
-    channel: CS18
-  - name: CS20
-    type: CS
-    channel: CS20
-  - name: CS22
-    type: CS
-    channel: CS22
-  - name: CS24
+  - name: 映画ch・NECO/日テレG+/MONDO TV/日テレプラス
     type: CS
     channel: CS24
+  - name: ザ・シネマ/ファミリー劇場/スーパー！ドラマTV/ヒストリーチャンネル
+    type: CS
+    channel: CS14
+  - name: ムービープラス/ゴルフネットワーク/チャンネル銀河/女性ch／LaLa
+    type: CS
+    channel: CS18
+  - name: スカイA/時代劇専門ch/エンタメ～テレ/MTV
+    type: CS
+    channel: CS4
+  - name: GAORA/エムオン！/キッズステーション/ナショナルジオグラフィック
+    type: CS
+    channel: CS12
+  - name: SKY STAGE/AXN海外ドラマ/AXNミステリー/スペシャプラス/AT-X/BBCワールドニュース
+    type: CS
+    channel: CS16
+  - name: ホームドラマch/ミュージック・エア/歌謡ポップスch/カートゥーン/ディスカバリーチャンネル/アニマルプラネット/CNNj/囲碁・将棋チャンネル
+    type: CS
+    channel: CS6
+  - name: TBSチャンネル1/テレ朝チャンネル1/テレ朝チャンネル2/ディズニージュニア
+    type: CS
+    channel: CS2
+  - name: TBSチャンネル2/FOX/TBS NEWS
+    type: CS
+    channel: CS22
+  - name: フジテレビONE/フジテレビTWO/フジテレビNEXT/スペースシャワーTV
+    type: CS
+    channel: CS20
 
 tuners:
   - name: PX4-S1
