@@ -1,6 +1,6 @@
 # TV Recorder on Docker
 
-> EPGStation 1.6.7, MariaDB 10.4.12-r0, mirakc 0.7.0 (or Mirakurun 2.15.2) のDockerコンテナ
+> EPGStation 1.6.8, MariaDB 10.4.12-r0, mirakc 0.7.0 (or Mirakurun 2.15.2) のDockerコンテナ
 
 Synology NAS(Intel CPUを採用した[Dockerパッケージ適用機種](https://www.synology.com/ja-jp/dsm/packages/Docker))を想定し作成しましたが、x86-64プラットフォームのLinuxであれば動作します。
 
@@ -15,11 +15,11 @@ Synology NAS(Intel CPUを採用した[Dockerパッケージ適用機種](https:/
 
 ## Dockerコンテナ構成
 
-### EPGStation ([collelog/uo-epgstation:1.6.7-alpine-amd64](https://hub.docker.com/r/collelog/uo-epgstation))
+### EPGStation ([collelog/uo-epgstation:1.6.8-alpine-amd64](https://hub.docker.com/r/collelog/uo-epgstation))
 - [Alpine Linux 3.11](https://alpinelinux.org/)([alpine:3.11](https://hub.docker.com/_/alpine))
 - [Node.js 12.16.2](https://nodejs.org/)
 - [EPGStation](https://github.com/l3tnun/EPGStation)
-  - version: 1.6.7 (commit e9a57bcdbdaee6edd7c276469bdfdd7e5c142f9a)
+  - version: 1.6.8 (commit b2e9d5d365bf0b68364cf801a3648273d0ef6b05)
 - [FFmpeg 4.2.2](https://www.ffmpeg.org/)
 
 ### MariaDB ([collelog/uo-epgstation-mariadb:10.4.12-alpine-amd64](https://hub.docker.com/r/collelog/uo-epgstation-mariadb))
