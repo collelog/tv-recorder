@@ -108,10 +108,10 @@ channels:
   - name: ディズニー・チャンネル
     type: BS
     channel: BS03_2
-  - name: 東映チャンネル/日テレNEWS24
+  - name: ショップチャンネル/東映チャンネル/Mnet/日テレNEWS24
     type: CS
     channel: CS8
-  - name: 衛星劇場/スポーツライブ+/スカチャン1
+  - name: 衛星劇場/KBW WORLD/スポーツライブ+/スカチャン1
     type: CS
     channel: CS10
   - name: 映画ch・NECO/日テレG+/MONDO TV/日テレプラス
@@ -138,7 +138,7 @@ channels:
   - name: TBSチャンネル1/テレ朝チャンネル1/テレ朝チャンネル2/ディズニージュニア
     type: CS
     channel: CS2
-  - name: TBSチャンネル2/FOX/TBS NEWS
+  - name: QVC/TBSチャンネル2/FOX/TBS NEWS
     type: CS
     channel: CS22
   - name: フジテレビONE/フジテレビTWO/フジテレビNEXT/スペースシャワーTV
