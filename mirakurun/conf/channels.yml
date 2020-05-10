@@ -136,6 +136,14 @@
   channel: BS03_2
   serviceId: 256
 
+- name: ショップチャンネル
+  type: CS
+  channel: CS8
+  serviceId: 55
+- name: QVC
+  type: CS
+  channel: CS22
+  serviceId: 161
 - name: 東映チャンネル
   type: CS
   channel: CS8
@@ -252,6 +260,14 @@
   type: CS
   channel: CS16
   serviceId: 316
+- name: KBW WORLD
+  type: CS
+  channel: CS10
+  serviceId: 317
+- name: Mnet
+  type: CS
+  channel: CS8
+  serviceId: 318
 - name: スペシャプラス
   type: CS
   channel: CS16
