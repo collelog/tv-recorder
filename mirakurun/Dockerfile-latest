@@ -46,7 +46,7 @@ ENV DOCKER="YES"
 COPY --from=recpt1-build /usr/local/bin/recpt1 /usr/local/bin/recpt1
 
 # timezone
-COPY --from==arib-b25-stream-test-build /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+COPY --from=arib-b25-stream-test-build /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 
 # arib-b25-stream-test
 COPY --from=arib-b25-stream-test-build /usr/local/lib/node_modules/arib-b25-stream-test /usr/local/lib/node_modules/arib-b25-stream-test
