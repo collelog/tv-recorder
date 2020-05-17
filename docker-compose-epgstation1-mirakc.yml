@@ -5,7 +5,7 @@ services:
         #    context: mirakc
         #    dockerfile: Dockerfile
         container_name: mirakc
-        image: collelog/uo-mirakc:0.7.0-alpine-amd64
+        image: collelog/uo-mirakc:0.8.0-alpine-amd64
         #networks:
         #    - container-link
         #ports:

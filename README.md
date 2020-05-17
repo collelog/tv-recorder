@@ -1,6 +1,6 @@
 # TV Recorder on Docker
 
-> EPGStation 1.6.8, MariaDB 10.4.12-r0, mirakc 0.7.0 (or Mirakurun 2.15.2) のDockerコンテナ
+> EPGStation 1.6.8, MariaDB 10.4.12-r0, mirakc 0.8.0 (or Mirakurun 2.15.2) のDockerコンテナ
 
 Synology NAS(Intel CPUを採用した[Dockerパッケージ適用機種](https://www.synology.com/ja-jp/dsm/packages/Docker))を想定し作成しましたが、x86-64プラットフォームのLinuxであれば動作します。
 
@@ -28,11 +28,11 @@ Synology NAS(Intel CPUを採用した[Dockerパッケージ適用機種](https:/
 - [Alpine Linux 3.11](https://alpinelinux.org/)([alpine:3.11](https://hub.docker.com/_/alpine))
 - [MariaDB 10.4.12-r0](https://mariadb.org/)
 
-### mirakc ([collelog/uo-mirakc:0.7.0-alpine-amd64](https://hub.docker.com/r/collelog/uo-mirakc))
+### mirakc ([collelog/uo-mirakc:0.8.0-alpine-amd64](https://hub.docker.com/r/collelog/uo-mirakc))
 ※[docker-compose-epgstation1-mirakc.yml](https://github.com/collelog/tv-recorder/blob/master/docker-compose-epgstation1-mirakc.yml) にのみ含まれます
 - [Alpine Linux 3.11](https://alpinelinux.org/)([alpine:3.11](https://hub.docker.com/_/alpine))
 - [mirakc](https://github.com/masnagam/mirakc)
-  - version: 0.7.0
+  - version: 0.8.0
 
 ### Mirakurun ([collelog/uo-mirakurun:2.15.2-alpine-amd64](https://hub.docker.com/r/collelog/uo-mirakurun))
 ※[docker-compose-epgstation1-mirakurun.yml](https://github.com/collelog/tv-recorder/blob/master/docker-compose-epgstation1-mirakurun.yml) にのみ含まれます
@@ -79,11 +79,13 @@ Synology NAS(Intel CPUを採用した[Dockerパッケージ適用機種](https:/
 - **mirakc Docker image**
   - Alpine Linux ベース
   - [arib-b25-stream-test](https://www.npmjs.com/package/arib-b25-stream-test)
+  - [stz2012 recpt1](https://github.com/stz2012/recpt1/) --enable-b25
   - スマートカードリーダーの使用
 
 - **Mirakurun Docker image**
   - Alpine Linux ベース
   - [Node.js vXX.X.X](https://nodejs.org/)
+  - [stz2012 recpt1](https://github.com/stz2012/recpt1/) --enable-b25
   - スマートカードリーダーの使用
   - 開発環境(Synology NAS)での実績値として、max_old_space_sizeを512から1024に変更（環境依存値のため、実際の動作環境に合わせて見直してください）
 
