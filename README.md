@@ -1,6 +1,6 @@
 # TV Recorder on Docker
 
-> EPGStation 1.6.8, MariaDB 10.4.12-r0, mirakc 0.8.0 (or Mirakurun 2.15.2) のDockerコンテナ
+> EPGStation 1.6.8, MariaDB 10.4.13-r0, mirakc 0.9.0 (or Mirakurun 2.15.2) のDockerコンテナ
 
 Synology NAS(Intel CPUを採用した[Dockerパッケージ適用機種](https://www.synology.com/ja-jp/dsm/packages/Docker))を想定し作成しましたが、x86-64プラットフォームのLinuxであれば動作します。
 
@@ -19,25 +19,25 @@ Synology NAS(Intel CPUを採用した[Dockerパッケージ適用機種](https:/
 
 ### EPGStation ([collelog/uo-epgstation:1.6.8-alpine-amd64](https://hub.docker.com/r/collelog/uo-epgstation))
 - [Alpine Linux 3.11](https://alpinelinux.org/)
-- [Node.js 12.16.2](https://nodejs.org/)([node:12-alpine3.11](https://hub.docker.com/_/node/))
+- [Node.js 12.17.0](https://nodejs.org/)([node:12-alpine3.11](https://hub.docker.com/_/node/))
 - [EPGStation](https://github.com/l3tnun/EPGStation)
   - version: 1.6.8 (commit b2e9d5d365bf0b68364cf801a3648273d0ef6b05)
-- [FFmpeg 4.2.2](https://www.ffmpeg.org/)
+- [FFmpeg 4.2.3](https://www.ffmpeg.org/)
 
-### MariaDB ([collelog/uo-epgstation-mariadb:10.4.12-alpine-amd64](https://hub.docker.com/r/collelog/uo-epgstation-mariadb))
+### MariaDB ([collelog/uo-epgstation-mariadb:10.4.13-alpine-amd64](https://hub.docker.com/r/collelog/uo-epgstation-mariadb))
 - [Alpine Linux 3.11](https://alpinelinux.org/)([alpine:3.11](https://hub.docker.com/_/alpine))
-- [MariaDB 10.4.12-r0](https://mariadb.org/)
+- [MariaDB 10.4.13-r0](https://mariadb.org/)
 
 ### mirakc ([collelog/uo-mirakc:0.8.0-alpine-amd64](https://hub.docker.com/r/collelog/uo-mirakc))
 ※[docker-compose-epgstation1-mirakc.yml](https://github.com/collelog/tv-recorder/blob/master/docker-compose-epgstation1-mirakc.yml) にのみ含まれます
 - [Alpine Linux 3.11](https://alpinelinux.org/)([alpine:3.11](https://hub.docker.com/_/alpine))
 - [mirakc](https://github.com/masnagam/mirakc)
-  - version: 0.8.0
+  - version: 0.9.0
 
 ### Mirakurun ([collelog/uo-mirakurun:2.15.2-alpine-amd64](https://hub.docker.com/r/collelog/uo-mirakurun))
 ※[docker-compose-epgstation1-mirakurun.yml](https://github.com/collelog/tv-recorder/blob/master/docker-compose-epgstation1-mirakurun.yml) にのみ含まれます
 - [Alpine Linux 3.11](https://alpinelinux.org/)
-- [Node.js 12.16.2](https://nodejs.org/)([node:12-alpine3.11](https://hub.docker.com/_/node/))
+- [Node.js 12.17.0](https://nodejs.org/)([node:12-alpine3.11](https://hub.docker.com/_/node/))
 - [Mirakurun](https://github.com/Chinachu/Mirakurun)
   - version: 2.15.2
 
@@ -62,8 +62,8 @@ Synology NAS(Intel CPUを採用した[Dockerパッケージ適用機種](https:/
 ### 主な機能
 - **EPGStation Docker image**
   - Alpine Linux ベース
-  - [Node.js v12.16.2](https://nodejs.org/)
-  - [FFmpeg 4.2.2](https://www.ffmpeg.org/) ビルドオプションは後述「FFmpeg Build」参照
+  - [Node.js v12.17.0](https://nodejs.org/)
+  - [FFmpeg 4.2.3](https://www.ffmpeg.org/) ビルドオプションは後述「FFmpeg Build」参照
   - MariaDB 連携：UNIXドメインソケット
   - MariaDB 文字コード：UTF8MB4、Collation：UTF8MB4_BIN
   - mirakc 連携：UNIXドメインソケット
@@ -129,7 +129,7 @@ TVチューナーデバイスとスマートカードリーダーデバイスの
 
 ## FFmpeg Build
 ```
-ffmpeg version 4.2.2 Copyright (c) 2000-2019 the FFmpeg developers
+ffmpeg version 4.2.3 Copyright (c) 2000-2019 the FFmpeg developers
 built with gcc 9.2.0 (Alpine 9.2.0)
 configuration: 
 	--enable-version3
