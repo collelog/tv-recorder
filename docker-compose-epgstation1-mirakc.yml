@@ -5,7 +5,7 @@ services:
         #    context: mirakc
         #    dockerfile: Dockerfile
         container_name: mirakc
-        image: collelog/uo-mirakc:0.8.0-alpine-amd64
+        image: collelog/uo-mirakc:0.9.0-alpine-amd64
         #networks:
         #    - container-link
         #ports:
@@ -43,7 +43,7 @@ services:
         #    context: mariadb
         #    dockerfile: Dockerfile
         container_name: epgstation-mysql
-        image: collelog/uo-epgstation-mariadb:10.4.12-alpine-amd64
+        image: collelog/uo-epgstation-mariadb:10.4.13-alpine-amd64
         networks:
             - container-link
         ports:
