@@ -5,7 +5,7 @@ services:
         #    context: mirakurun
         #    dockerfile: Dockerfile
         container_name: mirakurun
-        image: collelog/uo-mirakurun:2.15.2-node14.3.0-alpine-amd64
+        image: collelog/uo-mirakurun:2.15.2-node14.4.0-alpine-amd64
         networks:
             - container-link
         ports:
