@@ -23,7 +23,7 @@ RUN make install
 
 
 # arib-b25-stream-test
-FROM node:14.2.0-alpine3.11 AS arib-b25-stream-test-build
+FROM node:14.3.0-alpine3.11 AS arib-b25-stream-test-build
 
 RUN apk upgrade --update
 RUN apk add --no-cache gcc g++ make libc-dev pcsc-lite-dev pkgconfig
@@ -32,7 +32,7 @@ RUN npm install arib-b25-stream-test -g --unsafe
 
 
 # mirakurun-build
-FROM node:14.2.0-alpine3.11 AS mirakurun-build
+FROM node:14.3.0-alpine3.11 AS mirakurun-build
 
 ENV DOCKER="YES"
 
