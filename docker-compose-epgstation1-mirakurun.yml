@@ -60,7 +60,7 @@ services:
         #    context: epgstation
         #    dockerfile: Dockerfile
         container_name: epgstation
-        image: collelog/uo-epgstation:1.6.8-alpine-amd64
+        image: collelog/uo-epgstation:1.6.9-alpine-amd64
         networks:
             - container-link
         ports:
