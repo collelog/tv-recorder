@@ -12,12 +12,12 @@ Synology NAS(Intel CPUを採用した[Dockerパッケージ適用機種](https:/
 ###  EPGStation + MariaDB + Mirakurun の組み合わせ
 - [docker-compose-epgstation1-mirakurun.yml](https://github.com/collelog/tv-recorder/blob/master/docker-compose-epgstation1-mirakurun.yml)
 
-###  EPGStation + MariaDB + Mirakurun(Node.js v14.2.0) の組み合わせ
+###  EPGStation + MariaDB + Mirakurun(Node.js v14.4.0) の組み合わせ
 - [docker-compose-epgstation1-mirakurun-test.yml](https://github.com/collelog/tv-recorder/blob/master/docker-compose-epgstation1-mirakurun-test.yml)
 
 ## Dockerコンテナ構成
 
-### EPGStation ([collelog/uo-epgstation:1.6.8-alpine-amd64](https://hub.docker.com/r/collelog/uo-epgstation))
+### EPGStation ([collelog/uo-epgstation:1.6.9-alpine-amd64](https://hub.docker.com/r/collelog/uo-epgstation))
 - [Alpine Linux 3.11.6](https://alpinelinux.org/)
 - [Node.js 12.18.0](https://nodejs.org/)([node:12-alpine3.11](https://hub.docker.com/_/node/))
 - [EPGStation](https://github.com/l3tnun/EPGStation)
@@ -28,7 +28,7 @@ Synology NAS(Intel CPUを採用した[Dockerパッケージ適用機種](https:/
 - [Alpine Linux 3.11.6](https://alpinelinux.org/)([alpine:3.11](https://hub.docker.com/_/alpine))
 - [MariaDB 10.4.13-r0](https://mariadb.org/)
 
-### mirakc ([collelog/uo-mirakc:0.8.0-alpine-amd64](https://hub.docker.com/r/collelog/uo-mirakc))
+### mirakc ([collelog/uo-mirakc:0.9.0-alpine-amd64](https://hub.docker.com/r/collelog/uo-mirakc))
 ※[docker-compose-epgstation1-mirakc.yml](https://github.com/collelog/tv-recorder/blob/master/docker-compose-epgstation1-mirakc.yml) にのみ含まれます
 - [Alpine Linux 3.11.6](https://alpinelinux.org/)([alpine:3.11](https://hub.docker.com/_/alpine))
 - [mirakc](https://github.com/masnagam/mirakc)
@@ -41,7 +41,7 @@ Synology NAS(Intel CPUを採用した[Dockerパッケージ適用機種](https:/
 - [Mirakurun](https://github.com/Chinachu/Mirakurun)
   - version: 2.15.2
 
-### Mirakurun ([collelog/uo-mirakurun:2.15.2-node14.2.0-alpine-amd64](https://hub.docker.com/r/collelog/uo-mirakurun))
+### Mirakurun ([collelog/uo-mirakurun:2.15.2-node14.4.0-alpine-amd64](https://hub.docker.com/r/collelog/uo-mirakurun))
 ※[docker-compose-epgstation1-mirakurun-test.yml](https://github.com/collelog/tv-recorder/blob/master/docker-compose-epgstation1-mirakurun-test.yml) にのみ含まれます
 - [Alpine Linux 3.11.6](https://alpinelinux.org/)
 - [Node.js 14.2.0](https://nodejs.org/)([node:14.2.0-alpine3.11](https://hub.docker.com/_/node/))
