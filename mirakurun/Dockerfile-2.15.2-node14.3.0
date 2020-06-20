@@ -1,5 +1,5 @@
 # libarib25, recpt1, timezone
-FROM alpine:3.12 AS recpt1-build
+FROM alpine:3.11 AS recpt1-build
 
 RUN set -eux
 RUN apk upgrade --update
@@ -23,7 +23,7 @@ RUN make install
 
 
 # arib-b25-stream-test
-FROM node:14.2.0-alpine3.12 AS arib-b25-stream-test-build
+FROM node:14.2.0-alpine3.11 AS arib-b25-stream-test-build
 
 RUN apk upgrade --update
 RUN apk add --no-cache gcc g++ make libc-dev pcsc-lite-dev pkgconfig
@@ -32,7 +32,7 @@ RUN npm install arib-b25-stream-test -g --unsafe
 
 
 # mirakurun-build
-FROM node:14.2.0-alpine3.12 AS mirakurun-build
+FROM node:14.2.0-alpine3.11 AS mirakurun-build
 
 ENV DOCKER="YES"
 
@@ -41,7 +41,7 @@ RUN sed -i -e 's/--max_old_space_size=512/--max_old_space_size=1024/g' /usr/loca
 
 
 # final image
-FROM node:14.3.0-alpine3.12
+FROM node:14.3.0-alpine3.11
 LABEL maintainer "collelog <collelog.cavamin@gmail.com>"
 
 EXPOSE 40772
