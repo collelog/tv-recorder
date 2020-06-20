@@ -32,7 +32,7 @@ RUN npm install arib-b25-stream-test -g --unsafe
 
 
 # mirakurun-build
-FROM node:12-alpine3.11 AS mirakurun-build
+FROM node:12-alpine3.12 AS mirakurun-build
 
 ENV DOCKER="YES"
 
@@ -53,8 +53,9 @@ RUN npm install -g --production --unsafe-perm
 # final image
 FROM node:12-alpine3.12
 LABEL maintainer "collelog <collelog.cavamin@gmail.com>"
-
 EXPOSE 40772
+EXPOSE 9229
+
 ENV LD_LIBRARY_PATH=/usr/local/lib64
 ENV DOCKER="YES"
 
