@@ -92,7 +92,7 @@ RUN apk add --no-cache ca-certificates curl g++ make python3 tzdata
 
 RUN mkdir -p /usr/local/EPGStation
 WORKDIR /usr/local/EPGStation
-RUN curl -fsSL https://github.com/l3tnun/EPGStation/tarball/423491b70b59308d7dedb2e6772feb4b950fd339 \
+RUN curl -fsSL https://github.com/l3tnun/EPGStation/tarball/4557937cb08b1d28c2626b50a7e90520db394755 \
 		| tar -xz --strip-components=1
 RUN npm install --nosave
 RUN npm run build
