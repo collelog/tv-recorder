@@ -3,14 +3,14 @@ FROM alpine:3.12 AS base
 
 RUN set -eux
 RUN apk add --no-cache --update \
-	 libgcc \
-	 libstdc++ \
-	 ca-certificates \
-	 libcrypto1.1 \
-	 libssl1.1 \
-	 libgomp \
-	 expat \
-	 util-linux
+	libgcc \
+	libstdc++ \
+	ca-certificates \
+	libcrypto1.1 \
+	libssl1.1 \
+	libgomp \
+	expat \
+	util-linux
 
 
 # FFmpeg
@@ -18,8 +18,8 @@ FROM base AS ffmpeg-build
 WORKDIR /tmp/workdir
 
 ENV FFMPEG_VERSION=4.3
-ENV LD_LIBRARY_PATH=/opt/ffmpeg/lib:/opt/ffmpeg/lib64:/usr/lib64:/usr/lib:/usr/local/lib64:/usr/local/lib:/lib64:/lib
-ENV PKG_CONFIG_PATH=/opt/ffmpeg/share/pkgconfig:/opt/ffmpeg/lib/pkgconfig:/opt/ffmpeg/lib64/pkgconfig:/usr/local/lib64/pkgconfig:/usr/local/lib/pkgconfig
+ENV LD_LIBRARY_PATH=/opt/ffmpeg/lib:/opt/ffmpeg/lib64:/usr/lib:/usr/local/lib:/lib
+ENV PKG_CONFIG_PATH=/opt/ffmpeg/share/pkgconfig:/opt/ffmpeg/lib/pkgconfig:/opt/ffmpeg/lib64/pkgconfig:/usr/local/lib/pkgconfig
 ENV SRC=/usr/local
 #ENV MAKEFLAGS=-j2
 
@@ -478,7 +478,6 @@ RUN \
 		--enable-libx265 \
 		--enable-libxvid \
 		--enable-libx264 \
-		--enable-libaribb24 \
 		--enable-nonfree \
 		--enable-openssl \
 		--enable-libfdk_aac \
@@ -494,6 +493,7 @@ RUN \
 		--enable-libaom \
 		--extra-libs=-lpthread \
 		--enable-libsrt \
+		--enable-libaribb24 \
 		--extra-cflags="-I${PREFIX}/include" \
 		--extra-ldflags="-L${PREFIX}/lib" && \
 	make && \
@@ -524,7 +524,7 @@ RUN \
 FROM base AS release
 LABEL maintainer "collelog <collelog.cavamin@gmail.com>"
 
-ENV LD_LIBRARY_PATH=/usr/local/lib:/usr/local/lib64:/usr/lib:/usr/lib64:/lib:/lib64
+ENV LD_LIBRARY_PATH=/usr/local/lib:/usr/lib:/lib
 
 CMD  ["--help"]
 ENTRYPOINT  ["ffmpeg"]
