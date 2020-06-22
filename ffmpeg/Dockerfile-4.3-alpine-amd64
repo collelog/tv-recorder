@@ -10,7 +10,7 @@ RUN apk add --no-cache --update \
 	 libssl1.1 \
 	 libgomp \
 	 expat \
-	 git
+	 util-linux
 
 
 # FFmpeg
@@ -39,6 +39,7 @@ RUN apk add --no-cache \
 	file \
 	g++ \
 	gcc \
+	git \
 	gperf \
 	libtool \
 	make \
