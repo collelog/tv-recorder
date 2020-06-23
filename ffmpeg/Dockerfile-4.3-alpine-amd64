@@ -17,7 +17,37 @@ RUN apk add --no-cache --update \
 FROM base AS ffmpeg-build
 WORKDIR /tmp/workdir
 
-ENV FFMPEG_VERSION=4.3
+ENV FFMPEG_VERSION=4.3 \
+	AOM_VERSION=v2.0.0 \
+	FDKAAC_VERSION=2.0.1 \
+	FONTCONFIG_VERSION=2.13.1 \
+	FREETYPE_VERSION=2.10.2 \
+	FRIBIDI_VERSION=1.0.9 \
+	KVAZAAR_VERSION=2.0.0 \
+	LAME_VERSION=3.100 \
+	LIBASS_VERSION=0.14.0 \
+	LIBPTHREAD_STUBS_VERSION=0.4 \
+	LIBVIDSTAB_VERSION=1.1.0 \
+	LIBXCB_VERSION=1.14 \
+	XCBPROTO_VERSION=1.14 \
+	OGG_VERSION=1.3.4 \
+	OPENCOREAMR_VERSION=0.1.5 \
+	OPUS_VERSION=1.3.1 \
+	OPENJPEG_VERSION=2.3.1 \
+	THEORA_VERSION=1.1.1 \
+	VORBIS_VERSION=1.3.6 \
+	VPX_VERSION=1.8.2 \
+	WEBP_VERSION=1.1.0 \
+	X265_VERSION=3.2.1 \
+	XAU_VERSION=1.0.9 \
+	XORG_MACROS_VERSION=1.19.2 \
+	XPROTO_VERSION=7.0.31 \
+	XVID_VERSION=1.3.5 \
+	LIBXML2_VERSION=2.9.10 \
+	LIBBLURAY_VERSION=1.2.0 \
+	LIBZMQ_VERSION=4.3.2 \
+	LIBSRT_VERSION=1.4.1 \
+	LIBPNG_VERSION=1.6.37
 ENV LD_LIBRARY_PATH=/opt/ffmpeg/lib:/opt/ffmpeg/lib64:/usr/lib:/usr/local/lib:/lib
 ENV PKG_CONFIG_PATH=/opt/ffmpeg/share/pkgconfig:/opt/ffmpeg/lib/pkgconfig:/opt/ffmpeg/lib64/pkgconfig:/usr/local/lib/pkgconfig
 ENV SRC=/usr/local
@@ -57,7 +87,7 @@ RUN \
 	DIR=/tmp/opencore-amr && \
 	mkdir -p ${DIR} && \
 	cd ${DIR} && \
-	curl -fsSL https://versaweb.dl.sourceforge.net/project/opencore-amr/opencore-amr/opencore-amr-0.1.5.tar.gz | \
+	curl -fsSL https://versaweb.dl.sourceforge.net/project/opencore-amr/opencore-amr/opencore-amr-${OPENCOREAMR_VERSION}.tar.gz | \
 		tar -zx --strip-components=1 && \
 	./configure --prefix="${PREFIX}" --enable-shared  && \
 	make && \
@@ -69,20 +99,21 @@ RUN \
 	DIR=/tmp/x264 && \
 	mkdir -p ${DIR} && \
 	cd ${DIR} && \
-	curl -fsSL https://code.videolan.org/videolan/x264/-/archive/master/x264-master.tar.gz | \
+	curl -fsSL https://code.videolan.org/videolan/x264/-/archive/stable/x264-stable.tar.gz | \
 		tar -xz --strip-components=1 && \
 	./configure --prefix="${PREFIX}" --enable-shared --enable-pic --disable-cli && \
 	make && \
 	make install && \
 	rm -rf ${DIR}
+
 ### x265 http://x265.org/
 RUN \
 	DIR=/tmp/x265 && \
 	mkdir -p ${DIR} && \
 	cd ${DIR} && \
-	curl -fsSL https://download.videolan.org/pub/videolan/x265/x265_3.2.1.tar.gz  | \
+	curl -fsSL https://download.videolan.org/pub/videolan/x265/x265_${X265_VERSION}.tar.gz | \
 		tar -zx && \
-	cd x265_3.2.1/build/linux && \
+	cd x265_${X265_VERSION}/build/linux && \
 	sed -i "/-DEXTRA_LIB/ s/$/ -DCMAKE_INSTALL_PREFIX=\${PREFIX}/" multilib.sh && \
 	sed -i "/^cmake/ s/$/ -DENABLE_CLI=OFF/" multilib.sh && \
 	./multilib.sh && \
@@ -94,7 +125,7 @@ RUN \
 	DIR=/tmp/ogg && \
 	mkdir -p ${DIR} && \
 	cd ${DIR} && \
-	curl -fsSL http://downloads.xiph.org/releases/ogg/libogg-1.3.4.tar.gz | \
+	curl -fsSL http://downloads.xiph.org/releases/ogg/libogg-${OGG_VERSION}.tar.gz | \
 		tar -zx --strip-components=1 && \
 	./configure --prefix="${PREFIX}" --enable-shared  && \
 	make && \
@@ -106,7 +137,7 @@ RUN \
 	DIR=/tmp/opus && \
 	mkdir -p ${DIR} && \
 	cd ${DIR} && \
-	curl -fsSL https://archive.mozilla.org/pub/opus/opus-1.3.1.tar.gz | \
+	curl -fsSL https://archive.mozilla.org/pub/opus/opus-${OPUS_VERSION}.tar.gz | \
 		tar -zx --strip-components=1 && \
 	autoreconf -fiv && \
 	./configure --prefix="${PREFIX}" --enable-shared && \
@@ -119,7 +150,7 @@ RUN \
 	DIR=/tmp/vorbis && \
 	mkdir -p ${DIR} && \
 	cd ${DIR} && \
-	curl -fsSL http://downloads.xiph.org/releases/vorbis/libvorbis-1.3.6.tar.gz | \
+	curl -fsSL http://downloads.xiph.org/releases/vorbis/libvorbis-${VORBIS_VERSION}.tar.gz | \
 		tar -zx --strip-components=1 && \
 	./configure --prefix="${PREFIX}" --with-ogg="${PREFIX}" --enable-shared && \
 	make && \
@@ -131,7 +162,7 @@ RUN \
 	DIR=/tmp/theora && \
 	mkdir -p ${DIR} && \
 	cd ${DIR} && \
-	curl -fsSL http://downloads.xiph.org/releases/theora/libtheora-1.1.1.tar.gz | \
+	curl -fsSL http://downloads.xiph.org/releases/theora/libtheora-${THEORA_VERSION}.tar.gz | \
 		tar -zx --strip-components=1 && \
 	./configure --prefix="${PREFIX}" --with-ogg="${PREFIX}" --enable-shared && \
 	make && \
@@ -143,7 +174,7 @@ RUN \
 	DIR=/tmp/vpx && \
 	mkdir -p ${DIR} && \
 	cd ${DIR} && \
-	curl -fsSL https://codeload.github.com/webmproject/libvpx/tar.gz/v1.8.2 | \
+	curl -fsSL https://codeload.github.com/webmproject/libvpx/tar.gz/v${VPX_VERSION} | \
 		tar -zx --strip-components=1 && \
 	./configure --prefix="${PREFIX}" --enable-vp8 --enable-vp9 --enable-vp9-highbitdepth --enable-pic --enable-shared \
 	--disable-debug --disable-examples --disable-docs --disable-install-bins  && \
@@ -156,7 +187,7 @@ RUN \
 	DIR=/tmp/vebp && \
 	mkdir -p ${DIR} && \
 	cd ${DIR} && \
-	curl -fsSL https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-1.1.0.tar.gz | \
+	curl -fsSL https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-${WEBP_VERSION}.tar.gz | \
 		tar -zx --strip-components=1 && \
 	./configure --prefix="${PREFIX}" --enable-shared  && \
 	make && \
@@ -168,7 +199,7 @@ RUN \
 	DIR=/tmp/lame && \
 	mkdir -p ${DIR} && \
 	cd ${DIR} && \
-	curl -fsSL https://versaweb.dl.sourceforge.net/project/lame/lame/$(echo 3.100 | sed -e 's/[^0-9]*\([0-9]*\)[.]\([0-9]*\)[.]\([0-9]*\)\([0-9A-Za-z-]*\)/\1.\2/')/lame-3.100.tar.gz | \
+	curl -fsSL https://versaweb.dl.sourceforge.net/project/lame/lame/$(echo ${LAME_VERSION} | sed -e 's/[^0-9]*\([0-9]*\)[.]\([0-9]*\)[.]\([0-9]*\)\([0-9A-Za-z-]*\)/\1.\2/')/lame-${LAME_VERSION}.tar.gz | \
 		tar -zx --strip-components=1 && \
 	./configure --prefix="${PREFIX}" --bindir="${PREFIX}/bin" --enable-shared --enable-nasm --disable-frontend && \
 	make && \
@@ -180,7 +211,7 @@ RUN \
 	DIR=/tmp/xvid && \
 	mkdir -p ${DIR} && \
 	cd ${DIR} && \
-	curl -fsSL http://downloads.xvid.org/downloads/xvidcore-1.3.5.tar.gz | \
+	curl -fsSL http://downloads.xvid.org/downloads/xvidcore-${XVID_VERSION}.tar.gz | \
 		tar -zx && \
 	cd xvidcore/build/generic && \
 	./configure --prefix="${PREFIX}" --bindir="${PREFIX}/bin" && \
@@ -193,7 +224,7 @@ RUN \
 	DIR=/tmp/fdk-aac && \
 	mkdir -p ${DIR} && \
 	cd ${DIR} && \
-	curl -fsSL https://github.com/mstorsjo/fdk-aac/archive/v2.0.1.tar.gz | \
+	curl -fsSL https://github.com/mstorsjo/fdk-aac/archive/v${FDKAAC_VERSION}.tar.gz | \
 		tar -zx --strip-components=1 && \
 	autoreconf -fiv && \
 	./configure --prefix="${PREFIX}" --enable-shared --datadir="${DIR}" && \
@@ -206,7 +237,7 @@ RUN \
 	DIR=/tmp/openjpeg && \
 	mkdir -p ${DIR} && \
 	cd ${DIR} && \
-	curl -fsSL https://github.com/uclouvain/openjpeg/archive/v2.3.1.tar.gz | \
+	curl -fsSL https://github.com/uclouvain/openjpeg/archive/v${OPENJPEG_VERSION}.tar.gz | \
 		tar -zx --strip-components=1 && \
 	cmake -DBUILD_THIRDPARTY:BOOL=ON -DCMAKE_INSTALL_PREFIX="${PREFIX}" . && \
 	make && \
@@ -218,7 +249,7 @@ RUN  \
 	DIR=/tmp/freetype && \
 	mkdir -p ${DIR} && \
 	cd ${DIR} && \
-	curl -fsSL https://download.savannah.gnu.org/releases/freetype/freetype-2.10.2.tar.gz | \
+	curl -fsSL https://download.savannah.gnu.org/releases/freetype/freetype-${FREETYPE_VERSION}.tar.gz | \
 		tar -zx --strip-components=1 && \
 	./configure --prefix="${PREFIX}" --disable-static --enable-shared && \
 	make && \
@@ -230,7 +261,7 @@ RUN  \
 	DIR=/tmp/vid.stab && \
 	mkdir -p ${DIR} && \
 	cd ${DIR} && \
-	curl -fsSL https://github.com/georgmartius/vid.stab/archive/v1.1.0.tar.gz | \
+	curl -fsSL https://github.com/georgmartius/vid.stab/archive/v${LIBVIDSTAB_VERSION}.tar.gz | \
 		tar -zx --strip-components=1 && \
 	cmake -DCMAKE_INSTALL_PREFIX="${PREFIX}" . && \
 	make && \
@@ -242,7 +273,7 @@ RUN  \
 	DIR=/tmp/fribidi && \
 	mkdir -p ${DIR} && \
 	cd ${DIR} && \
-	curl -fsSL https://github.com/fribidi/fribidi/archive/v1.0.9.tar.gz | \
+	curl -fsSL https://github.com/fribidi/fribidi/archive/v${FRIBIDI_VERSION}.tar.gz | \
 		tar -zx --strip-components=1 && \
 #	sed -i 's/^SUBDIRS =.*/SUBDIRS=gen.tab charset lib bin/' Makefile.am && \
 #	./bootstrap --no-config --auto && \
@@ -257,7 +288,7 @@ RUN  \
 	DIR=/tmp/fontconfig && \
 	mkdir -p ${DIR} && \
 	cd ${DIR} && \
-	curl -fsSL https://www.freedesktop.org/software/fontconfig/release/fontconfig-2.13.1.tar.bz2 | \
+	curl -fsSL https://www.freedesktop.org/software/fontconfig/release/fontconfig-${FONTCONFIG_VERSION}.tar.bz2 | \
 		tar -jx --strip-components=1 && \
 	./configure --prefix="${PREFIX}" --disable-static --enable-shared && \
 	make && \
@@ -269,7 +300,7 @@ RUN  \
 	DIR=/tmp/libass && \
 	mkdir -p ${DIR} && \
 	cd ${DIR} && \
-	curl -fsSL https://github.com/libass/libass/archive/0.14.0.tar.gz | \
+	curl -fsSL https://github.com/libass/libass/archive/${LIBASS_VERSION}.tar.gz | \
 		tar -zx --strip-components=1 && \
 	./autogen.sh && \
 	./configure --prefix="${PREFIX}" --disable-static --enable-shared && \
@@ -282,7 +313,7 @@ RUN \
 	DIR=/tmp/kvazaar && \
 	mkdir -p ${DIR} && \
 	cd ${DIR} && \
-	curl -fsSL https://github.com/ultravideo/kvazaar/archive/v2.0.0.tar.gz | \
+	curl -fsSL https://github.com/ultravideo/kvazaar/archive/v${KVAZAAR_VERSION}.tar.gz | \
 		tar -zx --strip-components=1 && \
 	./autogen.sh && \
 	./configure --prefix="${PREFIX}" --disable-static --enable-shared && \
@@ -292,7 +323,7 @@ RUN \
 
 RUN \
 	DIR=/tmp/aom && \
-	git clone --branch v2.0.0 --depth 1 https://aomedia.googlesource.com/aom ${DIR} ; \
+	git clone --branch ${AOM_VERSION} --depth 1 https://aomedia.googlesource.com/aom ${DIR} ; \
 	cd ${DIR} ; \
 	rm -rf CMakeCache.txt CMakeFiles ; \
 	mkdir -p ./aom_build ; \
@@ -307,7 +338,7 @@ RUN \
 	DIR=/tmp/xorg-macros && \
 	mkdir -p ${DIR} && \
 	cd ${DIR} && \
-	curl -fsSL https://www.x.org/archive//individual/util/util-macros-1.19.2.tar.gz | \
+	curl -fsSL https://www.x.org/archive//individual/util/util-macros-${XORG_MACROS_VERSION}.tar.gz | \
 		tar -zx --strip-components=1 && \
 	./configure --srcdir=${DIR} --prefix="${PREFIX}" && \
 	make && \
@@ -318,7 +349,7 @@ RUN \
 	DIR=/tmp/xproto && \
 	mkdir -p ${DIR} && \
 	cd ${DIR} && \
-	curl -fsSL https://www.x.org/archive/individual/proto/xproto-7.0.31.tar.gz | \
+	curl -fsSL https://www.x.org/archive/individual/proto/xproto-${XPROTO_VERSION}.tar.gz | \
 		tar -zx --strip-components=1 && \
 	./configure --srcdir=${DIR} --prefix="${PREFIX}" && \
 	make && \
@@ -329,7 +360,7 @@ RUN \
 	DIR=/tmp/libXau && \
 	mkdir -p ${DIR} && \
 	cd ${DIR} && \
-	curl -fsSL https://www.x.org/archive/individual/lib/libXau-1.0.9.tar.gz | \
+	curl -fsSL https://www.x.org/archive/individual/lib/libXau-${XAU_VERSION}.tar.gz | \
 		tar -zx --strip-components=1 && \
 	./configure --srcdir=${DIR} --prefix="${PREFIX}" && \
 	make && \
@@ -340,7 +371,7 @@ RUN \
 	DIR=/tmp/libpthread-stubs && \
 	mkdir -p ${DIR} && \
 	cd ${DIR} && \
-	curl -fsSL https://xcb.freedesktop.org/dist/libpthread-stubs-0.4.tar.gz | \
+	curl -fsSL https://xcb.freedesktop.org/dist/libpthread-stubs-${LIBPTHREAD_STUBS_VERSION}.tar.gz | \
 		tar -zx --strip-components=1 && \
 	./configure --prefix="${PREFIX}" && \
 	make && \
@@ -351,7 +382,7 @@ RUN \
 	DIR=/tmp/libxcb-proto && \
 	mkdir -p ${DIR} && \
 	cd ${DIR} && \
-	curl -fsSL https://xcb.freedesktop.org/dist/xcb-proto-1.14.tar.gz | \
+	curl -fsSL https://xcb.freedesktop.org/dist/xcb-proto-${XCBPROTO_VERSION}.tar.gz | \
 		tar -zx --strip-components=1 && \
 	ACLOCAL_PATH="${PREFIX}/share/aclocal" ./autogen.sh && \
 	./configure --prefix="${PREFIX}" && \
@@ -363,7 +394,7 @@ RUN \
 	DIR=/tmp/libxcb && \
 	mkdir -p ${DIR} && \
 	cd ${DIR} && \
-	curl -fsSL https://xcb.freedesktop.org/dist/libxcb-1.14.tar.gz | \
+	curl -fsSL https://xcb.freedesktop.org/dist/libxcb-${LIBXCB_VERSION}.tar.gz | \
 		tar -zx --strip-components=1 && \
 	ACLOCAL_PATH="${PREFIX}/share/aclocal" ./autogen.sh && \
 	./configure --prefix="${PREFIX}" --disable-static --enable-shared && \
@@ -376,7 +407,7 @@ RUN \
 	DIR=/tmp/libxml2 && \
 	mkdir -p ${DIR} && \
 	cd ${DIR} && \
-	curl -fsSL https://gitlab.gnome.org/GNOME/libxml2/-/archive/v2.9.10/libxml2-v2.9.10.tar.gz | \
+	curl -fsSL https://gitlab.gnome.org/GNOME/libxml2/-/archive/v${LIBXML2_VERSION}/libxml2-v${LIBXML2_VERSION}.tar.gz | \
 		tar -xz --strip-components=1 && \
 	./autogen.sh --prefix="${PREFIX}" --with-ftp=no --with-http=no --with-python=no && \
 	make && \
@@ -388,7 +419,7 @@ RUN \
 	DIR=/tmp/libbluray && \
 	mkdir -p ${DIR} && \
 	cd ${DIR} && \
-	curl -fsSL https://download.videolan.org/pub/videolan/libbluray/1.2.0/libbluray-1.2.0.tar.bz2 | \
+	curl -fsSL https://download.videolan.org/pub/videolan/libbluray/${LIBBLURAY_VERSION}/libbluray-${LIBBLURAY_VERSION}.tar.bz2 | \
 		tar -jx --strip-components=1 && \
 	./configure --prefix="${PREFIX}" --disable-examples --disable-bdjava-jar --disable-static --enable-shared && \
 	make && \
@@ -400,7 +431,7 @@ RUN \
 	DIR=/tmp/libzmq && \
 	mkdir -p ${DIR} && \
 	cd ${DIR} && \
-	curl -fsSL https://github.com/zeromq/libzmq/archive/v4.3.2.tar.gz | \
+	curl -fsSL https://github.com/zeromq/libzmq/archive/v${LIBZMQ_VERSION}.tar.gz | \
 		tar -xz --strip-components=1 && \
 	./autogen.sh && \
 	./configure --prefix="${PREFIX}" && \
@@ -414,7 +445,7 @@ RUN \
 	DIR=/tmp/srt && \
 	mkdir -p ${DIR} && \
 	cd ${DIR} && \
-	curl -fsSL https://github.com/Haivision/srt/archive/v1.4.1.tar.gz | \
+	curl -fsSL https://github.com/Haivision/srt/archive/v${LIBSRT_VERSION}.tar.gz | \
 		tar -xz --strip-components=1 && \
 	cmake -DCMAKE_INSTALL_PREFIX="${PREFIX}" . && \
 	make && \
@@ -426,7 +457,7 @@ RUN \
 	DIR=/tmp/libpng && \
 	mkdir -p ${DIR} && \
 	cd ${DIR} && \
-	curl -fsSL https://github.com/glennrp/libpng/archive/v1.6.37.tar.gz | \
+	curl -fsSL https://github.com/glennrp/libpng/archive/v${LIBPNG_VERSION}.tar.gz | \
 		tar -xz --strip-components=1 && \
 	./configure --prefix="${PREFIX}" && \
 	make && \
