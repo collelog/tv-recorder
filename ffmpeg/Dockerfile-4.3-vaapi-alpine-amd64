@@ -1,5 +1,5 @@
 # base
-FROM alpine:3.12 AS base
+FROM amd64/alpine:3.12 AS base
 
 RUN set -eux
 RUN apk add --no-cache --update \
@@ -235,6 +235,18 @@ RUN \
 	make install && \
 	rm -rf ${DIR}
 
+## libpng https://github.com/glennrp/libpng
+RUN \
+	DIR=/tmp/libpng && \
+	mkdir -p ${DIR} && \
+	cd ${DIR} && \
+	curl -fsSL https://github.com/glennrp/libpng/archive/v${LIBPNG_VERSION}.tar.gz | \
+		tar -xz --strip-components=1 && \
+	./configure --prefix="${PREFIX}" && \
+	make && \
+	make install && \
+	rm -rf ${DIR}
+
 ## openjpeg https://github.com/uclouvain/openjpeg
 RUN \
 	DIR=/tmp/openjpeg && \
@@ -278,11 +290,11 @@ RUN  \
 	cd ${DIR} && \
 	curl -fsSL https://github.com/fribidi/fribidi/archive/v${FRIBIDI_VERSION}.tar.gz | \
 		tar -zx --strip-components=1 && \
-#	sed -i 's/^SUBDIRS =.*/SUBDIRS=gen.tab charset lib bin/' Makefile.am && \
+	sed -i 's/^SUBDIRS =.*/SUBDIRS=gen.tab lib bin/' Makefile.am && \
 #	./bootstrap --no-config --auto && \
 	./autogen.sh && \
 	./configure --prefix="${PREFIX}" --disable-static --enable-shared && \
-	make -j1 && \
+	make && \
 	make install && \
 	rm -rf ${DIR}
 
@@ -455,18 +467,6 @@ RUN \
 	make install && \
 	rm -rf ${DIR}
 
-## libpng https://github.com/glennrp/libpng
-RUN \
-	DIR=/tmp/libpng && \
-	mkdir -p ${DIR} && \
-	cd ${DIR} && \
-	curl -fsSL https://github.com/glennrp/libpng/archive/v${LIBPNG_VERSION}.tar.gz | \
-		tar -xz --strip-components=1 && \
-	./configure --prefix="${PREFIX}" && \
-	make && \
-	make install && \
-	rm -rf ${DIR}
-
 ## libaribb24 https://github.com/nkoriyama/aribb24/
 RUN \
 	DIR=/tmp/aribb24 && \
@@ -475,7 +475,7 @@ RUN \
 	curl -fsSL https://github.com/nkoriyama/aribb24/tarball/master | \
 		tar -xz --strip-components=1 && \
 	autoreconf -fiv && \
-       ./configure --prefix="${PREFIX}" && \
+	./configure --prefix="${PREFIX}" && \
 	make && \
 	make install && \
 	rm -rf ${DIR}
