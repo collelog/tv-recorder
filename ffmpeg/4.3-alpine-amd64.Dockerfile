@@ -54,7 +54,7 @@ ENV PKG_CONFIG_PATH=/opt/ffmpeg/share/pkgconfig:/opt/ffmpeg/lib/pkgconfig:/opt/f
 ENV SRC=/usr/local
 ENV PREFIX=/opt/ffmpeg
 
-#ENV MAKEFLAGS=-j12
+#ENV MAKEFLAGS=-j14
 
 RUN set -eux
 RUN apk add --no-cache \
