@@ -1,5 +1,6 @@
 # base
 FROM arm64v8/alpine:3.12 AS base
+#FROM multiarch/alpine:arm64-v3.12 AS base
 
 RUN set -eux
 RUN apk add --no-cache --update \
@@ -10,6 +11,7 @@ RUN apk add --no-cache --update \
 	libssl1.1 \
 	libgomp \
 	expat \
+	libzmq \
 	util-linux \
 	raspberrypi \
 	linux-rpi
@@ -47,17 +49,16 @@ ENV FFMPEG_VERSION=4.3 \
 	XVID_VERSION=1.3.5 \
 	LIBXML2_VERSION=2.9.10 \
 	LIBBLURAY_VERSION=1.2.0 \
-	LIBZMQ_VERSION=4.3.2 \
+#	LIBZMQ_VERSION=4.3.2 \
 	LIBSRT_VERSION=1.4.1 \
 	LIBPNG_VERSION=1.6.37
 
 ENV LD_LIBRARY_PATH=/opt/ffmpeg/lib:/opt/ffmpeg/lib64:/usr/lib:/usr/local/lib:/lib
 ENV PKG_CONFIG_PATH=/opt/ffmpeg/share/pkgconfig:/opt/ffmpeg/lib/pkgconfig:/opt/ffmpeg/lib64/pkgconfig:/usr/local/lib/pkgconfig
-
 ENV SRC=/usr/local
-ENV MAKEFLAGS=-j12
+ENV PREFIX=/opt/ffmpeg
 
-ARG PREFIX=/opt/ffmpeg
+#ENV MAKEFLAGS=-j14
 
 RUN set -eux
 RUN apk add --no-cache \
@@ -85,6 +86,7 @@ RUN apk add --no-cache \
 	nasm \
 	zlib-dev \
 	expat-dev \
+	zeromq-dev \
 	raspberrypi-dev
 
 ## opencore-amr https://sourceforge.net/projects/opencore-amr/
@@ -295,10 +297,8 @@ RUN  \
 	mkdir -p ${DIR} && \
 	cd ${DIR} && \
 	curl -fsSL https://github.com/fribidi/fribidi/archive/v${FRIBIDI_VERSION}.tar.gz | \
-#	curl -fsSL https://github.com/fribidi/fribidi/tarball/master | \
 		tar -zx --strip-components=1 && \
 	sed -i 's/^SUBDIRS =.*/SUBDIRS=gen.tab lib bin/' Makefile.am && \
-#	./bootstrap --no-config --auto && \
 	./autogen.sh && \
 	./configure --prefix="${PREFIX}" --disable-static --enable-shared && \
 	make && \
@@ -451,18 +451,18 @@ RUN \
 	rm -rf ${DIR}
 
 ## libzmq https://github.com/zeromq/libzmq/
-RUN \
-	DIR=/tmp/libzmq && \
-	mkdir -p ${DIR} && \
-	cd ${DIR} && \
-	curl -fsSL https://github.com/zeromq/libzmq/archive/v${LIBZMQ_VERSION}.tar.gz | \
-		tar -xz --strip-components=1 && \
-	./autogen.sh && \
-	./configure --prefix="${PREFIX}" && \
-	make && \
-	make check && \
-	make install && \
-	rm -rf ${DIR}
+#	DIR=/tmp/libzmq && \
+#	mkdir -p ${DIR} && \
+#	cd ${DIR} && \
+#	curl -fsSL https://github.com/zeromq/libzmq/archive/v${LIBZMQ_VERSION}.tar.gz | \
+##	curl -fsSL https://github.com/zeromq/libzmq/tarball/master | \
+#		tar -xz --strip-components=1 && \
+#	./autogen.sh && \
+#	./configure --prefix="${PREFIX}" && \
+#	make && \
+#	make check && \
+#	make install && \
+#	rm -rf ${DIR}
 
 ## libsrt https://github.com/Haivision/srt
 RUN \
@@ -490,12 +490,23 @@ RUN \
 	make install && \
 	rm -rf ${DIR}
 
+## AviSynth+ https://github.com/AviSynth/AviSynthPlus
+RUN \
+	DIR=/tmp/AviSynthPlus && \
+	mkdir -p ${DIR} && \
+	cd ${DIR} && \
+	curl -fsSL https://github.com/AviSynth/AviSynthPlus/tarball/master | \
+		tar -xz --strip-components=1 && \
+	mkdir avisynth-build && cd avisynth-build && \
+	cmake ../ -DHEADERS_ONLY:bool=on && \
+	make install && \
+	rm -rf ${DIR}
+
 ## ffmpeg https://ffmpeg.org/
 RUN  \
 	DIR=/tmp/ffmpeg && mkdir -p ${DIR} && cd ${DIR} && \
 	curl -fsSL https://ffmpeg.org/releases/ffmpeg-${FFMPEG_VERSION}.tar.bz2 | \
 		tar -jx --strip-components=1
-
 
 RUN \
 	DIR=/tmp/ffmpeg && mkdir -p ${DIR} && cd ${DIR} && \
@@ -538,6 +549,7 @@ RUN \
 		--extra-libs=-lpthread \
 		--enable-libsrt \
 		--enable-libaribb24 \
+		--enable-avisynth \
 		--enable-v4l2_m2m \
 		--extra-cflags="-I${PREFIX}/include" \
 		--extra-ldflags="-L${PREFIX}/lib" && \
