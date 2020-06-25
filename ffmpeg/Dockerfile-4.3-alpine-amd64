@@ -48,12 +48,13 @@ ENV FFMPEG_VERSION=4.3 \
 	LIBZMQ_VERSION=4.3.2 \
 	LIBSRT_VERSION=1.4.1 \
 	LIBPNG_VERSION=1.6.37
+
 ENV LD_LIBRARY_PATH=/opt/ffmpeg/lib:/opt/ffmpeg/lib64:/usr/lib:/usr/local/lib:/lib
 ENV PKG_CONFIG_PATH=/opt/ffmpeg/share/pkgconfig:/opt/ffmpeg/lib/pkgconfig:/opt/ffmpeg/lib64/pkgconfig:/usr/local/lib/pkgconfig
 ENV SRC=/usr/local
-#ENV MAKEFLAGS=-j2
+ENV PREFIX=/opt/ffmpeg
 
-ARG PREFIX=/opt/ffmpeg
+#ENV MAKEFLAGS=-j12
 
 RUN set -eux
 RUN apk add --no-cache \
@@ -477,6 +478,18 @@ RUN \
 	make install && \
 	rm -rf ${DIR}
 
+## AviSynth+ https://github.com/AviSynth/AviSynthPlus
+RUN \
+	DIR=/tmp/AviSynthPlus && \
+	mkdir -p ${DIR} && \
+	cd ${DIR} && \
+	curl -fsSL https://github.com/AviSynth/AviSynthPlus/tarball/master | \
+		tar -xz --strip-components=1 && \
+	mkdir avisynth-build && cd avisynth-build && \
+	cmake ../ -DHEADERS_ONLY:bool=on && \
+	make install && \
+	rm -rf ${DIR}
+
 ## ffmpeg https://ffmpeg.org/
 RUN  \
 	DIR=/tmp/ffmpeg && mkdir -p ${DIR} && cd ${DIR} && \
@@ -525,6 +538,7 @@ RUN \
 		--extra-libs=-lpthread \
 		--enable-libsrt \
 		--enable-libaribb24 \
+		--enable-avisynth \
 		--extra-cflags="-I${PREFIX}/include" \
 		--extra-ldflags="-L${PREFIX}/lib" && \
 	make && \
