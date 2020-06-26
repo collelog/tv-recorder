@@ -2,6 +2,7 @@
 FROM amd64/alpine:3.12 AS base
 
 RUN set -eux
+RUN apk upgrade --update
 RUN apk add --no-cache --update \
 	libgcc \
 	libstdc++ \
@@ -548,7 +549,6 @@ RUN \
 	cd tools && \
 	make qt-faststart && cp qt-faststart ${PREFIX}/bin/
 
-
 RUN \
 	ldd ${PREFIX}/bin/ffmpeg | grep opt/ffmpeg | cut -d ' ' -f 3 | xargs -i cp {} /usr/local/lib/ && \
 	for lib in /usr/local/lib/*.so.*; do ln -s "${lib##*/}" "${lib%%.so.*}".so; done && \
@@ -562,6 +562,7 @@ RUN \
 		sed "s:${PREFIX}:/usr/local:g" <"$pc" >/usr/local/lib/pkgconfig/"${pc##*/}"; \
 	done
 
+RUN rm -rf /tmp/* /var/cache/apk/*
 
 
 # final image
