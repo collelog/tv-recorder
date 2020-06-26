@@ -10,6 +10,7 @@ RUN apk add --no-cache --update \
 	libssl1.1 \
 	libgomp \
 	expat \
+	libzmq \
 	util-linux
 
 
@@ -45,7 +46,7 @@ ENV FFMPEG_VERSION=4.3 \
 	XVID_VERSION=1.3.5 \
 	LIBXML2_VERSION=2.9.10 \
 	LIBBLURAY_VERSION=1.2.0 \
-	LIBZMQ_VERSION=4.3.2 \
+#	LIBZMQ_VERSION=4.3.2 \
 	LIBSRT_VERSION=1.4.1 \
 	LIBPNG_VERSION=1.6.37
 
@@ -81,7 +82,8 @@ RUN apk add --no-cache \
 	yasm \
 	nasm \
 	zlib-dev \
-	expat-dev
+	expat-dev \
+	zeromq-dev
 
 ## opencore-amr https://sourceforge.net/projects/opencore-amr/
 RUN \
@@ -289,7 +291,6 @@ RUN  \
 	curl -fsSL https://github.com/fribidi/fribidi/archive/v${FRIBIDI_VERSION}.tar.gz | \
 		tar -zx --strip-components=1 && \
 	sed -i 's/^SUBDIRS =.*/SUBDIRS=gen.tab lib bin/' Makefile.am && \
-#	./bootstrap --no-config --auto && \
 	./autogen.sh && \
 	./configure --prefix="${PREFIX}" --disable-static --enable-shared && \
 	make && \
@@ -440,18 +441,18 @@ RUN \
 	rm -rf ${DIR}
 
 ## libzmq https://github.com/zeromq/libzmq/
-RUN \
-	DIR=/tmp/libzmq && \
-	mkdir -p ${DIR} && \
-	cd ${DIR} && \
-	curl -fsSL https://github.com/zeromq/libzmq/archive/v${LIBZMQ_VERSION}.tar.gz | \
-		tar -xz --strip-components=1 && \
-	./autogen.sh && \
-	./configure --prefix="${PREFIX}" && \
-	make && \
-	make check && \
-	make install && \
-	rm -rf ${DIR}
+#	DIR=/tmp/libzmq && \
+#	mkdir -p ${DIR} && \
+#	cd ${DIR} && \
+#	curl -fsSL https://github.com/zeromq/libzmq/archive/v${LIBZMQ_VERSION}.tar.gz | \
+##	curl -fsSL https://github.com/zeromq/libzmq/tarball/master | \
+#		tar -xz --strip-components=1 && \
+#	./autogen.sh && \
+#	./configure --prefix="${PREFIX}" && \
+#	make && \
+#	make check && \
+#	make install && \
+#	rm -rf ${DIR}
 
 ## libsrt https://github.com/Haivision/srt
 RUN \
@@ -496,10 +497,8 @@ RUN  \
 	curl -fsSL https://ffmpeg.org/releases/ffmpeg-${FFMPEG_VERSION}.tar.bz2 | \
 		tar -jx --strip-components=1
 
-
 RUN \
-	DIR=/tmp/ffmpeg && mkdir -p ${DIR} && cd ${DIR} && \
-		./configure \
+	./configure \
 		--disable-debug \
 		--disable-doc \
 		--disable-ffplay \

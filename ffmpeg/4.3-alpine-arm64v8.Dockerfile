@@ -284,7 +284,6 @@ RUN  \
 	mkdir -p ${DIR} && \
 	cd ${DIR} && \
 	curl -fsSL https://github.com/georgmartius/vid.stab/archive/v${LIBVIDSTAB_VERSION}.tar.gz | \
-#	curl -fsSL https://github.com/georgmartius/vid.stab/tarball/master | \
 		tar -zx --strip-components=1 && \
 	cmake -DCMAKE_INSTALL_PREFIX="${PREFIX}" -DSSE2_FOUND=OFF . && \
 	make && \
@@ -476,7 +475,6 @@ RUN \
 	make install && \
 	rm -rf ${DIR}
 
-
 ## libaribb24 https://github.com/nkoriyama/aribb24/
 RUN \
 	DIR=/tmp/aribb24 && \
@@ -509,8 +507,7 @@ RUN  \
 		tar -jx --strip-components=1
 
 RUN \
-	DIR=/tmp/ffmpeg && mkdir -p ${DIR} && cd ${DIR} && \
-		./configure \
+	./configure \
 		--disable-debug \
 		--disable-doc \
 		--disable-ffplay \

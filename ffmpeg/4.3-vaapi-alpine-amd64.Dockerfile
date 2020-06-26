@@ -294,7 +294,6 @@ RUN  \
 	curl -fsSL https://github.com/fribidi/fribidi/archive/v${FRIBIDI_VERSION}.tar.gz | \
 		tar -zx --strip-components=1 && \
 	sed -i 's/^SUBDIRS =.*/SUBDIRS=gen.tab lib bin/' Makefile.am && \
-#	./bootstrap --no-config --auto && \
 	./autogen.sh && \
 	./configure --prefix="${PREFIX}" --disable-static --enable-shared && \
 	make && \
@@ -501,10 +500,8 @@ RUN  \
 	curl -fsSL https://ffmpeg.org/releases/ffmpeg-${FFMPEG_VERSION}.tar.bz2 | \
 		tar -jx --strip-components=1
 
-
 RUN \
-	DIR=/tmp/ffmpeg && mkdir -p ${DIR} && cd ${DIR} && \
-		./configure \
+	./configure \
 		--disable-debug \
 		--disable-doc \
 		--disable-ffplay \
