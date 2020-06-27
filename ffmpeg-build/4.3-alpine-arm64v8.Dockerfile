@@ -584,7 +584,9 @@ LABEL maintainer "collelog <collelog.cavamin@gmail.com>"
 
 ENV LD_LIBRARY_PATH=/usr/local/lib:/usr/lib:/lib
 
-CMD  ["--help"]
-ENTRYPOINT  ["ffmpeg"]
+RUN rm -rf /tmp/* /var/cache/apk/*
 
 COPY --from=ffmpeg-build /usr/local /usr/local
+
+CMD  ["--help"]
+ENTRYPOINT  ["ffmpeg"]
