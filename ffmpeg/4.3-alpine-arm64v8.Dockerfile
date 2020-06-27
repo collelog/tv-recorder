@@ -508,6 +508,7 @@ RUN  \
 		tar -jx --strip-components=1
 
 RUN \
+	DIR=/tmp/ffmpeg && cd ${DIR} && \
 	./configure \
 		--disable-debug \
 		--disable-doc \
