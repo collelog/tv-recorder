@@ -50,8 +50,9 @@ RUN set -eux && \
 		util-linux && \
 	\
 	# Compatible with Old Version config.json
-	ln -s /usr/local/ffmpeg /usr/local/ffmpeg/bin/ffmpeg && \
-	ln -s /usr/local/ffprobe /usr/local/ffmpeg/bin/ffprobe && \
+	mkdir -p /usr/local/ffmpeg/bin && \
+	ln -s /usr/local/bin/ffmpeg /usr/local/ffmpeg/bin/ffmpeg && \
+	ln -s /usr/local/bin/ffprobe /usr/local/ffmpeg/bin/ffprobe && \
 	\
 	# timezone
 	echo "Asia/Tokyo" > /etc/timezone && \
