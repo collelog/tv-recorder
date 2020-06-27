@@ -1,11 +1,12 @@
 # FFmpeg
+
 FROM collelog/uo-ffmpeg-build:4.3-alpine-amd64 AS ffmpeg-build
 
 
-# EPGStation
-FROM node:12-alpine3.12 AS epgstation-build
 
-RUN set -eux
+# EPGStation
+FROM amd64/node:12-alpine3.12 AS epgstation-build
+
 RUN apk upgrade --update
 RUN apk add --no-cache ca-certificates curl g++ make python3 tzdata
 
@@ -19,8 +20,9 @@ RUN npm run build
 RUN rm -rf /tmp/* /var/cache/apk/*
 
 
+
 # final image
-FROM node:12-alpine3.12
+FROM amd64/node:12-alpine3.12
 LABEL maintainer "collelog <collelog.cavamin@gmail.com>"
 
 EXPOSE 8888
@@ -49,9 +51,8 @@ RUN set -eux && \
 		util-linux && \
 	\
 	# Compatible with Old Version config.json
-	mkdir -p /usr/local/ffmpeg/bin && \
-	ln -s /usr/local/bin/ffmpeg /usr/local/ffmpeg/bin/ffmpeg && \
-	ln -s /usr/local/bin/ffprobe /usr/local/ffmpeg/bin/ffprobe && \
+	ln -s /usr/local/ffmpeg /usr/local/ffmpeg/bin/ffmpeg && \
+	ln -s /usr/local/ffprobe /usr/local/ffmpeg/bin/ffprobe && \
 	\
 	# timezone
 	echo "Asia/Tokyo" > /etc/timezone && \
