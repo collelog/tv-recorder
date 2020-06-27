@@ -17,6 +17,7 @@ RUN apk add --no-cache --update \
 	libva-intel-driver
 
 
+
 # FFmpeg
 FROM base AS ffmpeg-build
 WORKDIR /tmp/workdir
@@ -568,6 +569,7 @@ RUN \
 	done
 
 RUN rm -rf /tmp/* /var/cache/apk/*
+
 
 
 # final image

@@ -1,5 +1,4 @@
 # FFmpeg
-
 FROM collelog/uo-ffmpeg-build:4.3-alpine-amd64 AS ffmpeg-build
 
 
