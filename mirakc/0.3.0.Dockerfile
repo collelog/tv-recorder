@@ -25,6 +25,7 @@ ENV LD_LIBRARY_PATH=/usr/local/lib64
 ENV MIRAKC_CONFIG=/etc/mirakc/config.yml
 
 # mirakc-arib, mirakc
+COPY --from=mirakc-image /usr/local/bin/mirakc-arib /usr/local/bin/
 COPY --from=mirakc-image /usr/local/bin/mirakc /usr/local/bin/
 COPY --from=mirakc-image /etc/mirakurun.openapi.json /etc/
 
@@ -45,11 +46,18 @@ COPY --from=arib-b25-stream-test-image /usr/local/arib-b25-stream-test /usr/loca
 COPY --from=jst-image /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 COPY --from=jst-image /etc/timezone /etc/timezone
 
-COPY ./services.sh /usr/local/bin
+COPY ./services.sh /usr/local/bin/
 
 RUN set -eux && \
 	apk upgrade --update && \
-	apk add --no-cache ca-certificates ccid curl libstdc++ pcsc-lite pcsc-lite-libs socat && \
+	apk add --no-cache \
+		ca-certificates \
+		ccid \
+		curl \
+		libstdc++ \
+		pcsc-lite \
+		pcsc-lite-libs \
+		socat && \
 	\
 	# libarib25
 	ln -sf /usr/local/lib64/libarib25.so.0.2.5 /usr/local/lib64/libarib25.so.0 && \
