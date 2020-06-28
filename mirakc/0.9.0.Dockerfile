@@ -2,14 +2,12 @@
 FROM masnagam/mirakc:0.9.0-alpine AS mirakc-image
 
 
-
-# libarib25, recpt1, timezone
-FROM collelog/uo-recpt1-build AS recpt1-image
-
+# libarib25, recpt1
+FROM collelog/uo-recpt1-build:latest-alpine AS recpt1-image
 
 
 # arib-b25-stream-test
-FROM collelog/uo-arib-b25-stream-test-build AS arib-b25-stream-test-image
+FROM collelog/uo-arib-b25-stream-test-build:latest-alpine AS arib-b25-stream-test-image
 
 
 # JST
