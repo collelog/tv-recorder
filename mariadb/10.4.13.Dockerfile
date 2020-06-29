@@ -3,7 +3,7 @@ LABEL maintainer "collelog <collelog.cavamin@gmail.com>"
 
 EXPOSE 3306
 
-ADD ./files/run.sh /scripts/run.sh
+ADD files /scripts/
 
 RUN set -eux && \
 	apk upgrade --update && \
