@@ -1,13 +1,12 @@
 # FFmpeg
-FROM collelog/uo-ffmpeg-build:4.3-alpine-arm64v8 AS ffmpeg-build
-
+FROM collelog/uo-ffmpeg-build:4.3-alpine-arm64v8 AS ffmpeg-image
 
 
 # EPGStation
 FROM arm64v8/node:12-alpine3.11 AS epgstation-build
 
 RUN apk upgrade --update
-RUN apk add --no-cache ca-certificates curl g++ make python3 tzdata
+RUN apk add --no-cache ca-certificates curl g++ make python3
 
 RUN mkdir -p /usr/local/EPGStation
 WORKDIR /usr/local/EPGStation
@@ -19,6 +18,11 @@ RUN npm run build
 RUN rm -rf /tmp/* /var/cache/apk/*
 
 
+# JST
+FROM alpine:3.11.0 as jst-image
+RUN apk add tzdata
+RUN echo "Asia/Tokyo" > /etc/timezone
+
 
 # final image
 FROM arm64v8/node:12-alpine3.11
@@ -28,13 +32,14 @@ EXPOSE 8888
 EXPOSE 8889
 
 # FFmpeg
-COPY --from=ffmpeg-build /usr/local /usr/local
-
-# timezone
-COPY --from=epgstation-build /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+COPY --from=ffmpeg-image /usr/local /usr/local
 
 # EPGStation
 COPY --from=epgstation-build /usr/local/EPGStation /usr/local/EPGStation
+
+# JST
+COPY --from=jst-image /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+COPY --from=jst-image /etc/timezone /etc/timezone
 
 RUN set -eux && \
 	apk upgrade --update && \
@@ -55,9 +60,6 @@ RUN set -eux && \
 	mkdir -p /usr/local/ffmpeg/bin && \
 	ln -s /usr/local/bin/ffmpeg /usr/local/ffmpeg/bin/ffmpeg && \
 	ln -s /usr/local/bin/ffprobe /usr/local/ffmpeg/bin/ffprobe && \
-	\
-	# timezone
-	echo "Asia/Tokyo" > /etc/timezone && \
 	\
 	# cleaning
 	npm cache verify && \
