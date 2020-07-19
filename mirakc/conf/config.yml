@@ -243,5 +243,5 @@ tuners:
     disabled: true
 
 filters:
-  post-filter: >-
-    arib-b25-stream-test
+  decode-filter:
+    command: arib-b25-stream-test
