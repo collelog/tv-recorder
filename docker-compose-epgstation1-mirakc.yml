@@ -5,7 +5,7 @@ services:
         #    context: mirakc
         #    dockerfile: Dockerfile
         container_name: mirakc
-        image: collelog/uo-mirakc:0.11.0-alpine-amd64
+        image: collelog/mirakc:0.12.0-alpine
         #networks:
         #    - container-link
         #ports:
@@ -14,7 +14,7 @@ services:
             - /etc/localtime:/etc/localtime:ro
             - ./mirakc/sock:/var/run/mirakurun
             - ./mirakc/epg:/var/lib/mirakc/epg
-            - ./mirakc/config.yml:/etc/mirakc/config.yml:ro
+            - ./mirakc/conf/config.yml:/etc/mirakc/config.yml:ro
         network_mode: 'none'
         environment:
             RUST_LOG: info
@@ -43,7 +43,7 @@ services:
         #    context: mariadb
         #    dockerfile: Dockerfile
         container_name: epgstation-mysql
-        image: collelog/uo-epgstation-mariadb:10.4.13-alpine-amd64
+        image: collelog/mariadb:10.4.13-alpine
         networks:
             - container-link
         ports:
@@ -65,7 +65,7 @@ services:
         #    context: epgstation
         #    dockerfile: Dockerfile
         container_name: epgstation
-        image: collelog/uo-epgstation:1.6.9-alpine-amd64
+        image: collelog/epgstation:1.7.1-alpine-amd64
         networks:
             - container-link
         ports:

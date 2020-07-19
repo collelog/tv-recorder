@@ -5,7 +5,7 @@ services:
         #    context: mirakurun
         #    dockerfile: Dockerfile
         container_name: mirakurun
-        image: collelog/uo-mirakurun:2.15.3-alpine-amd64
+        image: collelog/mirakurun:2.15.2-alpine
         networks:
             - container-link
         ports:
@@ -38,7 +38,7 @@ services:
         #    context: mariadb
         #    dockerfile: Dockerfile
         container_name: epgstation-mysql
-        image: collelog/uo-epgstation-mariadb:10.4.12-alpine-amd64
+        image: collelog/mariadb:10.4.13-alpine
         networks:
             - container-link
         ports:
@@ -60,7 +60,7 @@ services:
         #    context: epgstation
         #    dockerfile: Dockerfile
         container_name: epgstation
-        image: collelog/uo-epgstation:1.6.9-alpine-amd64
+        image: collelog/epgstation:1.7.1-alpine-amd64
         networks:
             - container-link
         ports:
