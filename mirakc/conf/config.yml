@@ -3,6 +3,7 @@ epg:
 
 server:
   addrs:
+    - http: 0.0.0.0:40772
     - unix: /var/run/mirakurun/mirakurun.sock
 
 channels:
