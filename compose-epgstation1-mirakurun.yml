@@ -1,9 +1,6 @@
 version: '3.7'
 services:
     mirakurun:
-        #build:
-        #    context: mirakurun
-        #    dockerfile: Dockerfile
         container_name: mirakurun
         image: collelog/mirakurun:2.15.2-alpine
         networks:
@@ -34,21 +31,18 @@ services:
         restart: unless-stopped
 
     mysql:
-        #build:
-        #    context: mariadb
-        #    dockerfile: Dockerfile
         container_name: epgstation-mysql
         image: collelog/mariadb:10.4.13-alpine
-        networks:
-            - container-link
-        ports:
-            - '3306:3306'
+        network_mode: 'none'
+        #networks:
+        #    - container-link
+        #ports:
+        #    - '3306:3306'
         volumes:
             - /etc/localtime:/etc/localtime:ro
             - ./mariadb/sock:/var/run/mysqld
             - ./mariadb/db:/var/lib/mysql
             - ./mariadb/init:/docker-entrypoint-initdb.d/
-        #network_mode: 'none'
         environment:
             TZ: Asia/Tokyo
             MYSQL_ROOT_PASSWORD: epgstation
@@ -57,9 +51,6 @@ services:
         restart: unless-stopped
 
     epgstation:
-        #build:
-        #    context: epgstation
-        #    dockerfile: Dockerfile
         container_name: epgstation
         image: collelog/epgstation:1.7.1-alpine-amd64
         networks:

@@ -1,21 +1,14 @@
 version: '3.7'
 services:
     mirakc:
-        #build:
-        #    context: mirakc
-        #    dockerfile: Dockerfile
         container_name: mirakc
         image: collelog/mirakc:0.12.0-alpine
-        #networks:
-        #    - container-link
-        #ports:
-        #    - '40772:40772'
+        network_mode: 'none'
         volumes:
             - /etc/localtime:/etc/localtime:ro
             - ./mirakc/sock:/var/run/mirakurun
             - ./mirakc/epg:/var/lib/mirakc/epg
             - ./mirakc/conf/config.yml:/etc/mirakc/config.yml:ro
-        network_mode: 'none'
         environment:
             RUST_LOG: info
             MIRAKC_DEBUG_CHILD_PROCESS: ''
@@ -39,21 +32,18 @@ services:
         restart: unless-stopped
 
     mysql:
-        #build:
-        #    context: mariadb
-        #    dockerfile: Dockerfile
         container_name: epgstation-mysql
         image: collelog/mariadb:10.4.13-alpine
-        networks:
-            - container-link
-        ports:
-            - '3306:3306'
+        network_mode: 'none'
+        #networks:
+        #    - container-link
+        #ports:
+        #    - '3306:3306'
         volumes:
             - /etc/localtime:/etc/localtime:ro
             - ./mariadb/sock:/var/run/mysqld
             - ./mariadb/db:/var/lib/mysql
             - ./mariadb/init:/docker-entrypoint-initdb.d/
-        #network_mode: 'none'
         environment:
             TZ: Asia/Tokyo
             MYSQL_ROOT_PASSWORD: epgstation
@@ -62,9 +52,6 @@ services:
         restart: unless-stopped
 
     epgstation:
-        #build:
-        #    context: epgstation
-        #    dockerfile: Dockerfile
         container_name: epgstation
         image: collelog/epgstation:1.7.1-alpine-amd64
         networks:
