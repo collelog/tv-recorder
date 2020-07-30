@@ -2,7 +2,7 @@ version: '3.7'
 services:
     mirakc:
         container_name: mirakc
-        image: collelog/mirakc:master-alpine
+        image: collelog/mirakc:0.13.0-alpine
         networks:
             - container-link
         ports:
@@ -56,7 +56,7 @@ services:
 
     epgstation:
         container_name: epgstation
-        image: collelog/epgstation:1.7.1-alpine-amd64
+        image: collelog/epgstation:1.7.4-alpine-amd64
         networks:
             - container-link
         ports:
