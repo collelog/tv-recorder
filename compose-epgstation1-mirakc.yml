@@ -2,7 +2,7 @@ version: '3.7'
 services:
     mirakc:
         container_name: mirakc
-        image: collelog/mirakc:0.13.0-alpine
+        image: collelog/mirakc:0.13.1-alpine
         network_mode: 'none'
         volumes:
             - /etc/localtime:/etc/localtime:ro
