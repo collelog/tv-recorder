@@ -3,7 +3,10 @@ services:
     mirakc:
         container_name: mirakc
         image: collelog/mirakc:0.13.1-alpine
-        network_mode: 'none'
+        networks:
+            - container-link
+        ports:
+            - '40772:40772'
         volumes:
             - /etc/localtime:/etc/localtime:ro
             - ./mirakc/sock:/var/run/mirakurun
@@ -53,7 +56,7 @@ services:
 
     epgstation:
         container_name: epgstation
-        image: collelog/epgstation:1.7.4-alpine-amd64
+        image: collelog/epgstation:1.7.4-alpine-rpi-arm64v8
         networks:
             - container-link
         ports:
@@ -73,7 +76,59 @@ services:
         depends_on:
            - mirakc
            - mysql
-        #user: '1000:1000'
+        devices:
+            - /dev/video10:/dev/video10
+            - /dev/video11:/dev/video11
+            - /dev/video12:/dev/video12
+        init: true
+        restart: unless-stopped
+
+    xteve:
+        container_name: xteve
+        image: collelog/xteve:2.1.2-alpine
+        networks:
+            - container-link
+        ports:
+            - 34400:34400
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - ./xteve/conf:/usr/local/xteve/conf
+            - ./xteve/temp:/tmp/xteve
+        environment:
+             TZ: Asia/Tokyo
+        depends_on:
+           - mirakc
+        logging:
+            driver: json-file
+            options:
+                max-size: '10m'
+                max-file: '5'
+        init: true
+        restart: unless-stopped
+
+    jellyfin:
+        container_name: jellyfin
+        image: linuxserver/jellyfin
+        network_mode: 'host'
+        ports:
+            - 8096:8096
+            - 8920:8920 #optional
+        volumes:
+            - ./jellyfin/conf:/config
+            - ./jellyfin/cache:/cache
+            - ./recorded:/media/video
+        environment:
+             TZ: Asia/Tokyo
+             UMASK_SET: 022
+        logging:
+            driver: json-file
+            options:
+                max-size: '10m'
+                max-file: '5'
+        devices:
+            - /dev/video10:/dev/video10
+            - /dev/video11:/dev/video11
+            - /dev/video12:/dev/video12
         init: true
         restart: unless-stopped
 

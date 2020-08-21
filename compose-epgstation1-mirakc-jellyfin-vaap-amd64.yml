@@ -56,7 +56,7 @@ services:
 
     epgstation:
         container_name: epgstation
-        image: collelog/epgstation:1.7.4-alpine-amd64
+        image: collelog/epgstation:1.7.4-alpine-vaap-amd64
         networks:
             - container-link
         ports:
@@ -76,7 +76,8 @@ services:
         depends_on:
            - mirakc
            - mysql
-        #user: '1000:1000'
+        devices:
+            - /dev/dri:/dev/dri
         init: true
         restart: unless-stopped
 
@@ -100,7 +101,6 @@ services:
             options:
                 max-size: '10m'
                 max-file: '5'
-        #user: '1000:1000'
         init: true
         restart: unless-stopped
 
@@ -115,24 +115,16 @@ services:
             - ./jellyfin/conf:/config
             - ./jellyfin/cache:/cache
             - ./recorded:/media/video
-        #    - /opt/vc/lib:/opt/vc/lib #optional
         environment:
              TZ: Asia/Tokyo
-        #     PUID: 0
-        #     PGID: 0
              UMASK_SET: 022 #optional
         logging:
             driver: json-file
             options:
                 max-size: '10m'
                 max-file: '5'
-        #devices:
-        #    - /dev/dri:/dev/dri #optional
-        #    - /dev/vcsm:/dev/vcsm #optional
-        #    - /dev/vchiq:/dev/vchiq #optional
-        #    - /dev/video10:/dev/video10 #optional
-        #    - /dev/video11:/dev/video11 #optional
-        #    - /dev/video12:/dev/video12 #optional
+        devices:
+            - /dev/dri:/dev/dri
         init: true
         restart: unless-stopped
 

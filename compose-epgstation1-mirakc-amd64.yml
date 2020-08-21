@@ -1,0 +1,86 @@
+version: '3.7'
+services:
+    mirakc:
+        container_name: mirakc
+        image: collelog/mirakc:0.13.1-alpine
+        network_mode: 'none'
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - ./mirakc/sock:/var/run/mirakurun
+            - ./mirakc/epg:/var/lib/mirakc/epg
+            - ./mirakc/conf/config.yml:/etc/mirakc/config.yml:ro
+        environment:
+            RUST_LOG: info
+            MIRAKC_DEBUG_CHILD_PROCESS: ''
+            MIRAKC_ARIG_LOG: info
+        logging:
+            driver: json-file
+            options:
+                max-size: '10m'
+                max-file: '5'
+        devices:
+            - /dev/px4video0:/dev/px4video0
+            - /dev/px4video1:/dev/px4video1
+            - /dev/px4video2:/dev/px4video2
+            - /dev/px4video3:/dev/px4video3
+            - /dev/px4video4:/dev/px4video4
+            - /dev/px4video5:/dev/px4video5
+            - /dev/px4video6:/dev/px4video6
+            - /dev/px4video7:/dev/px4video7
+            - /dev/bus/usb/00x/0xx             # USB IC card reader
+        init: true
+        restart: unless-stopped
+
+    mysql:
+        container_name: epgstation-mysql
+        image: collelog/mariadb:10.4.13-alpine
+        network_mode: 'none'
+        #networks:
+        #    - container-link
+        #ports:
+        #    - '3306:3306'
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - ./mariadb/sock:/var/run/mysqld
+            - ./mariadb/db:/var/lib/mysql
+            - ./mariadb/init:/docker-entrypoint-initdb.d/
+        environment:
+            TZ: Asia/Tokyo
+            MYSQL_ROOT_PASSWORD: epgstation
+        command: --character-set-server=utf8mb4 --collation-server=utf8mb4_bin --performance-schema=false --expire_logs_days=1
+        init: true
+        restart: unless-stopped
+
+    epgstation:
+        container_name: epgstation
+        image: collelog/epgstation:1.7.4-alpine-amd64
+        networks:
+            - container-link
+        ports:
+            - '8888:8888'
+            - '8889:8889'
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - ./mirakc/sock:/var/run/mirakurun
+            - ./mariadb/sock:/var/run/mysqld
+            - ./epgstation/config:/usr/local/EPGStation/config
+            - ./epgstation/data:/usr/local/EPGStation/data
+            - ./epgstation/thumbnail:/usr/local/EPGStation/thumbnail
+            - ./epgstation/logs:/usr/local/EPGStation/logs
+            - ./recorded:/usr/local/EPGStation/recorded
+        environment:
+            NODE_ENV: production
+        depends_on:
+           - mirakc
+           - mysql
+        init: true
+        restart: unless-stopped
+
+networks:
+    default:
+        external:
+            name: bridge
+
+    container-link:
+        name: tv-recorder
+        driver: bridge
