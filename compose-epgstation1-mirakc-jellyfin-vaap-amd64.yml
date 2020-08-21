@@ -90,7 +90,7 @@ services:
             - 34400:34400
         volumes:
             - /etc/localtime:/etc/localtime:ro
-            - ./xteve/conf:/usr/local/xteve/conf
+            - ./xteve/conf:/var/opt/xteve/conf
             - ./xteve/temp:/tmp/xteve
         environment:
              TZ: Asia/Tokyo
