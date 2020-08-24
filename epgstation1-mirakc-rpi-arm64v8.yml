@@ -1,22 +1,24 @@
 version: '3.7'
 services:
-    mirakurun:
-        container_name: mirakurun
-        image: collelog/mirakurun:2.15.2-alpine
-        networks:
-            - container-link
-        ports:
-            - "40772:40772"
+    mirakc:
+        container_name: mirakc
+        image: collelog/mirakc:0.13.1-alpine
+        network_mode: 'none'
         volumes:
             - /etc/localtime:/etc/localtime:ro
-            - ./mirakurun/sock:/var/run/mirakurun
-            - ./mirakurun/conf:/usr/local/etc/mirakurun
-            - ./mirakurun/db:/usr/local/var/db/mirakurun
+            - ./mirakc/sock:/var/run/mirakurun
+            - ./mirakc/epg:/var/lib/mirakc/epg
+            - ./mirakc/conf/config.yml:/etc/mirakc/config.yml:ro
         environment:
-            NODE_ENV: production
-        cap_add:
-            - SYS_NICE
-            - SYS_ADMIN
+            MIRAKC_DEBUG_CHILD_PROCESS: ''
+            MIRAKC_ARIG_LOG: info
+            RUST_LOG: info
+            TZ: Asia/Tokyo
+        logging:
+            driver: json-file
+            options:
+                max-size: '10m'
+                max-file: '5'
         devices:
             - /dev/px4video0:/dev/px4video0
             - /dev/px4video1:/dev/px4video1
@@ -44,15 +46,15 @@ services:
             - ./mariadb/db:/var/lib/mysql
             - ./mariadb/init:/docker-entrypoint-initdb.d/
         environment:
-            TZ: Asia/Tokyo
             MYSQL_ROOT_PASSWORD: epgstation
+            TZ: Asia/Tokyo
         command: --character-set-server=utf8mb4 --collation-server=utf8mb4_bin --performance-schema=false --expire_logs_days=1
         init: true
         restart: unless-stopped
 
     epgstation:
         container_name: epgstation
-        image: collelog/epgstation:1.7.1-alpine-amd64
+        image: collelog/epgstation:1.7.4-alpine-rpi-arm64v8
         networks:
             - container-link
         ports:
@@ -60,19 +62,23 @@ services:
             - '8889:8889'
         volumes:
             - /etc/localtime:/etc/localtime:ro
-            - ./mirakurun/sock:/var/run/mirakurun
+            - ./mirakc/sock:/var/run/mirakurun
             - ./mariadb/sock:/var/run/mysqld
-            - ./epgstation/config:/usr/local/EPGStation/config
-            - ./epgstation/data:/usr/local/EPGStation/data
-            - ./epgstation/thumbnail:/usr/local/EPGStation/thumbnail
-            - ./epgstation/logs:/usr/local/EPGStation/logs
-            - ./recorded:/usr/local/EPGStation/recorded
+            - ./epgstation/config:/opt/epgstation/config
+            - ./epgstation/data:/opt/epgstation/data
+            - ./epgstation/thumbnail:/opt/epgstation/thumbnail
+            - ./epgstation/logs:/opt/epgstation/logs
+            - ./recorded:/opt/epgstation/recorded
         environment:
             NODE_ENV: production
+            TZ: Asia/Tokyo
         depends_on:
-           - mirakurun
+           - mirakc
            - mysql
-        #user: '1000:1000'
+        devices:
+            - /dev/video10:/dev/video10
+            - /dev/video11:/dev/video11
+            - /dev/video12:/dev/video12
         init: true
         restart: unless-stopped
 
