@@ -73,7 +73,6 @@ services:
             - ./epgstation/logs:/opt/epgstation/logs
             - ./recorded:/opt/epgstation/recorded
         environment:
-            NODE_ENV: production
             TZ: Asia/Tokyo
         depends_on:
            - mirakc
