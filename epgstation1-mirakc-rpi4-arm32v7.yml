@@ -1,45 +1,49 @@
-version: '3.7'
+version: "3.7"
 services:
     mirakc:
         container_name: mirakc
-        image: collelog/mirakc:0.14.0-alpine-rpi4-arm32v7
-        network_mode: 'none'
+        image: collelog/mirakc:latest-alpine-rpi4-arm32v7
+        #network_mode: "none"
+        networks:
+            - container-link
+        ports:
+            - "40772"
         volumes:
             - /etc/localtime:/etc/localtime:ro
             - ./mirakc/sock:/var/run/mirakurun
             - ./mirakc/epg:/var/lib/mirakc/epg
             - ./mirakc/conf/config.yml:/etc/mirakc/config.yml:ro
         environment:
-            MIRAKC_DEBUG_CHILD_PROCESS: ''
+            MIRAKC_DEBUG_CHILD_PROCESS: ""
             MIRAKC_ARIG_LOG: info
             RUST_LOG: info
             TZ: Asia/Tokyo
         logging:
             driver: json-file
             options:
-                max-size: '10m'
-                max-file: '5'
+                max-size: "10m"
+                max-file: "5"
         devices:
-            - /dev/px4video0:/dev/px4video0
-            - /dev/px4video1:/dev/px4video1
-            - /dev/px4video2:/dev/px4video2
-            - /dev/px4video3:/dev/px4video3
-            - /dev/px4video4:/dev/px4video4
-            - /dev/px4video5:/dev/px4video5
-            - /dev/px4video6:/dev/px4video6
-            - /dev/px4video7:/dev/px4video7
-            - /dev/bus/usb/00x/0xx             # USB IC card reader
+            - /dev/px4video0
+            - /dev/px4video1
+            - /dev/px4video2
+            - /dev/px4video3
+            - /dev/px4video4
+            - /dev/px4video5
+            - /dev/px4video6
+            - /dev/px4video7
+            - /dev/bus/usb # USB IC card reader
         init: true
         restart: unless-stopped
 
     mysql:
         container_name: epgstation-mysql
         image: collelog/mariadb:10.4.13-alpine
-        network_mode: 'none'
+        network_mode: "none"
         #networks:
         #    - container-link
         #ports:
-        #    - '3306:3306'
+        #    - "3306"
         volumes:
             - /etc/localtime:/etc/localtime:ro
             - ./mariadb/sock:/var/run/mysqld
@@ -54,15 +58,14 @@ services:
 
     epgstation:
         container_name: epgstation
-        image: collelog/epgstation:1.7.4-alpine-rpi4-arm32v7
+        image: collelog/epgstation:latest-alpine-rpi4-arm32v7
         networks:
             - container-link
         ports:
-            - '8888:8888'
-            - '8889:8889'
+            - "8888"
+            - "8889"
         volumes:
             - /etc/localtime:/etc/localtime:ro
-            - /opt/vc/lib:/opt/vc/lib
             - ./mirakc/sock:/var/run/mirakurun
             - ./mariadb/sock:/var/run/mysqld
             - ./epgstation/config:/opt/epgstation/config
@@ -76,11 +79,11 @@ services:
            - mirakc
            - mysql
         devices:
-            - /dev/vcsm:/dev/vcsm
-            - /dev/vchiq:/dev/vchiq
-            - /dev/video10:/dev/video10
-            - /dev/video11:/dev/video11
-            - /dev/video12:/dev/video12
+            - /dev/vcsm
+            - /dev/vchiq
+            - /dev/video10
+            - /dev/video11
+            - /dev/video12
         init: true
         restart: unless-stopped
 
