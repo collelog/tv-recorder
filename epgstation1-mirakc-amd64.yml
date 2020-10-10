@@ -7,7 +7,7 @@ services:
         networks:
             - container-link
         ports:
-            - "40772"
+            - "40772:40772"
         volumes:
             - /etc/localtime:/etc/localtime:ro
             - ./mirakc/sock:/var/run/mirakurun
@@ -43,7 +43,7 @@ services:
         #networks:
         #    - container-link
         #ports:
-        #    - "3306"
+        #    - "3306:3306"
         volumes:
             - /etc/localtime:/etc/localtime:ro
             - ./mariadb/sock:/var/run/mysqld
@@ -62,8 +62,8 @@ services:
         networks:
             - container-link
         ports:
-            - "8888"
-            - "8889"
+            - "8888:8888"
+            - "8889:8889"
         volumes:
             - /etc/localtime:/etc/localtime:ro
             - ./mirakc/sock:/var/run/mirakurun

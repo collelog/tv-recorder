@@ -34,11 +34,11 @@ services:
     mysql:
         container_name: epgstation-mysql
         image: collelog/mariadb:10.4.13-alpine
-        network_mode: 'none'
+        network_mode: "none"
         #networks:
         #    - container-link
         #ports:
-        #    - '3306:3306'
+        #    - "3306:3306"
         volumes:
             - /etc/localtime:/etc/localtime:ro
             - ./mariadb/sock:/var/run/mysqld
@@ -57,8 +57,8 @@ services:
         networks:
             - container-link
         ports:
-            - '8888:8888'
-            - '8889:8889'
+            - "8888:8888"
+            - "8889:8889"
         volumes:
             - /etc/localtime:/etc/localtime:ro
             - ./mirakurun/sock:/var/run/mirakurun
@@ -73,7 +73,7 @@ services:
         depends_on:
            - mirakurun
            - mysql
-        #user: '1000:1000'
+        #user: "1000:1000"
         init: true
         restart: unless-stopped
 
