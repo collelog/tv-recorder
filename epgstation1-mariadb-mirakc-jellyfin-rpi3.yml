@@ -2,7 +2,7 @@ version: "3.7"
 services:
     mirakc:
         container_name: mirakc
-        image: collelog/mirakc:latest-alpine-rpi3-arm32v7
+        image: collelog/mirakc:latest-alpine-rpi3
         #network_mode: "none"
         networks:
             - container-link
@@ -58,7 +58,7 @@ services:
 
     epgstation:
         container_name: epgstation
-        image: collelog/epgstation:latest-alpine-rpi3-arm32v7
+        image: collelog/epgstation:latest-alpine-rpi3
         networks:
             - container-link
         ports:
@@ -78,6 +78,57 @@ services:
         depends_on:
            - mirakc
            - mysql
+        devices:
+            - /dev/vcsm
+            - /dev/vchiq
+            - /dev/video10
+            - /dev/video11
+            - /dev/video12
+        init: true
+        restart: unless-stopped
+
+    xteve:
+        container_name: xteve
+        image: collelog/xteve:latest-alpine
+        networks:
+            - container-link
+        ports:
+            - "34400:34400"
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - ./xteve/conf:/etc/opt/xteve
+            - ./xteve/temp:/tmp/xteve
+        environment:
+             TZ: Asia/Tokyo
+        depends_on:
+           - mirakc
+        logging:
+            driver: json-file
+            options:
+                max-size: "10m"
+                max-file: "5"
+        init: true
+        restart: unless-stopped
+
+    jellyfin:
+        container_name: jellyfin
+        image: linuxserver/jellyfin
+        network_mode: "host"
+        ports:
+            - "8096:8096"
+            - "8920:8920" # optional
+        volumes:
+            - ./jellyfin/conf:/config
+            - ./jellyfin/cache:/cache
+            - ./recorded:/media/video
+        environment:
+             TZ: Asia/Tokyo
+             UMASK_SET: 022 # optional
+        logging:
+            driver: json-file
+            options:
+                max-size: "10m"
+                max-file: "5"
         devices:
             - /dev/vcsm
             - /dev/vchiq

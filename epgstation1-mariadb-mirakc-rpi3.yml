@@ -1,33 +1,38 @@
-version: '3.7'
+version: "3.7"
 services:
-    mirakurun:
-        container_name: mirakurun
-        image: collelog/mirakurun:2.15.2-alpine
+    mirakc:
+        container_name: mirakc
+        image: collelog/mirakc:latest-alpine-rpi3
+        #network_mode: "none"
         networks:
             - container-link
         ports:
             - "40772:40772"
         volumes:
             - /etc/localtime:/etc/localtime:ro
-            - ./mirakurun/sock:/var/run/mirakurun
-            - ./mirakurun/conf:/usr/local/etc/mirakurun
-            - ./mirakurun/db:/usr/local/var/db/mirakurun
+            - ./mirakc/sock:/var/run/mirakurun
+            - ./mirakc/epg:/var/lib/mirakc/epg
+            - ./mirakc/conf/config.yml:/etc/mirakc/config.yml:ro
         environment:
-            NODE_ENV: production
+            MIRAKC_DEBUG_CHILD_PROCESS: ""
+            MIRAKC_ARIG_LOG: info
+            RUST_LOG: info
             TZ: Asia/Tokyo
-        cap_add:
-            - SYS_NICE
-            - SYS_ADMIN
+        logging:
+            driver: json-file
+            options:
+                max-size: "10m"
+                max-file: "5"
         devices:
-            - /dev/px4video0:/dev/px4video0
-            - /dev/px4video1:/dev/px4video1
-            - /dev/px4video2:/dev/px4video2
-            - /dev/px4video3:/dev/px4video3
-            - /dev/px4video4:/dev/px4video4
-            - /dev/px4video5:/dev/px4video5
-            - /dev/px4video6:/dev/px4video6
-            - /dev/px4video7:/dev/px4video7
-            - /dev/bus/usb/00x/0xx             # USB IC card reader
+            - /dev/px4video0
+            - /dev/px4video1
+            - /dev/px4video2
+            - /dev/px4video3
+            - /dev/px4video4
+            - /dev/px4video5
+            - /dev/px4video6
+            - /dev/px4video7
+            - /dev/bus/usb # USB IC card reader
         init: true
         restart: unless-stopped
 
@@ -53,7 +58,7 @@ services:
 
     epgstation:
         container_name: epgstation
-        image: collelog/epgstation:1.7.1-alpine-amd64
+        image: collelog/epgstation:latest-alpine-rpi3
         networks:
             - container-link
         ports:
@@ -61,7 +66,7 @@ services:
             - "8889:8889"
         volumes:
             - /etc/localtime:/etc/localtime:ro
-            - ./mirakurun/sock:/var/run/mirakurun
+            - ./mirakc/sock:/var/run/mirakurun
             - ./mariadb/sock:/var/run/mysqld
             - ./epgstation/config:/opt/epgstation/config
             - ./epgstation/data:/opt/epgstation/data
@@ -71,9 +76,14 @@ services:
         environment:
             TZ: Asia/Tokyo
         depends_on:
-           - mirakurun
+           - mirakc
            - mysql
-        #user: "1000:1000"
+        devices:
+            - /dev/vcsm
+            - /dev/vchiq
+            - /dev/video10
+            - /dev/video11
+            - /dev/video12
         init: true
         restart: unless-stopped
 

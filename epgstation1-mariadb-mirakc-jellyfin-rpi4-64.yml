@@ -2,7 +2,7 @@ version: "3.7"
 services:
     mirakc:
         container_name: mirakc
-        image: collelog/mirakc:latest-alpine-rpi4-arm32v7
+        image: collelog/mirakc:latest-alpine-rpi4
         #network_mode: "none"
         networks:
             - container-link
@@ -58,7 +58,7 @@ services:
 
     epgstation:
         container_name: epgstation
-        image: collelog/epgstation:latest-alpine-rpi4-arm32v7
+        image: collelog/epgstation:latest-alpine-rpi4
         networks:
             - container-link
         ports:
@@ -79,8 +79,6 @@ services:
            - mirakc
            - mysql
         devices:
-            - /dev/vcsm
-            - /dev/vchiq
             - /dev/video10
             - /dev/video11
             - /dev/video12
@@ -113,7 +111,7 @@ services:
     jellyfin:
         container_name: jellyfin
         image: linuxserver/jellyfin
-        network_mode: 'host'
+        network_mode: "host"
         ports:
             - "8096:8096"
             - "8920:8920" # optional
@@ -130,8 +128,6 @@ services:
                 max-size: "10m"
                 max-file: "5"
         devices:
-            - /dev/vcsm
-            - /dev/vchiq
             - /dev/video10
             - /dev/video11
             - /dev/video12
