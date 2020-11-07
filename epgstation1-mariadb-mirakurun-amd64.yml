@@ -33,7 +33,7 @@ services:
 
     mysql:
         container_name: epgstation-mysql
-        image: collelog/mariadb:10.4.13-alpine
+        image: collelog/mariadb:latest-10.4-alpine
         network_mode: "none"
         #networks:
         #    - container-link

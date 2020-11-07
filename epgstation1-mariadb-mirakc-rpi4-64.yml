@@ -38,7 +38,7 @@ services:
 
     mysql:
         container_name: epgstation-mysql
-        image: collelog/mariadb:10.4.13-alpine
+        image: collelog/mariadb:latest-10.4-alpine
         network_mode: "none"
         #networks:
         #    - container-link
@@ -84,6 +84,56 @@ services:
             - /dev/video12
         init: true
         restart: unless-stopped
+
+#    xteve:
+#        container_name: xteve
+#        image: collelog/xteve:latest-alpine
+#        networks:
+#            - container-link
+#        ports:
+#            - "34400:34400"
+#        volumes:
+#            - /etc/localtime:/etc/localtime:ro
+#            - ./xteve/conf:/etc/opt/xteve
+#            - ./xteve/temp:/tmp/xteve
+#        environment:
+#             TZ: Asia/Tokyo
+#        depends_on:
+#           - mirakc
+#        logging:
+#            driver: json-file
+#            options:
+#                max-size: "10m"
+#                max-file: "5"
+#        init: true
+#        restart: unless-stopped
+
+#    jellyfin:
+#        container_name: jellyfin
+#        image: linuxserver/jellyfin
+#        network_mode: "host"
+#        ports:
+#            - "8096:8096"
+#            - "8920:8920" # optional
+#            - "7359:7359/udp" #optional
+#            - "1900:1900/udp" #optional
+#        volumes:
+#            - ./jellyfin/conf:/config
+#            - ./jellyfin/cache:/cache
+#            - ./recorded:/media/video
+#        environment:
+#             TZ: Asia/Tokyo
+#        logging:
+#            driver: json-file
+#            options:
+#                max-size: "10m"
+#                max-file: "5"
+#        devices:
+#            - /dev/video10
+#            - /dev/video11
+#            - /dev/video12
+#        init: true
+#        restart: unless-stopped
 
 networks:
     default:
