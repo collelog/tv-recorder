@@ -24,6 +24,7 @@ services:
             - /dev/px4video6
             - /dev/px4video7
             # - /dev/bus/usb # USB IC card reader
+        # entrypoint: /bin/ash
         init: true
         tty: true
         restart: unless-stopped
