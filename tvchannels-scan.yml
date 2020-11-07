@@ -1,0 +1,34 @@
+version: "3.7"
+services:
+    tvchannels-scan:
+        container_name: tvchannels-scan
+        image: collelog/tvchannels-scan:latest-alpine
+        network_mode: "none"
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - ./tvchannels-scan:/opt/tvchannels-scan
+        environment:
+            TZ: Asia/Tokyo
+        logging:
+            driver: json-file
+            options:
+                max-size: "10m"
+                max-file: "5"
+        devices:
+            - /dev/px4video0
+            - /dev/px4video1
+            - /dev/px4video2
+            - /dev/px4video3
+            - /dev/px4video4
+            - /dev/px4video5
+            - /dev/px4video6
+            - /dev/px4video7
+            # - /dev/bus/usb # USB IC card reader
+        init: true
+        tty: true
+        restart: unless-stopped
+
+networks:
+    default:
+        external:
+            name: bridge
