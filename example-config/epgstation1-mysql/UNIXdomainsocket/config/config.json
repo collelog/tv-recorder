@@ -1,7 +1,7 @@
 {
     "readOnlyOnce": false,
     "serverPort": 8888,
-    "mirakurunPath": "http://mirakc:40772/",
+    "mirakurunPath": "http+unix://%2Fvar%2Frun%2Fmirakurun%2Fmirakurun.sock/",
     "mysql": {
         "socketPath": "/var/run/mysqld/mysqld.sock",
         "database": "epgstation",
