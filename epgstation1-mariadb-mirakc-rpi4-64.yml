@@ -58,7 +58,7 @@ services:
 
     epgstation:
         container_name: epgstation
-        image: collelog/epgstation:latest-alpine-rpi4-64
+        image: collelog/epgstation:1.7.6-alpine-rpi4-64
         networks:
             - container-link
         ports:

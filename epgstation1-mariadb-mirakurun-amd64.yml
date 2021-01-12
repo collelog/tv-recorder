@@ -53,7 +53,7 @@ services:
 
     epgstation:
         container_name: epgstation
-        image: collelog/epgstation:latest-alpine-amd64
+        image: collelog/epgstation:1.7.6-alpine-amd64
         networks:
             - container-link
         ports:
