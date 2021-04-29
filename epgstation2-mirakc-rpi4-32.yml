@@ -1,0 +1,172 @@
+version: "3.7"
+services:
+    mirakc:
+        container_name: mirakc
+        image: collelog/mirakc:latest-alpine-rpi4-32
+        #network_mode: "none"
+        networks:
+            - container-link
+        ports:
+            - "40772:40772"
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - ./mirakc/sock:/var/run/mirakurun
+            - ./mirakc/epg:/var/lib/mirakc/epg
+            - ./mirakc/conf/config.yml:/etc/mirakc/config.yml:ro
+        environment:
+            MIRAKC_DEBUG_CHILD_PROCESS: ""
+            MIRAKC_ARIG_LOG: info
+            RUST_LOG: info
+            TZ: Asia/Tokyo
+        logging:
+            driver: json-file
+            options:
+                max-size: "10m"
+                max-file: "5"
+        devices:
+            - /dev/px4video0
+            - /dev/px4video1
+            - /dev/px4video2
+            - /dev/px4video3
+            - /dev/px4video4
+            - /dev/px4video5
+            - /dev/px4video6
+            - /dev/px4video7
+            - /dev/bus/usb # USB IC card reader
+        init: true
+        restart: unless-stopped
+
+    epgstation:
+        container_name: epgstation
+        image: collelog/epgstation:latest-alpine-rpi4-32
+        networks:
+            - container-link
+        ports:
+            - "8888:8888"
+            - "8889:8889"
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - ./mirakc/sock:/var/run/mirakurun
+            - ./epgstation2/config:/opt/epgstation/config
+            - ./epgstation2/data:/opt/epgstation/data
+            - ./epgstation2/drop:/opt/epgstation/drop
+            - ./epgstation2/img:/opt/epgstation/img
+            - ./epgstation2/thumbnail:/opt/epgstation/thumbnail
+            - ./epgstation2/logs:/opt/epgstation/logs
+            - ./recorded:/opt/epgstation/recorded
+        environment:
+            TZ: Asia/Tokyo
+        depends_on:
+           - mirakc
+#           - mysql
+        devices:
+            - /dev/vcsm
+            - /dev/vchiq
+            - /dev/video10
+            - /dev/video11
+            - /dev/video12
+        init: true
+        restart: unless-stopped
+
+#    mysql:
+#        container_name: epgstation-mysql
+#        image: collelog/mariadb:latest-10.4-alpine
+#        network_mode: "none"
+#        #networks:
+#        #    - container-link
+#        #ports:
+#        #    - "3306:3306"
+#        volumes:
+#            - /etc/localtime:/etc/localtime:ro
+#            - ./mariadb/sock:/var/run/mysqld
+#            - ./mariadb/db:/var/lib/mysql
+#            - ./mariadb/init:/docker-entrypoint-initdb.d/
+#        environment:
+#            MYSQL_ROOT_PASSWORD: epgstation
+#            TZ: Asia/Tokyo
+#        command: --character-set-server=utf8mb4 --collation-server=utf8mb4_bin --performance-schema=false --expire_logs_days=1
+#        init: true
+#        restart: unless-stopped
+
+#    xteve:
+#        container_name: xteve
+#        image: collelog/xteve:latest-alpine
+#        networks:
+#            - container-link
+#        ports:
+#            - "34400:34400"
+#        volumes:
+#            - /etc/localtime:/etc/localtime:ro
+#            - ./xteve/conf:/etc/opt/xteve
+#            - ./xteve/temp:/tmp/xteve
+#        environment:
+#             TZ: Asia/Tokyo
+#        depends_on:
+#           - mirakc
+#        logging:
+#            driver: json-file
+#            options:
+#                max-size: "10m"
+#                max-file: "5"
+#        init: true
+#        restart: unless-stopped
+
+#    jellyfin:
+#        container_name: jellyfin
+#        image: linuxserver/jellyfin
+#        network_mode: "host"
+#        ports:
+#            - "8096:8096"
+#            - "8920:8920" # optional
+#            - "7359:7359/udp" #optional
+#            - "1900:1900/udp" #optional
+#        volumes:
+#            - ./jellyfin/conf:/config
+#            - ./jellyfin/cache:/cache
+#            - ./recorded:/media/video
+#        environment:
+#             TZ: Asia/Tokyo
+#        logging:
+#            driver: json-file
+#            options:
+#                max-size: "10m"
+#                max-file: "5"
+#        devices:
+#            - /dev/vcsm
+#            - /dev/vchiq
+#            - /dev/video10
+#            - /dev/video11
+#            - /dev/video12
+#        init: true
+#        restart: unless-stopped
+
+#    b25-server:
+#        container_name:b25-server
+#        image: collelog/b25-server:latest-alpine
+#        networks:
+#            - container-link
+#        ports:
+#            - "40773:40773"
+#            - "40774:40774"
+#        volumes:
+#            - /etc/localtime:/etc/localtime:ro
+#        environment:
+#            TZ: Asia/Tokyo
+#        logging:
+#            driver: json-file
+#            options:
+#                max-size: "10m"
+#                max-file: "5"
+#        devices:
+#            - /dev/bus/usb # USB IC card reader
+#        init: true
+#        restart: unless-stopped
+
+networks:
+    default:
+        external:
+            name: bridge
+
+    container-link:
+        name: tv-recorder
+        driver: bridge
