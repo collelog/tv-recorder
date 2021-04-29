@@ -8,6 +8,7 @@ mysql:
     user: epgstation
     password: epgstation
     database: epgstation
+    charset: utf8mb4
 
 epgUpdateIntervalTime: 10
 

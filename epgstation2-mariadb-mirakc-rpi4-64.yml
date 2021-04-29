@@ -2,7 +2,7 @@ version: "3.7"
 services:
     mirakc:
         container_name: mirakc
-        image: collelog/mirakc:latest-alpine-rpi4-32
+        image: collelog/mirakc:latest-alpine-rpi4-64
         #network_mode: "none"
         networks:
             - container-link
@@ -38,7 +38,7 @@ services:
 
     epgstation:
         container_name: epgstation
-        image: collelog/epgstation:latest-alpine-rpi4-32
+        image: collelog/epgstation:latest-alpine-rpi4-64
         networks:
             - container-link
         ports:
@@ -58,35 +58,33 @@ services:
             TZ: Asia/Tokyo
         depends_on:
            - mirakc
-#           - mysql
+           - mysql
         devices:
-            - /dev/vcsm
-            - /dev/vchiq
             - /dev/video10
             - /dev/video11
             - /dev/video12
         init: true
         restart: unless-stopped
 
-#    mysql:
-#        container_name: epgstation2-mysql
-#        image: collelog/mariadb:latest-10.4-alpine
-#        #network_mode: "none"
-#        networks:
-#            - container-link
-#        ports:
-#            - "3306:3306"
-#        volumes:
-#            - /etc/localtime:/etc/localtime:ro
-#            - ./epgstation2-mysql/sock:/var/run/mysqld
-#            - ./epgstation2-mysql/db:/var/lib/mysql
-#            - ./epgstation2-mysql/init:/docker-entrypoint-initdb.d/
-#        environment:
-#            MYSQL_ROOT_PASSWORD: epgstation
-#            TZ: Asia/Tokyo
-#        command: --character-set-server=utf8mb4 --collation-server=utf8mb4_bin --performance-schema=false --expire_logs_days=1
-#        init: true
-#        restart: unless-stopped
+    mysql:
+        container_name: epgstation2-mysql
+        image: collelog/mariadb:latest-10.4-alpine
+        #network_mode: "none"
+        networks:
+            - container-link
+        ports:
+            - "3306:3306"
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - ./epgstation2-mysql/sock:/var/run/mysqld
+            - ./epgstation2-mysql/db:/var/lib/mysql
+            - ./epgstation2-mysql/init:/docker-entrypoint-initdb.d/
+        environment:
+            MYSQL_ROOT_PASSWORD: epgstation
+            TZ: Asia/Tokyo
+        command: --character-set-server=utf8mb4 --collation-server=utf8mb4_bin --performance-schema=false --expire_logs_days=1
+        init: true
+        restart: unless-stopped
 
 #    xteve:
 #        container_name: xteve
@@ -132,33 +130,9 @@ services:
 #                max-size: "10m"
 #                max-file: "5"
 #        devices:
-#            - /dev/vcsm
-#            - /dev/vchiq
 #            - /dev/video10
 #            - /dev/video11
 #            - /dev/video12
-#        init: true
-#        restart: unless-stopped
-
-#    b25-server:
-#        container_name:b25-server
-#        image: collelog/b25-server:latest-alpine
-#        networks:
-#            - container-link
-#        ports:
-#            - "40773:40773"
-#            - "40774:40774"
-#        volumes:
-#            - /etc/localtime:/etc/localtime:ro
-#        environment:
-#            TZ: Asia/Tokyo
-#        logging:
-#            driver: json-file
-#            options:
-#                max-size: "10m"
-#                max-file: "5"
-#        devices:
-#            - /dev/bus/usb # USB IC card reader
 #        init: true
 #        restart: unless-stopped
 

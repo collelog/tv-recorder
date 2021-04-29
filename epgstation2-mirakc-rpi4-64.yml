@@ -69,11 +69,11 @@ services:
 #    mysql:
 #        container_name: epgstation2-mysql
 #        image: collelog/mariadb:latest-10.4-alpine
-#        network_mode: "none"
-#        #networks:
-#        #    - container-link
-#        #ports:
-#        #    - "3306:3306"
+#        #network_mode: "none"
+#        networks:
+#            - container-link
+#        ports:
+#            - "3306:3306"
 #        volumes:
 #            - /etc/localtime:/etc/localtime:ro
 #            - ./epgstation2-mysql/sock:/var/run/mysqld
