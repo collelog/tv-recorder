@@ -58,31 +58,31 @@ services:
             TZ: Asia/Tokyo
         depends_on:
            - mirakc
-#           - mysql
+           - mysql
         devices:
             - /dev/dri
         init: true
         restart: unless-stopped
 
-#    mysql:
-#        container_name: epgstation2-mysql
-#        image: collelog/mariadb:latest-10.4-alpine
-#        #network_mode: "none"
-#        networks:
-#            - container-link
-#        ports:
-#            - "3306:3306"
-#        volumes:
-#            - /etc/localtime:/etc/localtime:ro
-#            - ./epgstation2-mysql/sock:/var/run/mysqld
-#            - ./epgstation2-mysql/db:/var/lib/mysql
-#            - ./epgstation2-mysql/init:/docker-entrypoint-initdb.d/
-#        environment:
-#            MYSQL_ROOT_PASSWORD: epgstation
-#            TZ: Asia/Tokyo
-#        command: --character-set-server=utf8mb4 --collation-server=utf8mb4_bin --performance-schema=false --expire_logs_days=1
-#        init: true
-#        restart: unless-stopped
+    mysql:
+        container_name: epgstation2-mysql
+        image: collelog/mariadb:latest-10.4-alpine
+        #network_mode: "none"
+        networks:
+            - container-link
+        ports:
+            - "3306:3306"
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - ./epgstation2-mysql/sock:/var/run/mysqld
+            - ./epgstation2-mysql/db:/var/lib/mysql
+            - ./epgstation2-mysql/init:/docker-entrypoint-initdb.d/
+        environment:
+            MYSQL_ROOT_PASSWORD: epgstation
+            TZ: Asia/Tokyo
+        command: --character-set-server=utf8mb4 --collation-server=utf8mb4_bin --performance-schema=false --expire_logs_days=1
+        init: true
+        restart: unless-stopped
 
 #    xteve:
 #        container_name: xteve
