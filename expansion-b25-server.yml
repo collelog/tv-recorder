@@ -1,0 +1,38 @@
+version: "3.7"
+
+x-service: &default-service
+    logging:
+        driver: json-file
+        options:
+            max-size: "10m"
+            max-file: "5"
+    init: true
+    restart: unless-stopped
+
+x-environment: &default-environment
+    TZ: Asia/Tokyo
+
+x-network-host: &custom-network-host
+    network_mode: "host"
+
+
+services:
+    b25-server:
+        <<: *default-service
+        <<: *custom-network-host
+        container_name: b25-server
+        image: collelog/b25-server:latest-alpine
+        ports:
+            - "40773:40773"
+            - "40774:40774"
+        devices:
+            - /dev/bus/usb
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+        environment:
+            <<: *default-environment
+
+networks:
+    default:
+        external:
+            name: bridge

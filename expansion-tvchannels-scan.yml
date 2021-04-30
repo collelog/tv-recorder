@@ -1,0 +1,67 @@
+version: "3.7"
+
+x-devices-tuner: &custom-devices-tuner
+    devices:
+        # PLEX PX-Q3U4/Q3PE4/Q3PE5, PX-W3U4/W3PE4/W3PE5
+        - /dev/px4video0
+        - /dev/px4video1
+        - /dev/px4video2
+        - /dev/px4video3
+        # PLEX PX-Q3U4/Q3PE4/Q3PE5
+        - /dev/px4video4
+        - /dev/px4video5
+        - /dev/px4video6
+        - /dev/px4video7
+        # PLEX PX-MLT5PE
+#        - /dev/pxmlt5video0
+#        - /dev/pxmlt5video1
+#        - /dev/pxmlt5video2
+#        - /dev/pxmlt5video3
+#        - /dev/pxmlt5video4
+        # PLEX PX-MLT8PE
+#        - /dev/pxmlt8video0
+#        - /dev/pxmlt8video1
+#        - /dev/pxmlt8video2
+#        - /dev/pxmlt8video3
+#        - /dev/pxmlt8video4
+#        - /dev/pxmlt8video5
+#        - /dev/pxmlt8video6
+#        - /dev/pxmlt8video7
+        # USB IC card reader
+        - /dev/bus/usb
+
+x-service: &default-service
+    logging:
+        driver: json-file
+        options:
+            max-size: "10m"
+            max-file: "5"
+    init: true
+    restart: "no"
+
+x-environment: &default-environment
+    TZ: Asia/Tokyo
+
+x-network-none: &custom-network-none
+    network_mode: "none"
+
+
+services:
+    tvchannels-scan:
+        <<: *default-service
+        <<: *custom-network-none
+        <<: *custom-devices-tuner
+        container_name: tvchannels-scan
+        image: collelog/tvchannels-scan:latest-alpine
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - ./tvchannels-scan:/opt/tvchannels-scan
+        environment:
+            <<: *default-environment
+        tty: true
+        # entrypoint: /bin/ash
+
+networks:
+    default:
+        external:
+            name: bridge

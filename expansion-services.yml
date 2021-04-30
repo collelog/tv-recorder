@@ -1,0 +1,127 @@
+version: "3.7"
+
+x-devices-tuner: &custom-devices-tuner
+    devices:
+        # PLEX PX-Q3U4/Q3PE4/Q3PE5, PX-W3U4/W3PE4/W3PE5
+        - /dev/px4video0
+        - /dev/px4video1
+        - /dev/px4video2
+        - /dev/px4video3
+        # PLEX PX-Q3U4/Q3PE4/Q3PE5
+        - /dev/px4video4
+        - /dev/px4video5
+        - /dev/px4video6
+        - /dev/px4video7
+        # PLEX PX-MLT5PE
+#        - /dev/pxmlt5video0
+#        - /dev/pxmlt5video1
+#        - /dev/pxmlt5video2
+#        - /dev/pxmlt5video3
+#        - /dev/pxmlt5video4
+        # PLEX PX-MLT8PE
+#        - /dev/pxmlt8video0
+#        - /dev/pxmlt8video1
+#        - /dev/pxmlt8video2
+#        - /dev/pxmlt8video3
+#        - /dev/pxmlt8video4
+#        - /dev/pxmlt8video5
+#        - /dev/pxmlt8video6
+#        - /dev/pxmlt8video7
+        # USB IC card reader
+        - /dev/bus/usb
+
+x-devices-hardware_acceleration: &custom-devices-hardware_acceleration
+    devices:
+        # VAAPI
+#        - /dev/dri
+        # RPi MMAL
+#        - /dev/vcsm
+        # RPi OpenMax
+#        - /dev/vchiq
+        # RPi V4L2
+#        - /dev/video10
+#        - /dev/video11
+#        - /dev/video12
+
+x-service: &default-service
+    logging:
+        driver: json-file
+        options:
+            max-size: "10m"
+            max-file: "5"
+    init: true
+
+x-environment: &default-environment
+    TZ: Asia/Tokyo
+
+x-network: &default-network
+    networks:
+        - container-link
+
+x-network-host: &custom-network-host
+    network_mode: "host"
+
+x-network-non: &custom-network-none
+    network_mode: "none"
+
+
+services:
+    xteve:
+        <<: *default-service
+        <<: *custom-network-host
+        container_name: xteve
+        image: collelog/xteve:latest-alpine
+        ports:
+            - "34400:34400"
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - ./xteve/conf:/etc/opt/xteve
+            - ./xteve/temp:/tmp/xteve
+        environment:
+            <<: *default-environment
+        restart: unless-stopped
+
+    jellyfin:
+        <<: *default-service
+        <<: *custom-network-host
+#devices-ha#        <<: *custom-devices-hardware_acceleration
+        container_name: jellyfin
+        image: linuxserver/jellyfin
+        ports:
+            - "8096:8096"
+            - "8920:8920" # optional
+            - "7359:7359/udp" #optional
+            - "1900:1900/udp" #optional
+        volumes:
+            - ./jellyfin/conf:/config
+            - ./jellyfin/cache:/cache
+            - ./recorded:/media/video
+        environment:
+            <<: *default-environment
+        restart: unless-stopped
+
+    samba:
+        <<: *default-service
+        <<: *custom-network-host
+        container_name: samba
+        image: dperson/samba
+        ports:
+            - "137:137/udp"
+            - "138:138/udp"
+            - "139:139/tcp"
+            - "445:445/tcp"
+        volumes:
+            - ../tv-recorder:/mnt/tv-recorder
+            - ./recorded:/media/video
+        environment:
+            <<: *default-environment
+        stdin_open: true
+        tty: true
+        command: '-s "tv-recorder;/mnt/tv-recorder;yes;no;no;tvrecorder" -s "video;/media/video;yes;no;no;tvrecorder" -u "tvrecorder;tvrecorderapass"'
+        restart: unless-stopped
+
+
+networks:
+    default:
+        external:
+            name: bridge
