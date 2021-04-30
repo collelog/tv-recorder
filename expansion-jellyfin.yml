@@ -1,35 +1,5 @@
 version: "3.7"
 
-x-devices-tuner: &custom-devices-tuner
-    devices:
-        # PLEX PX-Q3U4/Q3PE4/Q3PE5, PX-W3U4/W3PE4/W3PE5
-        - /dev/px4video0
-        - /dev/px4video1
-        - /dev/px4video2
-        - /dev/px4video3
-        # PLEX PX-Q3U4/Q3PE4/Q3PE5
-        - /dev/px4video4
-        - /dev/px4video5
-        - /dev/px4video6
-        - /dev/px4video7
-        # PLEX PX-MLT5PE
-#        - /dev/pxmlt5video0
-#        - /dev/pxmlt5video1
-#        - /dev/pxmlt5video2
-#        - /dev/pxmlt5video3
-#        - /dev/pxmlt5video4
-        # PLEX PX-MLT8PE
-#        - /dev/pxmlt8video0
-#        - /dev/pxmlt8video1
-#        - /dev/pxmlt8video2
-#        - /dev/pxmlt8video3
-#        - /dev/pxmlt8video4
-#        - /dev/pxmlt8video5
-#        - /dev/pxmlt8video6
-#        - /dev/pxmlt8video7
-        # USB IC card reader
-        - /dev/bus/usb
-
 x-devices-hardware_acceleration: &custom-devices-hardware_acceleration
     devices:
         # VAAPI
@@ -86,7 +56,7 @@ services:
         <<: *custom-network-host
 #devices-ha#        <<: *custom-devices-hardware_acceleration
         container_name: jellyfin
-        image: linuxserver/jellyfin
+        image: linuxserver/jellyfin:latest
         ports:
             - "8096:8096"
             - "8920:8920" # optional
@@ -98,26 +68,6 @@ services:
             - ./recorded:/media/video
         environment:
             <<: *default-environment
-        restart: unless-stopped
-
-    samba:
-        <<: *default-service
-        <<: *custom-network-host
-        container_name: samba
-        image: dperson/samba
-        ports:
-            - "137:137/udp"
-            - "138:138/udp"
-            - "139:139/tcp"
-            - "445:445/tcp"
-        volumes:
-            - ../tv-recorder:/mnt/tv-recorder
-            - ./recorded:/media/video
-        environment:
-            <<: *default-environment
-        stdin_open: true
-        tty: true
-        command: '-s "tv-recorder;/mnt/tv-recorder;yes;no;no;tvrecorder" -s "video;/media/video;yes;no;no;tvrecorder" -u "tvrecorder;tvrecorderapass"'
         restart: unless-stopped
 
 
