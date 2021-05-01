@@ -1,15 +1,13 @@
 {
     "readOnlyOnce": false,
     "serverPort": 8888,
-    "mirakurunPath": "http://mirakc:40772/",
-    "mysql": {
-        "socketPath": "/var/run/mysqld/mysqld.sock",
-        "database": "epgstation",
-        "user": "epgstation",
-        "password": "epgstation",
-        "connectTimeout": 1000,
-        "connectionLimit": 10,
-        "charset": "UTF8MB4_BIN"
+    "mirakurunPath": "http+unix://%2Fvar%2Frun%2Fmirakurun%2Fmirakurun.sock/",
+    "dbType": "sqlite3",
+    "sqlite3": {
+        "extensions": [
+            "/opt/epgstation/regexp.so"
+        ],
+        "regexp": true
     },
     "convertDBStr": "oneByte",
     "recordedFormat": "%YEAR%%MONTH%%DAY%_%TITLE%",

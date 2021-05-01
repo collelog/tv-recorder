@@ -1,19 +1,11 @@
 port: 8888
-mirakurunPath: http+unix://%2Fvar%2Frun%2Fmirakurun.sock/
+mirakurunPath: http+unix://%2Fvar%2Frun%2Fmirakurun%2Fmirakurun.sock/
 
 dbtype: sqlite
-# sqlite:
-#   extensions:
-#     - '/hoge/regexp.dylib'
-#   regexp: true
-
-# dbtype: mysql
-# mysql:
-#     host: 192.168.xx.xx
-#     port: 3306
-#     user: epgstation
-#     password: epgstation
-#     database: epgstation
+sqlite:
+    extensions:
+        - '/opt/epgstation/regexp.so'
+    regexp: true
 
 epgUpdateIntervalTime: 10
 
