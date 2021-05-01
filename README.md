@@ -2,159 +2,76 @@
 
 > EPGStatio, MariaDB, mirakc (or Mirakurun 2.15.3) のDockerコンテナ
 
-Synology NAS(Intel CPUを採用した[Dockerパッケージ適用機種](https://www.synology.com/ja-jp/dsm/packages/Docker))を想定し作成しましたが、x86-64プラットフォームのLinuxであれば動作します。  
-Docker Composeで展開されるDockerコンテナは[Docker Hub](https://hub.docker.com/u/collelog)からコンテナイメージがダウンロードされますので環境構築が容易です。
+録画サーバの構築に必要とする[Dockerコンテナイメージ](https://hub.docker.com/u/collelog)を管理するDocker Composeファイルと各アプリケーションの初期設定ファイルを提供します。
 
-
-## 現在の状況
-DockerコンテナのDockerfileは [collelog/tv-recorder-dockerfile](https://github.com/collelog/tv-recorder-dockerfile) にて管理するようにしました。  
-Dockerコンテナをマルチプラットフォーム化（amd64(x86-64),arm64v8,arm32v7に対応）し、Docker Hubにてコンテナイメージを公開しています。  
-ただし、現時点で公開しているDocker Composeファイルはamd64(x86-64)向けのものになり、他プラットフォーム向けのDocker Composeファイルは今後対応予定となります。  
-前述の作業を優先しているため、Mirakurunは2.15.3までの対応で現在停止しており、最新バージョンの3.xに未対応です。
-
+## Dockerコンテナイメージ
+[dockerhub](https://hub.docker.com/)にて公開している自作イメージのDockerfileは [collelog/tv-recorder-dockerfile](https://github.com/collelog/tv-recorder-dockerfile) にて管理しています。
 
 ## Docker Composeファイル
-### EPGStation + MariaDB + mirakc の組み合わせ
-- [docker-compose-epgstation1-mirakc.yml](https://github.com/collelog/tv-recorder/blob/master/docker-compose-epgstation1-mirakc.yml)
+現在メンテナンスを行っている構成は以下の通りです。
+こちらに記載がないファイルも残しておりますが、メンテ・説明等は行っておりません。
 
-###  EPGStation + MariaDB + Mirakurun の組み合わせ
-- [docker-compose-epgstation1-mirakurun.yml](https://github.com/collelog/tv-recorder/blob/master/docker-compose-epgstation1-mirakurun.yml)
+### チューナー・フロントエンド
+| Docker Composeファイル | プラットフォーム | アプリケーション | Dockerイメージ | 備考 |
+| ---- | ---- | ---- | ---- | ---- |
+| epgstation2-mirakc-amd64.yml | x86-64 | mirakc | [collelog/mirakc](https://hub.docker.com/r/collelog/mirakc) | チューナーコマンド(※1) |
+| | | EPGStation v2 | [collelog/epgstation](https://hub.docker.com/r/collelog/epgstation) | SQLite3 + 正規表現拡張モジュール |
+| | | | | FFmpeg 4.4 |
+| epgstation2-mirakc-vaapi-amd64.yml | x86-64 | mirakc | [collelog/mirakc](https://hub.docker.com/r/collelog/mirakc) | チューナーコマンド(※1) |
+| | | EPGStation v2 | [collelog/epgstation](https://hub.docker.com/r/collelog/epgstation) | SQLite3 + 正規表現拡張モジュール |
+| | | | | FFmpeg 4.4(VAAPI対応) |
+| epgstation2-mirakc-rpi4-64.yml | Raspberry Pi4(64bit OS) | mirakc | [collelog/mirakc](https://hub.docker.com/r/collelog/mirakc) | チューナーコマンド(※1) |
+| | | EPGStation v2 | [collelog/epgstation](https://hub.docker.com/r/collelog/epgstation) | SQLite3 + 正規表現拡張モジュール |
+| | | | | FFmpeg 4.4(V4L2対応) |
+| epgstation2-mirakc-rpi4-32.yml | Raspberry Pi4(32bit OS) | mirakc | [collelog/mirakc](https://hub.docker.com/r/collelog/mirakc) | チューナーコマンド(※1) |
+| | | EPGStation v2 | [collelog/epgstation](https://hub.docker.com/r/collelog/epgstation) | SQLite3 + 正規表現拡張モジュール |
+| | | | | FFmpeg 4.4(OpenMAX対応) |
+| epgstation2-mirakc-rpi3.yml | Raspberry Pi3(32bit OS) | mirakc | [collelog/mirakc](https://hub.docker.com/r/collelog/mirakc) | チューナーコマンド(※1) |
+| | | EPGStation v2 | [collelog/epgstation](https://hub.docker.com/r/collelog/epgstation) | SQLite3 + 正規表現拡張モジュール |
+| | | | | FFmpeg 4.4(OpenMAX対応) |
 
-## Dockerコンテナ構成
+※1 recpt1, recdvb, recfsusb2n, dvbv5-zap
 
-### EPGStation ([collelog/epgstation:1.7.4-alpine-amd64](https://hub.docker.com/r/collelog/epgstation))
-- [Alpine Linux 3.12](https://alpinelinux.org/)
-- [Node.js 14.7.0](https://nodejs.org/)
-- [EPGStation 1.7.4](https://github.com/l3tnun/EPGStation)
-- [FFmpeg 4.3.1](https://www.ffmpeg.org/)
+#### DBMSにMariaDBを使用した場合
+SQLite3 + 正規表現拡張モジュールの使用を推奨しますが、MariaDBを使用したい場合はDocker Composeファイル中の「#mysql#」を置換し、コメントを解除してください。
 
-### MariaDB ([collelog/mariadb:10.4.13-alpine](https://hub.docker.com/r/collelog/mariadb))
-- [Alpine Linux 3.12](https://alpinelinux.org/)
-- [MariaDB 10.4.13-r0](https://mariadb.org/)
 
-### mirakc ([collelog/mirakc:0.13.1-alpine](https://hub.docker.com/r/collelog/mirakc))
-※[docker-compose-epgstation1-mirakc.yml](https://github.com/collelog/tv-recorder/blob/master/docker-compose-epgstation1-mirakc.yml) にのみ含まれます
-- [Alpine Linux 3.12](https://alpinelinux.org/)
-- [mirakc 0.13.1](https://github.com/masnagam/mirakc)
+### TV番組スキャン
+| Docker Composeファイル | プラットフォーム | アプリケーション| Dockerイメージ | 備考 |
+| ---- | ---- | ---- | ---- | ---- |
+| expansion-tvchannels-scan.yml | x86-64,arm64,arm/v7,arm/v6 | tvchannels-scan | [collelog/tvchannels-scan](https://hub.docker.com/r/collelog/tvchannels-scan) | |
 
-### Mirakurun ([collelog/mirakurun:2.15.3-alpine](https://hub.docker.com/r/collelog/mirakurun))
-※[docker-compose-epgstation1-mirakurun.yml](https://github.com/collelog/tv-recorder/blob/master/docker-compose-epgstation1-mirakurun.yml) にのみ含まれます
-- [Alpine Linux 3.12](https://alpinelinux.org/)
-- [Node.js 12.18.3](https://nodejs.org/)
-- [Mirakurun 2.15.3](https://github.com/Chinachu/Mirakurun)
+
+### メディアサーバ
+| Docker Composeファイル | プラットフォーム | アプリケーション | Dockerイメージ | 備考 |
+| ---- | ---- | ---- | ---- | ---- |
+| expansion-jellyfin.yml | x86-64,arm64,arm/v7,arm/v6 | jellyfin | [linuxserver/jellyfin](https://hub.docker.com/r/linuxserver/jellyfin) | |
+| | | xteve | [collelog/xteve](https://hub.docker.com/r/collelog/xteve) | |
+
+
+### ファイル共有,Docker管理
+| Docker Composeファイル | プラットフォーム | アプリケーション | Dockerイメージ | 備考 |
+| ---- | ---- | ---- | ---- | ---- |
+|expansion-management.yml | x86-64,arm64,arm/v7,arm/v6 | samba | [dperson/samba](https://hub.docker.com/r/dperson/samba) | |
+| | | portainer | [portainer/portainer-ce](https://hub.docker.com/r/portainer/portainer-ce) | |
+
+
+### BCASサーバ
+| Docker Composeファイル | プラットフォーム | アプリケーション | Dockerイメージ | 備考 |
+| ---- | ---- | ---- | ---- | ---- |
+|expansion-b25-server.yml | x86-64,arm64,arm/v7,arm/v6 | b25-server | [collelog/tvchannels-scan](https://hub.docker.com/r/collelog/b25-server) | |
+
 
 ## 実行条件
-- Linux x86-64プラットフォーム
+- Linux x86-64、Raspberry Pi4/3 プラットフォーム
 - docker-compose.yml version 3.7 対応 Docker バージョンのインストール
   - Docker Engine version 18.06.0 and higher
   - docker-compose version 1.22.0 and higher
 - pcscd の無効化
 - [nns779/px4_drv](https://github.com/nns779/px4_drv) のインストール
-- PLEX社製TVチューナー PX-W3U4/Q3U4/W3PE4/Q3PE4 のUSB接続
+- PLEX社製TVチューナー PX-Q3U4/Q3PE4/Q3PE5, PX-W3U4/W3PE4/W3PE5 のUSB接続  
+各種ファイルを修正することでPX-MLT5PE、PLEX PX-MLT8PE等も可
 - B-CASカード/スマートカードリーダーのUSB接続
-
-
-### 主な機能
-- **EPGStation Docker image**
-  - Alpine Linux ベース
-  - [Node.js v14.7.0](https://nodejs.org/)
-  - [FFmpeg 4.3.1](https://www.ffmpeg.org/) ビルドオプションは後述「FFmpeg Build」参照
-  - MariaDB 連携：UNIXドメインソケット
-  - MariaDB 文字コード：UTF8MB4、Collation：UTF8MB4_BIN
-  - mirakc 連携：UNIXドメインソケット
-  - Mirakurun 連携：UNIXドメインソケット
-
-- **MariaDB Docker image**
-  - Alpine Linux ベース
-  - サーバー 文字コード：UTF8MB4、Collation：UTF8MB4_BIN
-  - EPGStation 向けDB作成（文字コード：UTF8MB4、Collation：UTF8MB4_BIN）
-  - EPGStation 向けユーザー作成
-  - [Grafana](https://grafana.com/) 向け読み取り専用ユーザー作成
-
-- **mirakc Docker image**
-  - Alpine Linux ベース
-  - [arib-b25-stream-test](https://www.npmjs.com/package/arib-b25-stream-test)
-  - [stz2012 recpt1](https://github.com/stz2012/recpt1/) --enable-b25
-  - スマートカードリーダーの使用
-
-- **Mirakurun Docker image**
-  - Alpine Linux ベース
-  - [Node.js v12.18.3](https://nodejs.org/)
-  - [stz2012 recpt1](https://github.com/stz2012/recpt1/) --enable-b25
-  - スマートカードリーダーの使用
-  - 開発環境(Synology NAS)での実績値として、max_old_space_sizeを512から1024に変更（環境依存値のため、実際の動作環境に合わせて見直してください）
-
-- **[tv-recorder-monitoring](https://github.com/collelog/tv-recorder-monitoring) との連携**
-
-
-## インストール
-### 1. Gitリポジトリの取得
-```
-sudo git clone https://github.com/collelog/tv-recorder.git
-```
-### 2．資材のカスタマイズ
-### 3．Docker Compose によるコンテナ構築/起動
-EPGStation + MariaDB + mirakc の場合：
-```
-sudo docker-compose -f docker-compose-epgstation1-mirakc.yml up --build -d
-```
-
-## カスタマイズ箇所
-### Docker Composeファイル ([Docker-docs-ja > Compose ファイル・リファレンス](http://docs.docker.jp/compose/compose-file.html))
-使用するDocker Composeファイル(docker-compose-xxxxxxx.yml)を事前に編集する必要があります。  
-#### mirakc > devices (mirakc使用時)
-TVチューナーデバイスとスマートカードリーダーデバイスの指定を実行環境に合わせてください。  
-リポジトリ取得直後のファイルにはPLEX PX-Q3PE4(PX-Q3U4)のTVチューナーデバイスが指定されています。
-#### mirakurun > devices (Mirakurun使用時) 
-TVチューナーデバイスとスマートカードリーダーデバイスの指定を実行環境に合わせてください。  
-リポジトリ取得直後のファイルにはPLEX PX-Q3PE4(PX-Q3U4)のTVチューナーデバイスが指定されています。
-### EPGStation 設定 ([EPGStation > config.json 詳細マニュアル](https://github.com/l3tnun/EPGStation/blob/master/doc/conf-manual.md))
-コンテナにマウントされる設定ファイルは ./epgstation/config/config.json です。コンテナ外から編集可能です。  
-初回動作確認時には編集せずとも動作します。  
-
-### mirakc 設定 ([mirakc > Configuration](https://github.com/masnagam/mirakc/blob/master/docs/config.md))
-コンテナにマウントされる設定ファイルは ./mirakc/config.yml です。コンテナ外から編集可能です。  
-初回動作確認時にはchannels、tunersプロパティを最低限編集する必要があります。  
-リポジトリ取得直後のファイルにはchannelsプロパティに地上波 - 東京都 送信塔：スカイツリー、tunersプロパティにPLEX PX-Q3PE4(PX-Q3U4)のTVチューナーデバイスが指定されています。  
-
-### Mirakurun 設定 ([Mirakurun > Configuration](https://github.com/Chinachu/Mirakurun/blob/master/doc/Configuration.md))
-コンテナにマウントされる設定ファイルは ./mirakurun/server.yml | channels.yml | tuners.yml です。コンテナ外から編集可能です。  
-初回動作確認時にはchannels.yml と tuners.yml を最低限編集する必要があります。  
-リポジトリ取得直後のファイルにはchannels.ymlに地上波 - 東京都 送信塔：スカイツリー、tuners.ymlにPLEX PX-Q3PE4(PX-Q3U4)のTVチューナーデバイスが指定されています。  
-
-## 利用ソースコード
-当ソースコードは以下のソースコード（docker-compose.yml,Dockerfile,その他動作に必要なファイル一式）を改変または参考に作成しています。
-
-- **EPGStation**
-  - [l3tnun/docker-mirakurun-epgstation](https://github.com/l3tnun/docker-mirakurun-epgstation) : docker-mirakurun-epgstation
-    - [MIT License](https://github.com/l3tnun/docker-mirakurun-epgstation/blob/master/LICENSE)
-
-- **MariaDB**
-  - [yobasystems/alpine-mariadb](https://github.com/yobasystems/alpine-mariadb) : MariaDB Docker image running on Alpine Linux  
-
-- **mirakc**
-  - [masnagam/mirakc](https://github.com/masnagam/mirakc) : mirakc (a Mirakurun clone written in Rust) + recdvb + recpt1
-    - [Apache License, Version 2.0](https://github.com/masnagam/mirakc/blob/master/LICENSE-APACHE) or [MIT License](https://github.com/masnagam/mirakc/blob/master/LICENSE-MIT)
-
-- **Mirakurun**
-  - [Chinachu/docker-mirakurun-chinachu](https://github.com/Chinachu/docker-mirakurun-chinachu) : docker-mirakurun-chinach
-    - [MIT License](https://github.com/Chinachu/docker-mirakurun-chinachu/blob/master/LICENSE)
-
-## 開発環境
-> Synology NAS
->>DiskStation ds1618+
->>>DiskStation Manager 6.2  
->>>Linux 4.4.59+ #24922 SMP PREEMPT Thu Mar 12 13:02:11 CST 2020 x86_64 GNU/Linux synology_denverton_1618+
-
->>DiskStation ds1513+
->>>DiskStation Manager 6.2  
->>>Linux 3.10.105 #24922 SMP Wed Jul 3 16:35:48 CST 2019 x86_64 GNU/Linux synology_cedarview_1513+
-
->Docker (Server)
->> Version: 18.09.6, build 1d8275b
-
->docker-compose
->> version 1.24.0, build 0aa59064
 
 ## License
 このソースコードは [MIT License](https://github.com/collelog/tv-recorder/blob/master/LICENSE) のもとでリリースします。  
