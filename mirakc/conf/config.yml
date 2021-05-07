@@ -131,13 +131,29 @@ channels:
 
   - name: 'ＢＳスカパー！'
     type: 'BS'
-    channel: 'BS11_1'
+    channel: 'BS11_0'
     services: [241]
 
-  - name: 'スカパー！ガイド'
+  - name: '放送大学ｅｘ'
     type: 'BS'
     channel: 'BS11_1'
-    services: [840]
+    services: [231]
+
+  - name: '放送大学ｏｎ'
+    type: 'BS'
+    channel: 'BS11_1'
+    services: [232]
+
+  - name: '放送大学ラジオ'
+    type: 'BS'
+    channel: 'BS11_1'
+    services: [531]
+    disabled: true
+
+  - name: 'ＢＳ釣りビジョン'
+    type: 'BS'
+    channel: 'BS11_2'
+    services: [251]
 
   - name: 'ＢＳ日テレ'
     type: 'BS'
@@ -219,290 +235,15 @@ channels:
     channel: 'BS21_0'
     services: [252]
 
+  - name: '日本映画専門ｃｈ'
+    type: 'BS'
+    channel: 'BS21_1'
+    services: [255]
+
   - name: 'グリーンチャンネル'
     type: 'BS'
     channel: 'BS21_2'
     services: [234]
-
-  - name: 'ＢＳ釣りビジョン'
-    type: 'BS'
-    channel: 'BS23_0'
-    services: [251]
-
-  - name: '日本映画専門ｃｈ'
-    type: 'BS'
-    channel: 'BS23_1'
-    services: [255]
-
-  - name: 'ＴＢＳチャンネル１'
-    type: 'CS'
-    channel: 'CS2'
-    services: [296]
-
-  - name: 'テレ朝チャンネル１'
-    type: 'CS'
-    channel: 'CS2'
-    services: [298]
-
-  - name: 'テレ朝チャンネル２'
-    type: 'CS'
-    channel: 'CS2'
-    services: [299]
-
-  - name: 'ディズニージュニア'
-    type: 'CS'
-    channel: 'CS2'
-    services: [339]
-
-  - name: 'スカイＡ'
-    type: 'CS'
-    channel: 'CS4'
-    services: [250]
-
-  - name: '時代劇専門ｃｈ'
-    type: 'CS'
-    channel: 'CS4'
-    services: [292]
-
-  - name: 'エンタメ〜テレ'
-    type: 'CS'
-    channel: 'CS4'
-    services: [301]
-
-  - name: 'ＭＴＶ'
-    type: 'CS'
-    channel: 'CS4'
-    services: [323]
-
-  - name: 'ホームドラマＣＨ'
-    type: 'CS'
-    channel: 'CS6'
-    services: [294]
-
-  - name: 'ミュージック・エア'
-    type: 'CS'
-    channel: 'CS6'
-    services: [324]
-
-  - name: '歌謡ポップス'
-    type: 'CS'
-    channel: 'CS6'
-    services: [329]
-
-  - name: 'カートゥーン'
-    type: 'CS'
-    channel: 'CS6'
-    services: [331]
-
-  - name: 'ディスカバリー'
-    type: 'CS'
-    channel: 'CS6'
-    services: [340]
-
-  - name: 'アニマルプラネット'
-    type: 'CS'
-    channel: 'CS6'
-    services: [341]
-
-  - name: 'ＣＮＮｊ'
-    type: 'CS'
-    channel: 'CS6'
-    services: [354]
-
-  - name: '囲碁・将棋チャンネル'
-    type: 'CS'
-    channel: 'CS6'
-    services: [363]
-
-  - name: 'ショップチャンネル'
-    type: 'CS'
-    channel: 'CS8'
-    services: [55]
-
-  - name: '東映チャンネル'
-    type: 'CS'
-    channel: 'CS8'
-    services: [218]
-
-  - name: 'Ｍｎｅｔ'
-    type: 'CS'
-    channel: 'CS8'
-    services: [318]
-
-  - name: '日テレＮＥＷＳ２４'
-    type: 'CS'
-    channel: 'CS8'
-    services: [349]
-
-  - name: '衛星劇場'
-    type: 'CS'
-    channel: 'CS10'
-    services: [219]
-
-  - name: 'ＫＢＳ　Ｗｏｒｌｄ'
-    type: 'CS'
-    channel: 'CS10'
-    services: [317]
-
-  - name: 'スポーツライブ＋'
-    type: 'CS'
-    channel: 'CS10'
-    services: [800]
-
-  - name: 'スカチャン１'
-    type: 'CS'
-    channel: 'CS10'
-    services: [801]
-
-  - name: 'ＧＡＯＲＡ'
-    type: 'CS'
-    channel: 'CS12'
-    services: [254]
-
-  - name: 'エムオン！'
-    type: 'CS'
-    channel: 'CS12'
-    services: [325]
-
-  - name: 'キッズステーション'
-    type: 'CS'
-    channel: 'CS12'
-    services: [330]
-
-  - name: 'ナショジオ'
-    type: 'CS'
-    channel: 'CS12'
-    services: [343]
-
-  - name: 'ザ・シネマ'
-    type: 'CS'
-    channel: 'CS14'
-    services: [227]
-
-  - name: 'ファミリー劇場'
-    type: 'CS'
-    channel: 'CS14'
-    services: [293]
-
-  - name: 'スーパー！ドラマＴＶ'
-    type: 'CS'
-    channel: 'CS14'
-    services: [310]
-
-  - name: 'ヒストリーチャンネル'
-    type: 'CS'
-    channel: 'CS14'
-    services: [342]
-
-  - name: 'ＳＫＹ　ＳＴＡＧＥ'
-    type: 'CS'
-    channel: 'CS16'
-    services: [290]
-
-  - name: 'ＡＸＮ　海外ドラマ'
-    type: 'CS'
-    channel: 'CS16'
-    services: [311]
-
-  - name: 'ＡＸＮミステリー'
-    type: 'CS'
-    channel: 'CS16'
-    services: [316]
-
-  - name: 'スペシャプラス'
-    type: 'CS'
-    channel: 'CS16'
-    services: [321]
-
-  - name: 'ＡＴ−Ｘ'
-    type: 'CS'
-    channel: 'CS16'
-    services: [333]
-
-  - name: 'ＢＢＣワールド'
-    type: 'CS'
-    channel: 'CS16'
-    services: [353]
-
-  - name: 'ムービープラス'
-    type: 'CS'
-    channel: 'CS18'
-    services: [240]
-
-  - name: 'ゴルフネットワーク'
-    type: 'CS'
-    channel: 'CS18'
-    services: [262]
-
-  - name: '銀河◆歴ドラ・サスペ'
-    type: 'CS'
-    channel: 'CS18'
-    services: [305]
-
-  - name: '女性ｃｈ／ＬａＬａ'
-    type: 'CS'
-    channel: 'CS18'
-    services: [314]
-
-  - name: 'フジテレビＯＮＥ'
-    type: 'CS'
-    channel: 'CS20'
-    services: [307]
-
-  - name: 'フジテレビＴＷＯ'
-    type: 'CS'
-    channel: 'CS20'
-    services: [308]
-
-  - name: 'フジテレビＮＥＸＴ'
-    type: 'CS'
-    channel: 'CS20'
-    services: [309]
-
-  - name: 'スペースシャワーＴＶ'
-    type: 'CS'
-    channel: 'CS20'
-    services: [322]
-
-  - name: 'ＱＶＣ'
-    type: 'CS'
-    channel: 'CS22'
-    services: [161]
-
-  - name: 'ＴＢＳチャンネル２'
-    type: 'CS'
-    channel: 'CS22'
-    services: [297]
-
-  - name: 'ＦＯＸ'
-    type: 'CS'
-    channel: 'CS22'
-    services: [312]
-
-  - name: 'ＴＢＳ　ＮＥＷＳ'
-    type: 'CS'
-    channel: 'CS22'
-    services: [351]
-
-  - name: '映画・ｃｈＮＥＣＯ'
-    type: 'CS'
-    channel: 'CS24'
-    services: [223]
-
-  - name: '日テレジータス'
-    type: 'CS'
-    channel: 'CS24'
-    services: [257]
-
-  - name: 'ＭＯＮＤＯ　ＴＶ'
-    type: 'CS'
-    channel: 'CS24'
-    services: [295]
-
-  - name: '日テレプラス'
-    type: 'CS'
-    channel: 'CS24'
-    services: [300]
 
 tuners:
   - name: PX4-S1
