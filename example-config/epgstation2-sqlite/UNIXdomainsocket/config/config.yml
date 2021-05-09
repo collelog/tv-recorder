@@ -25,7 +25,7 @@ recordedFormat: '%YEAR%%MONTH%%DAY%_%HALF_WIDTH_TITLE%'
 recordedFileExtension: .m2ts
 recorded:
     - name: recorded
-      path: '%ROOT%/recorded'
+      path: '/opt/epgstation/recorded'
 
 isEnabledDropCheck: true
 
