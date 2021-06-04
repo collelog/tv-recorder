@@ -34,6 +34,7 @@ services:
             - "139:139/tcp"
             - "445:445/tcp"
         volumes:
+            - /etc/localtime:/etc/localtime:ro
             - ../tv-recorder:/mnt/tv-recorder
             - ./recorded:/media/video
         environment:
@@ -52,6 +53,7 @@ services:
             - "8000:8000"
             - "9000:9000"
         volumes:
+            - /etc/localtime:/etc/localtime:ro
             - /var/run/docker.sock:/var/run/docker.sock
             - ./portainer:/data
         restart: unless-stopped
