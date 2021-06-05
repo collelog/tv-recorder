@@ -1,0 +1,162 @@
+version: "3.7"
+
+x-devices-tuner: &custom-devices-tuner
+    devices:
+        # PLEX PX-Q3U4/Q3PE4/Q3PE5, PX-W3U4/W3PE4/W3PE5
+        - /dev/px4video0
+        - /dev/px4video1
+        - /dev/px4video2
+        - /dev/px4video3
+        # PLEX PX-Q3U4/Q3PE4/Q3PE5
+        - /dev/px4video4
+        - /dev/px4video5
+        - /dev/px4video6
+        - /dev/px4video7
+        # PLEX PX-MLT5PE
+#        - /dev/pxmlt5video0
+#        - /dev/pxmlt5video1
+#        - /dev/pxmlt5video2
+#        - /dev/pxmlt5video3
+#        - /dev/pxmlt5video4
+        # PLEX PX-MLT8PE
+#        - /dev/pxmlt8video0
+#        - /dev/pxmlt8video1
+#        - /dev/pxmlt8video2
+#        - /dev/pxmlt8video3
+#        - /dev/pxmlt8video4
+#        - /dev/pxmlt8video5
+#        - /dev/pxmlt8video6
+#        - /dev/pxmlt8video7
+        # USB IC card reader
+        - /dev/bus/usb
+
+x-devices-hardware_acceleration: &custom-devices-hardware_acceleration
+    devices:
+        # VAAPI
+        - /dev/dri
+        # RPi MMAL
+#        - /dev/vcsm
+        # RPi OpenMax
+#        - /dev/vchiq
+        # RPi V4L2
+#        - /dev/video10
+#        - /dev/video11
+#        - /dev/video12
+
+x-service: &default-service
+    logging:
+        driver: json-file
+        options:
+            max-size: "10m"
+            max-file: "5"
+    init: true
+    restart: unless-stopped
+
+x-environment: &default-environment
+    TZ: Asia/Tokyo
+
+x-network: &default-network
+    networks:
+        - container-link
+
+x-network-host: &custom-network-host
+    network_mode: "host"
+
+x-network-non: &custom-network-none
+    network_mode: "none"
+
+
+
+services:
+#    mirakc:
+#        <<: *default-service
+#        <<: *default-network
+#        <<: *custom-devices-tuner
+#        container_name: mirakc
+#        image: collelog/mirakc:latest-alpine-amd64
+#        ports:
+#            - "40772:40772"
+#        volumes:
+#            - /etc/localtime:/etc/localtime:ro
+#            - ./mirakc/sock:/var/run/mirakurun
+#            - ./mirakc/epg:/var/lib/mirakc/epg
+#            - ./mirakc/conf/config.yml:/etc/mirakc/config.yml:ro
+#        environment:
+#            <<: *default-environment
+#            MIRAKC_DEBUG_CHILD_PROCESS: ""
+#            MIRAKC_ARIG_LOG: info
+#            RUST_LOG: info
+
+    mirakurun:
+        <<: *default-service
+        <<: *default-network
+        <<: *custom-devices-tuner
+        container_name: mirakurun
+        image: collelog/mirakurun:3.5.0-alpine-amd64
+        cap_add:
+            - SYS_ADMIN
+            - SYS_NICE
+        ports:
+            - "40772:40772"
+            - "9229:9229"
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - ./mirakurun/sock:/var/run/
+            - ./mirakurun/conf:/app-config/
+            - ./mirakurun/data/:/app-data/
+        environment:
+            <<: *default-environment
+
+    epgstation:
+        <<: *default-service
+        <<: *default-network
+        <<: *custom-devices-hardware_acceleration
+        container_name: epgstation
+        image: collelog/epgstation:latest-alpine-vaapi-amd64
+        ports:
+            - "8888:8888"
+            - "8889:8889"
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+#            - ./mirakc/sock:/var/run/mirakurun
+            - ./mirakurun/sock:/var/run/mirakurun
+            - ./epgstation2/config:/opt/epgstation/config
+            - ./epgstation2/data:/opt/epgstation/data
+            - ./epgstation2/drop:/opt/epgstation/drop
+            - ./epgstation2/img:/opt/epgstation/img
+            - ./epgstation2/thumbnail:/opt/epgstation/thumbnail
+            - ./epgstation2/logs:/opt/epgstation/logs
+            - ./recorded:/opt/epgstation/recorded
+        environment:
+            <<: *default-environment
+        depends_on:
+#            - mirakc
+            - mirakurun
+#mysql#            - mysql
+
+#mysql#    mysql:
+#mysql#        <<: *default-service
+#mysql#        <<: *default-network
+#mysql#        container_name: epgstation2-mysql
+#mysql#        image: collelog/mariadb:latest-10.4-alpine
+#mysql#        ports:
+#mysql#            - "3306:3306"
+#mysql#        volumes:
+#mysql#            - /etc/localtime:/etc/localtime:ro
+#mysql#            - ./epgstation2-mysql/sock:/var/run/mysqld
+#mysql#            - ./epgstation2-mysql/db:/var/lib/mysql
+#mysql#            - ./epgstation2-mysql/init:/docker-entrypoint-initdb.d/
+#mysql#        environment:
+#mysql#            <<: *default-environment
+#mysql#            MYSQL_ROOT_PASSWORD: epgstation
+#mysql#        command: --character-set-server=utf8mb4 --collation-server=utf8mb4_bin --performance-schema=false --expire_logs_days=1
+
+
+networks:
+    default:
+        external:
+            name: bridge
+
+    container-link:
+        name: tv-recorder
+        driver: bridge
