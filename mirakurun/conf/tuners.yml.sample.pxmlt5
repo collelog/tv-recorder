@@ -1,0 +1,82 @@
+- name: PXMLT5-1
+  types:
+    - GR
+    - BS
+    - CS
+  command: recpt1 --device /dev/pxmlt5video0 <channel> - -
+  decoder: arib-b25-stream-test
+  isDisabled: false
+
+- name: PXMLT5-2
+  types:
+    - GR
+    - BS
+    - CS
+  command: recpt1 --device /dev/pxmlt5video1 <channel> - -
+  decoder: arib-b25-stream-test
+  isDisabled: false
+
+- name: PXMLT5-3
+  types:
+    - GR
+    - BS
+    - CS
+  command: recpt1 --device /dev/pxmlt5video2 <channel> - -
+  decoder: arib-b25-stream-test
+  isDisabled: false
+
+- name: PXMLT5-4
+  types:
+    - GR
+    - BS
+    - CS
+  command: recpt1 --device /dev/pxmlt5video3 <channel> - -
+  decoder: arib-b25-stream-test
+  isDisabled: false
+
+- name: PXMLT5-5
+  types:
+    - GR
+    - BS
+    - CS
+  command: recpt1 --device /dev/pxmlt5video4 <channel> - -
+  decoder: arib-b25-stream-test
+  isDisabled: false
+
+- name: PT3-S1
+  types:
+    - BS
+    - CS
+  command: recpt1 --device /dev/pt3video0 --lnb 15 <channel> - -
+  decoder: arib-b25-stream-test
+  isDisabled: true
+
+- name: PT3-S2
+  types:
+    - BS
+    - CS
+  command: recpt1 --device /dev/pt3video1 --lnb 15 <channel> - -
+  decoder: arib-b25-stream-test
+  isDisabled: true
+
+- name: PT3-T1
+  types:
+    - GR
+  command: recpt1 --device /dev/pt3video2 <channel> - -
+  decoder: arib-b25-stream-test
+  isDisabled: true
+
+- name: PT3-T2
+  types:
+    - GR
+  command: recpt1 --device /dev/pt3video3 <channel> - -
+  decoder: arib-b25-stream-test
+  isDisabled: true
+
+- name: TBS6922
+  types:
+    - SKY
+  command: szap-s2j -c /usr/local/etc/szap-s2j.conf -l <satellite> -S 1 -p -r -M 5 -C 35 <channel>
+  dvbDevicePath: /dev/dvb/adapter0/dvr0
+  decoder: arib-b1-stream-test
+  isDisabled: true
