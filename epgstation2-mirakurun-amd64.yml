@@ -80,7 +80,7 @@ services:
 #            - /etc/localtime:/etc/localtime:ro
 #            - ./mirakc/sock:/var/run/mirakurun
 #            - ./mirakc/epg:/var/lib/mirakc/epg
-#            - ./mirakc/logs:/var/lib/mirakc/logs
+#            - ./mirakc/logos:/var/lib/mirakc/logos
 #            - ./mirakc/conf/config.yml:/etc/mirakc/config.yml:ro
 #        environment:
 #            <<: *default-environment
