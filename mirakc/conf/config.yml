@@ -11,6 +11,10 @@ channels:
     type: 'GR'
     channel: '16'
 
+  - name: 'ｔｖｋ１'
+    type: 'GR'
+    channel: '18'
+
   - name: 'フジテレビ'
     type: 'GR'
     channel: '21'
@@ -98,11 +102,6 @@ channels:
     type: 'BS'
     channel: 'BS3_1'
     services: [104]
-
-  - name: 'ディズニーｃｈ'
-    type: 'BS'
-    channel: 'BS3_2'
-    services: [256]
 
   - name: 'ＷＯＷＯＷライブ'
     type: 'BS'
@@ -245,6 +244,11 @@ channels:
     channel: 'BS21_2'
     services: [234]
 
+  - name: 'ディズニーｃｈ'
+    type: 'BS'
+    channel: 'BS23_0'
+    services: [256]
+
 tuners:
   - name: PX4-S1
     types: [BS,CS]
@@ -342,6 +346,214 @@ tuners:
       recpt1 --device /dev/px4video15 {{channel}} {{duration}} -
     disabled: true
 
+  - name: PXMLT5-1
+    types: [GR,BS,CS]
+    command: >-
+      recpt1 --device /dev/pxmlt5video0 {{channel}} {{duration}} -
+    disabled: true
+
+  - name: PXMLT5-2
+    types: [GR,BS,CS]
+    command: >-
+      recpt1 --device /dev/pxmlt5video1 {{channel}} {{duration}} -
+    disabled: true
+
+  - name: PXMLT5-3
+    types: [GR,BS,CS]
+    command: >-
+      recpt1 --device /dev/pxmlt5video2 {{channel}} {{duration}} -
+    disabled: true
+
+  - name: PXMLT5-4
+    types: [GR,BS,CS]
+    command: >-
+      recpt1 --device /dev/pxmlt5video3 {{channel}} {{duration}} -
+    disabled: true
+
+  - name: PXMLT5-5
+    types: [GR,BS,CS]
+    command: >-
+      recpt1 --device /dev/pxmlt5video4 {{channel}} {{duration}} -
+    disabled: true
+
+  - name: PXMLT8-1
+    types: [GR,BS,CS]
+    command: >-
+      recpt1 --device /dev/pxmlt8video0 {{channel}} {{duration}} -
+    disabled: true
+
+  - name: PXMLT8-2
+    types: [GR,BS,CS]
+    command: >-
+      recpt1 --device /dev/pxmlt8video1 {{channel}} {{duration}} -
+    disabled: true
+
+  - name: PXMLT8-3
+    types: [GR,BS,CS]
+    command: >-
+      recpt1 --device /dev/pxmlt8video2 {{channel}} {{duration}} -
+    disabled: true
+
+  - name: PXMLT8-4
+    types: [GR,BS,CS]
+    command: >-
+      recpt1 --device /dev/pxmlt8video3 {{channel}} {{duration}} -
+    disabled: true
+
+  - name: PXMLT8-5
+    types: [GR,BS,CS]
+    command: >-
+      recpt1 --device /dev/pxmlt8video4 {{channel}} {{duration}} -
+    disabled: true
+
+  - name: PXMLT8-6
+    types: [GR,BS,CS]
+    command: >-
+      recpt1 --device /dev/pxmlt8video5 {{channel}} {{duration}} -
+    disabled: true
+
+  - name: PXMLT8-7
+    types: [GR,BS,CS]
+    command: >-
+      recpt1 --device /dev/pxmlt8video6 {{channel}} {{duration}} -
+    disabled: true
+
+  - name: PXMLT8-8
+    types: [GR,BS,CS]
+    command: >-
+      recpt1 --device /dev/pxmlt8video7 {{channel}} {{duration}} -
+    disabled: true
+
 filters:
   decode-filter:
     command: arib-b25-stream-test
+
+#TVStation logo#resource:
+#TVStation logo#  logos:
+#TVStation logo#    - service-triple: [32391, 32391, 23608]
+#TVStation logo#      image: /var/lib/mirakc/logos/gr_23608.png
+#TVStation logo#    - service-triple: [32391, 32391, 23609]
+#TVStation logo#      image: /var/lib/mirakc/logos/gr_23608.png
+#TVStation logo#    - service-triple: [32391, 32391, 23610]
+#TVStation logo#      image: /var/lib/mirakc/logos/gr_23608.png
+#TVStation logo#    - service-triple: [32375, 32375, 24632]
+#TVStation logo#      image: /var/lib/mirakc/logos/gr_24632.jpg
+#TVStation logo#    - service-triple: [32375, 32375, 24633]
+#TVStation logo#      image: /var/lib/mirakc/logos/gr_24632.jpg
+#TVStation logo#    - service-triple: [32375, 32375, 24634]
+#TVStation logo#      image: /var/lib/mirakc/logos/gr_24632.jpg
+#TVStation logo#    - service-triple: [32740, 32740, 1056]
+#TVStation logo#      image: /var/lib/mirakc/logos/gr_1056.png
+#TVStation logo#    - service-triple: [32740, 32740, 1057]
+#TVStation logo#      image: /var/lib/mirakc/logos/gr_1056.png
+#TVStation logo#    - service-triple: [32740, 32740, 1058]
+#TVStation logo#      image: /var/lib/mirakc/logos/gr_1056.png
+#TVStation logo#    - service-triple: [32739, 32739, 1048]
+#TVStation logo#      image: /var/lib/mirakc/logos/gr_1048.png
+#TVStation logo#    - service-triple: [32739, 32739, 1049]
+#TVStation logo#      image: /var/lib/mirakc/logos/gr_1048.png
+#TVStation logo#    - service-triple: [32742, 32742, 1072]
+#TVStation logo#      image: /var/lib/mirakc/logos/gr_1072.png
+#TVStation logo#    - service-triple: [32742, 32742, 1073]
+#TVStation logo#      image: /var/lib/mirakc/logos/gr_1072.png
+#TVStation logo#    - service-triple: [32742, 32742, 1074]
+#TVStation logo#      image: /var/lib/mirakc/logos/gr_1072.png
+#TVStation logo#    - service-triple: [32741, 32741, 1064]
+#TVStation logo#      image: /var/lib/mirakc/logos/gr_1064.png
+#TVStation logo#    - service-triple: [32741, 32741, 1065]
+#TVStation logo#      image: /var/lib/mirakc/logos/gr_1064.png
+#TVStation logo#      syeimage: /var/lib/mirakc/logos/gr_1064.png
+#TVStation logo#    - service-triple: [32738, 32738, 1040]
+#TVStation logo#      image: /var/lib/mirakc/logos/gr_1040.png
+#TVStation logo#    - service-triple: [32738, 32738, 1041]
+#TVStation logo#      image: /var/lib/mirakc/logos/gr_1040.png
+#TVStation logo#    - service-triple: [32737, 32737, 1032]
+#TVStation logo#      image: /var/lib/mirakc/logos/gr_nhke.png
+#TVStation logo#    - service-triple: [32737, 32737, 1033]
+#TVStation logo#      image: /var/lib/mirakc/logos/gr_nhke.png
+#TVStation logo#    - service-triple: [32737, 32737, 1034]
+#TVStation logo#      image: /var/lib/mirakc/logos/gr_nhke.png
+#TVStation logo#    - service-triple: [32736, 32736, 1024]
+#TVStation logo#      image: /var/lib/mirakc/logos/gr_nhkg.png
+#TVStation logo#    - service-triple: [32736, 32736, 1025]
+#TVStation logo#      image: /var/lib/mirakc/logos/gr_nhkg.png
+#TVStation logo#    - service-triple: [4, 16400, 151]
+#TVStation logo#      image: /var/lib/mirakc/logos/bs_151.png
+#TVStation logo#    - service-triple: [4, 16400, 152]
+#TVStation logo#      image: /var/lib/mirakc/logos/bs_151.png
+#TVStation logo#    - service-triple: [4, 16400, 153]
+#TVStation logo#      image: /var/lib/mirakc/logos/bs_151.png
+#TVStation logo#    - service-triple: [4, 16401, 161]
+#TVStation logo#      image: /var/lib/mirakc/logos/bs_161.png
+#TVStation logo#    - service-triple: [4, 16401, 162]
+#TVStation logo#      image: /var/lib/mirakc/logos/bs_161.png
+#TVStation logo#    - service-triple: [4, 16401, 163]
+#TVStation logo#      image: /var/lib/mirakc/logos/bs_161.png
+#TVStation logo#    - service-triple: [4, 16402, 171]
+#TVStation logo#      image: /var/lib/mirakc/logos/bs_171.png
+#TVStation logo#    - service-triple: [4, 16402, 172]
+#TVStation logo#      image: /var/lib/mirakc/logos/bs_171.png
+#TVStation logo#    - service-triple: [4, 16402, 173]
+#TVStation logo#      image: /var/lib/mirakc/logos/bs_171.png
+#TVStation logo#    - service-triple: [4, 16432, 191]
+#TVStation logo#      image: /var/lib/mirakc/logos/bs_191.png
+#TVStation logo#    - service-triple: [4, 16433, 103]
+#TVStation logo#      image: /var/lib/mirakc/logos/bs_103.png
+#TVStation logo#    - service-triple: [4, 16433, 104]
+#TVStation logo#      image: /var/lib/mirakc/logos/bs_103.png
+#TVStation logo#    - service-triple: [4, 17488, 192]
+#TVStation logo#      image: /var/lib/mirakc/logos/bs_191.png
+#TVStation logo#    - service-triple: [4, 17489, 193]
+#TVStation logo#      image: /var/lib/mirakc/logos/bs_191.png
+#TVStation logo#    - service-triple: [4, 16528, 211]
+#TVStation logo#      image: /var/lib/mirakc/logos/bs_211.png
+#TVStation logo#    - service-triple: [4, 16529, 200]
+#TVStation logo#      image: /var/lib/mirakc/logos/bs_200.png
+#TVStation logo#    - service-triple: [4, 16530, 222]
+#TVStation logo#      image: /var/lib/mirakc/logos/bs_222.png
+#TVStation logo#    - service-triple: [4, 18097, 241]
+#TVStation logo#      image: /var/lib/mirakc/logos/bs_241.png
+#TVStation logo#    - service-triple: [4, 18098, 231]
+#TVStation logo#      image: /var/lib/mirakc/logos/bs_231.jpg
+#TVStation logo#    - service-triple: [4, 18098, 232]
+#TVStation logo#      image: /var/lib/mirakc/logos/bs_231.jpg
+#TVStation logo#    - service-triple: [4, 18099, 251]
+#TVStation logo#      image: /var/lib/mirakc/logos/bs_251.png
+#TVStation logo#    - service-triple: [4, 16592, 141]
+#TVStation logo#      image: /var/lib/mirakc/logos/bs_141.png
+#TVStation logo#    - service-triple: [4, 16592, 142]
+#TVStation logo#      image: /var/lib/mirakc/logos/bs_141.png
+#TVStation logo#    - service-triple: [4, 16592, 143]
+#TVStation logo#      image: /var/lib/mirakc/logos/bs_141.png
+#TVStation logo#    - service-triple: [4, 16593, 181]
+#TVStation logo#      image: /var/lib/mirakc/logos/bs_181.png
+#TVStation logo#    - service-triple: [4, 16593, 182]
+#TVStation logo#      image: /var/lib/mirakc/logos/bs_181.png
+#TVStation logo#    - service-triple: [4, 16593, 183]
+#TVStation logo#      image: /var/lib/mirakc/logos/bs_181.png
+#TVStation logo#    - service-triple: [4, 18130, 236]
+#TVStation logo#      image: /var/lib/mirakc/logos/bs_236.png
+#TVStation logo#    - service-triple: [4, 16625, 101]
+#TVStation logo#      image: /var/lib/mirakc/logos/bs_101.png
+#TVStation logo#    - service-triple: [4, 16625, 101]
+#TVStation logo#      image: /var/lib/mirakc/logos/bs_101.png
+#TVStation logo#    - service-triple: [4, 16626, 201]
+#TVStation logo#      image: /var/lib/mirakc/logos/bs_200.png
+#TVStation logo#    - service-triple: [4, 16626, 202]
+#TVStation logo#      image: /var/lib/mirakc/logos/bs_200.png
+#TVStation logo#    - service-triple: [4, 18224, 245]
+#TVStation logo#      image: /var/lib/mirakc/logos/bs_242.png
+#TVStation logo#    - service-triple: [4, 18225, 242]
+#TVStation logo#      image: /var/lib/mirakc/logos/bs_242.png
+#TVStation logo#    - service-triple: [4, 18226, 243]
+#TVStation logo#      image: /var/lib/mirakc/logos/bs_242.png
+#TVStation logo#    - service-triple: [4, 18227, 244]
+#TVStation logo#      image: /var/lib/mirakc/logos/bs_242.png
+#TVStation logo#    - service-triple: [4, 18256, 252]
+#TVStation logo#      image: /var/lib/mirakc/logos/bs_252.png
+#TVStation logo#    - service-triple: [4, 18257, 255]
+#TVStation logo#      image: /var/lib/mirakc/logos/bs_255.jpg
+#TVStation logo#    - service-triple: [4, 18288, 256]
+#TVStation logo#      image: /var/lib/mirakc/logos/bs_256.png
+#TVStation logo#    - service-triple: [4, 18258, 234]
+#TVStation logo#      image: /var/lib/mirakc/logos/bs_234.png
