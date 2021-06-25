@@ -437,11 +437,11 @@ filters:
 #TVStation logo#    - service-triple: [32391, 32391, 23610]
 #TVStation logo#      image: /var/lib/mirakc/logos/gr_23608.png
 #TVStation logo#    - service-triple: [32375, 32375, 24632]
-#TVStation logo#      image: /var/lib/mirakc/logos/gr_24632.jpg
+#TVStation logo#      image: /var/lib/mirakc/logos/gr_24632.png
 #TVStation logo#    - service-triple: [32375, 32375, 24633]
-#TVStation logo#      image: /var/lib/mirakc/logos/gr_24632.jpg
+#TVStation logo#      image: /var/lib/mirakc/logos/gr_24632.png
 #TVStation logo#    - service-triple: [32375, 32375, 24634]
-#TVStation logo#      image: /var/lib/mirakc/logos/gr_24632.jpg
+#TVStation logo#      image: /var/lib/mirakc/logos/gr_24632.png
 #TVStation logo#    - service-triple: [32740, 32740, 1056]
 #TVStation logo#      image: /var/lib/mirakc/logos/gr_1056.png
 #TVStation logo#    - service-triple: [32740, 32740, 1057]
@@ -514,9 +514,9 @@ filters:
 #TVStation logo#    - service-triple: [4, 18097, 241]
 #TVStation logo#      image: /var/lib/mirakc/logos/bs_241.png
 #TVStation logo#    - service-triple: [4, 18098, 231]
-#TVStation logo#      image: /var/lib/mirakc/logos/bs_231.jpg
+#TVStation logo#      image: /var/lib/mirakc/logos/bs_231.png
 #TVStation logo#    - service-triple: [4, 18098, 232]
-#TVStation logo#      image: /var/lib/mirakc/logos/bs_231.jpg
+#TVStation logo#      image: /var/lib/mirakc/logos/bs_231.png
 #TVStation logo#    - service-triple: [4, 18099, 251]
 #TVStation logo#      image: /var/lib/mirakc/logos/bs_251.png
 #TVStation logo#    - service-triple: [4, 16592, 141]
@@ -552,7 +552,7 @@ filters:
 #TVStation logo#    - service-triple: [4, 18256, 252]
 #TVStation logo#      image: /var/lib/mirakc/logos/bs_252.png
 #TVStation logo#    - service-triple: [4, 18257, 255]
-#TVStation logo#      image: /var/lib/mirakc/logos/bs_255.jpg
+#TVStation logo#      image: /var/lib/mirakc/logos/bs_255.png
 #TVStation logo#    - service-triple: [4, 18288, 256]
 #TVStation logo#      image: /var/lib/mirakc/logos/bs_256.png
 #TVStation logo#    - service-triple: [4, 18258, 234]
