@@ -93,7 +93,7 @@ services:
         <<: *default-network
         <<: *custom-devices-tuner
         container_name: mirakurun
-        image: collelog/mirakurun:3.5.0-alpine-rpi3
+        image: collelog/mirakurun:latest-alpine-rpi3
         cap_add:
             - SYS_ADMIN
             - SYS_NICE
