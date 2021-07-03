@@ -4,7 +4,8 @@ mirakurunPath: http://mirakc:40772/
 dbtype: sqlite
 sqlite:
     extensions:
-        - '/opt/epgstation/regexp.so'
+        - '/opt/epgstation/libsqlite_pcre.so'
+#        - '/opt/epgstation/regexp.so'
     regexp: true
 
 # dbtype: mysql

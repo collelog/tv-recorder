@@ -4,7 +4,8 @@ mirakurunPath: http+unix://%2Fvar%2Frun%2Fmirakurun%2Fmirakurun.sock/
 dbtype: sqlite
 sqlite:
     extensions:
-        - '/opt/epgstation/regexp.so'
+        - '/opt/epgstation/libsqlite_pcre.so'
+#        - '/opt/epgstation/regexp.so'
     regexp: true
 
 # dbtype: mysql
