@@ -535,7 +535,7 @@ filters:
 #TVStation logo#      image: /var/lib/mirakc/logos/bs_236.png
 #TVStation logo#    - service-triple: [4, 16625, 101]
 #TVStation logo#      image: /var/lib/mirakc/logos/bs_101.png
-#TVStation logo#    - service-triple: [4, 16625, 101]
+#TVStation logo#    - service-triple: [4, 16625, 102]
 #TVStation logo#      image: /var/lib/mirakc/logos/bs_101.png
 #TVStation logo#    - service-triple: [4, 16626, 201]
 #TVStation logo#      image: /var/lib/mirakc/logos/bs_200.png
