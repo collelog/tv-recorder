@@ -93,7 +93,7 @@ services:
         <<: *default-network
         <<: *custom-devices-hardware_acceleration
         container_name: epgstation
-        image: collelog/epgstation:latest-alpine-rpi4-64
+        image: collelog/epgstation:latest-debian-arm64v8
         ports:
             - "8888:8888"
             - "8889:8889"

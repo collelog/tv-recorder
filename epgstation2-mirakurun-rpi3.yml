@@ -113,12 +113,13 @@ services:
         <<: *default-network
         <<: *custom-devices-hardware_acceleration
         container_name: epgstation
-        image: collelog/epgstation:latest-alpine-rpi3
+        image: collelog/epgstation:latest-debian-arm32v7
         ports:
             - "8888:8888"
             - "8889:8889"
         volumes:
             - /etc/localtime:/etc/localtime:ro
+            - /opt/vc/lib:/opt/vc/lib
 #            - ./mirakc/sock:/var/run/mirakurun
             - ./mirakurun/sock:/var/run/mirakurun
             - ./epgstation2/config:/opt/epgstation/config

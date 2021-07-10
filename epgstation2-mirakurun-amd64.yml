@@ -33,7 +33,7 @@ x-devices-tuner: &custom-devices-tuner
 x-devices-hardware_acceleration: &custom-devices-hardware_acceleration
     devices:
         # VAAPI
-#        - /dev/dri
+#ha-intel#        - /dev/dri
         # RPi MMAL
 #        - /dev/vcsm
         # RPi OpenMax
@@ -111,9 +111,9 @@ services:
     epgstation:
         <<: *default-service
         <<: *default-network
-#        <<: *custom-devices-hardware_acceleration
+#ha-common#        <<: *custom-devices-hardware_acceleration
         container_name: epgstation
-        image: collelog/epgstation:latest-alpine-amd64
+        image: collelog/epgstation:latest-debian-amd64
         ports:
             - "8888:8888"
             - "8889:8889"
@@ -130,6 +130,12 @@ services:
             - ./recorded:/opt/epgstation/recorded
         environment:
             <<: *default-environment
+#ha-nvidia#        deploy:
+#ha-nvidia#            resources:
+#ha-nvidia#                reservations:
+#ha-nvidia#                    devices:
+#ha-nvidia#                    - driver: nvidia
+#ha-nvidia#                      capabilities: [gpu]
         depends_on:
 #            - mirakc
             - mirakurun
